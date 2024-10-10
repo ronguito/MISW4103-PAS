@@ -7,20 +7,20 @@ assignees: ronguito
 
 ---
 
-##Comportamiento Esperado
+## Comportamiento Esperado
 describa el comportamiento esperado para el escenario de prueba
 
-##Comportamiento Actual
+## Comportamiento Actual
 describa el comportameinto actual del escenario ejecutado
 
-##Paso para reproducir el efect
+## Paso para reproducir el efect
 1. Paso 1
 2. Paso 2
 
-##Evidencias
+## Evidencias
 Enlaces a imagenes o videos que complementan la informacion de la prueba
 
-##Contexto
+## Contexto
 | Elemento  |  Valor |
 |----|----|
 | Version de la app |    |
