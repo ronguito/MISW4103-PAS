@@ -7,13 +7,13 @@ assignees: ronguito
 
 ---
 
-## Comportamiento Esperado
+## Comportamiento esperado
 describa el comportamiento esperado para el escenario de prueba
 
-## Comportamiento Actual
+## Comportamiento actual
 describa el comportameinto actual del escenario ejecutado
 
-## Paso para reproducir el efect
+## Paso para reproducir el efecto
 1. Paso 1
 2. Paso 2
 
