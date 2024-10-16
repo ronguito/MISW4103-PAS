@@ -4,8 +4,11 @@
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="f5KSo2H9V50DNXcvkdVn-1" value="" style="strokeWidth=1;shadow=0;dashed=0;align=center;html=1;shape=mxgraph.mockup.containers.browserWindow;rSize=0;strokeColor=#666666;strokeColor2=#008cff;strokeColor3=#c4c4c4;mainText=,;recursiveResize=0;fillColor=#343a40;" parent="1" vertex="1">
+        <mxCell id="f5KSo2H9V50DNXcvkdVn-1" value="" style="strokeWidth=1;shadow=0;dashed=0;align=center;html=1;shape=mxgraph.mockup.containers.browserWindow;rSize=0;strokeColor=#666666;strokeColor2=#008cff;strokeColor3=#c4c4c4;mainText=,;recursiveResize=0;fillColor=#ffffff;" parent="1" vertex="1">
           <mxGeometry x="14" y="9" width="1141" height="751" as="geometry" />
+        </mxCell>
+        <mxCell id="uNqIIzGQjSYeqVvIgbfA-84" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#343a40;" vertex="1" parent="f5KSo2H9V50DNXcvkdVn-1">
+          <mxGeometry y="111" width="1140" height="639" as="geometry" />
         </mxCell>
         <mxCell id="f5KSo2H9V50DNXcvkdVn-2" value="Page 1" style="strokeWidth=1;shadow=0;dashed=0;align=center;html=1;shape=mxgraph.mockup.containers.anchor;fontSize=17;fontColor=#666666;align=left;whiteSpace=wrap;" parent="f5KSo2H9V50DNXcvkdVn-1" vertex="1">
           <mxGeometry x="60" y="12" width="110" height="26" as="geometry" />
