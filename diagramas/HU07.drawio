@@ -50,7 +50,7 @@
         <mxCell id="-FeIcqoyr3Fs8w_GBFfm-1" value="Actores" style="text;strokeColor=none;align=center;verticalAlign=middle;spacingLeft=10;spacingRight=10;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;fillColor=none;fontColor=#9A9DA0;fontSize=14;" parent="uNqIIzGQjSYeqVvIgbfA-14" vertex="1">
           <mxGeometry x="237" y="18.009999999999994" width="68.25" height="34.49" as="geometry" />
         </mxCell>
-        <mxCell id="-FeIcqoyr3Fs8w_GBFfm-46" value="Todas las peliculas ( filtrada por nombre )" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;fontSize=16;fontColor=#ffffff;" parent="f5KSo2H9V50DNXcvkdVn-1" vertex="1">
+        <mxCell id="-FeIcqoyr3Fs8w_GBFfm-46" value="Peliculas / Filtrado por nombre de pelicula" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;fontSize=16;fontColor=#ffffff;" parent="f5KSo2H9V50DNXcvkdVn-1" vertex="1">
           <mxGeometry x="113" y="260" width="357" height="30" as="geometry" />
         </mxCell>
         <mxCell id="-FeIcqoyr3Fs8w_GBFfm-52" value="" style="group" parent="f5KSo2H9V50DNXcvkdVn-1" vertex="1" connectable="0">
@@ -167,16 +167,16 @@
         <mxCell id="-FeIcqoyr3Fs8w_GBFfm-45" value="Nombre Pelicula" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="-FeIcqoyr3Fs8w_GBFfm-42" vertex="1">
           <mxGeometry y="161" width="104" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="Leau61xDwtq3EpkHuWSL-1" value="" style="group" vertex="1" connectable="0" parent="f5KSo2H9V50DNXcvkdVn-1">
+        <mxCell id="Leau61xDwtq3EpkHuWSL-1" value="" style="group" parent="f5KSo2H9V50DNXcvkdVn-1" vertex="1" connectable="0">
           <mxGeometry x="119" y="300.5" width="104" height="191" as="geometry" />
         </mxCell>
-        <mxCell id="Leau61xDwtq3EpkHuWSL-2" value="&lt;div&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;/div&gt;" style="html=1;shadow=0;dashed=0;shape=mxgraph.bootstrap.rrect;rSize=5;strokeColor=#DFDFDF;html=1;whiteSpace=wrap;fillColor=#ffffff;fontColor=#000000;verticalAlign=bottom;align=left;spacing=20;fontSize=14;" vertex="1" parent="Leau61xDwtq3EpkHuWSL-1">
+        <mxCell id="Leau61xDwtq3EpkHuWSL-2" value="&lt;div&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;/div&gt;" style="html=1;shadow=0;dashed=0;shape=mxgraph.bootstrap.rrect;rSize=5;strokeColor=#DFDFDF;html=1;whiteSpace=wrap;fillColor=#ffffff;fontColor=#000000;verticalAlign=bottom;align=left;spacing=20;fontSize=14;" parent="Leau61xDwtq3EpkHuWSL-1" vertex="1">
           <mxGeometry width="104" height="190" as="geometry" />
         </mxCell>
-        <mxCell id="Leau61xDwtq3EpkHuWSL-3" value="Image cap" style="html=1;shadow=0;dashed=0;shape=mxgraph.bootstrap.topButton;rSize=5;perimeter=none;whiteSpace=wrap;fillColor=#868E96;strokeColor=#DFDFDF;fontColor=#DEE2E6;resizeWidth=1;fontSize=18;" vertex="1" parent="Leau61xDwtq3EpkHuWSL-2">
+        <mxCell id="Leau61xDwtq3EpkHuWSL-3" value="Image cap" style="html=1;shadow=0;dashed=0;shape=mxgraph.bootstrap.topButton;rSize=5;perimeter=none;whiteSpace=wrap;fillColor=#868E96;strokeColor=#DFDFDF;fontColor=#DEE2E6;resizeWidth=1;fontSize=18;" parent="Leau61xDwtq3EpkHuWSL-2" vertex="1">
           <mxGeometry width="104" height="160" relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="Leau61xDwtq3EpkHuWSL-4" value="Nombre Pelicula" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="Leau61xDwtq3EpkHuWSL-1">
+        <mxCell id="Leau61xDwtq3EpkHuWSL-4" value="Nombre Pelicula" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="Leau61xDwtq3EpkHuWSL-1" vertex="1">
           <mxGeometry y="161" width="104" height="30" as="geometry" />
         </mxCell>
         <mxCell id="-FeIcqoyr3Fs8w_GBFfm-23" value="" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=https://misw-4104-web.github.io/202312_GuiasProyecto/assets/images/listadoPeliculas.jpg;clipPath=inset(23.06% 82.67% 49.09% 2.67%);" parent="Leau61xDwtq3EpkHuWSL-1" vertex="1">
