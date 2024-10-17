@@ -185,7 +185,7 @@
         <mxCell id="uNqIIzGQjSYeqVvIgbfA-81" value="Nombre Pelicula" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="uNqIIzGQjSYeqVvIgbfA-78" vertex="1">
           <mxGeometry y="161" width="104" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="wwhWs5dpGb0v1Hpsx3S0-3" value="" style="rounded=1;whiteSpace=wrap;html=1;arcSize=3;" vertex="1" parent="f5KSo2H9V50DNXcvkdVn-1">
+        <mxCell id="wwhWs5dpGb0v1Hpsx3S0-3" value="" style="rounded=1;whiteSpace=wrap;html=1;arcSize=1;" vertex="1" parent="f5KSo2H9V50DNXcvkdVn-1">
           <mxGeometry x="786" y="260" width="344" height="490" as="geometry" />
         </mxCell>
         <mxCell id="wwhWs5dpGb0v1Hpsx3S0-9" value="Trailer" style="html=1;shadow=0;dashed=0;shape=mxgraph.bootstrap.topButton;rSize=5;perimeter=none;whiteSpace=wrap;fillColor=#868E96;strokeColor=#DFDFDF;fontColor=#DEE2E6;resizeWidth=1;fontSize=18;" vertex="1" parent="f5KSo2H9V50DNXcvkdVn-1">
