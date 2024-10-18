@@ -272,20 +272,17 @@
         <mxCell id="5BGiurE_HWUAb0wBSuTy-1" value="Aventura" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=11;fontStyle=2" vertex="1" parent="f5KSo2H9V50DNXcvkdVn-1">
           <mxGeometry x="137" y="911" width="60" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="5BGiurE_HWUAb0wBSuTy-8" value="" style="group" vertex="1" connectable="0" parent="f5KSo2H9V50DNXcvkdVn-1">
-          <mxGeometry x="2" y="276" width="1138" height="391" as="geometry" />
+        <mxCell id="zh0TSdQQMP7ca_rgh4GI-4" value="" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=https://cdn.marvel.com/content/1x/theavengers_lob_mas_dsk_03_1.jpg;" parent="f5KSo2H9V50DNXcvkdVn-1" vertex="1">
+          <mxGeometry x="2" y="276" width="1138" height="379.33" as="geometry" />
         </mxCell>
-        <mxCell id="zh0TSdQQMP7ca_rgh4GI-4" value="" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=https://cdn.marvel.com/content/1x/theavengers_lob_mas_dsk_03_1.jpg;" parent="5BGiurE_HWUAb0wBSuTy-8" vertex="1">
-          <mxGeometry width="1138" height="379.33" as="geometry" />
+        <mxCell id="zh0TSdQQMP7ca_rgh4GI-5" value="" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=https://1000marcas.net/wp-content/uploads/2020/01/Avengers-Logo-2015.png;" parent="f5KSo2H9V50DNXcvkdVn-1" vertex="1">
+          <mxGeometry x="81.88999999999999" y="452" width="382.22" height="215" as="geometry" />
         </mxCell>
-        <mxCell id="zh0TSdQQMP7ca_rgh4GI-5" value="" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=https://1000marcas.net/wp-content/uploads/2020/01/Avengers-Logo-2015.png;" parent="5BGiurE_HWUAb0wBSuTy-8" vertex="1">
-          <mxGeometry x="79.88999999999999" y="176" width="382.22" height="215" as="geometry" />
+        <mxCell id="zh0TSdQQMP7ca_rgh4GI-6" value="Ver detalles" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#dff9fb;fontSize=20;fontStyle=6" parent="f5KSo2H9V50DNXcvkdVn-1" vertex="1">
+          <mxGeometry x="927" y="572" width="137.57" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="zh0TSdQQMP7ca_rgh4GI-6" value="Ver detalles" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#dff9fb;fontSize=20;fontStyle=6" parent="5BGiurE_HWUAb0wBSuTy-8" vertex="1">
-          <mxGeometry x="925" y="296" width="137.57" height="30" as="geometry" />
-        </mxCell>
-        <mxCell id="zh0TSdQQMP7ca_rgh4GI-7" value="" style="verticalLabelPosition=bottom;shadow=0;dashed=0;align=center;html=1;verticalAlign=top;strokeWidth=1;shape=mxgraph.mockup.navigation.pageControl;fillColor=#d5e8d4;strokeColor=#82b366;" parent="5BGiurE_HWUAb0wBSuTy-8" vertex="1">
-          <mxGeometry x="529" y="326" width="100" height="30" as="geometry" />
+        <mxCell id="zh0TSdQQMP7ca_rgh4GI-7" value="" style="verticalLabelPosition=bottom;shadow=0;dashed=0;align=center;html=1;verticalAlign=top;strokeWidth=1;shape=mxgraph.mockup.navigation.pageControl;fillColor=#d5e8d4;strokeColor=#82b366;" parent="f5KSo2H9V50DNXcvkdVn-1" vertex="1">
+          <mxGeometry x="531" y="602" width="100" height="30" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
