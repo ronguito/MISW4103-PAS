@@ -1,0 +1,20 @@
+{
+  "name": "Test-e2e-ghost",
+  "version": "1.0.0",
+  "main": "index.js",
+  "description": "Pruebas automatizadas con Kraken y Cypress al sistema Ghost",
+  "scripts": {
+    "test:kraken": "npx kraken-node run",
+    "test:cypress": "npx cypress run"
+  },
+  "dependencies": {
+    "kraken-node": "^1.0.24",
+    "cypress": "^13.0.0"
+  }
+  "devDependencies": {
+    "cypress-mochawesome-reporter": "^3.8.2",
+    "mochawesome": "^7.1.3",
+    "mochawesome-merge": "^4.3.0",
+    "mochawesome-report-generator": "^6.2.0"
+  }
+}
