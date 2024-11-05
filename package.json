@@ -10,7 +10,7 @@
   "dependencies": {
     "kraken-node": "^1.0.24",
     "cypress": "^13.0.0"
-  }
+  },
   "devDependencies": {
     "cypress-mochawesome-reporter": "^3.8.2",
     "mochawesome": "^7.1.3",
