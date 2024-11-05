@@ -25,7 +25,7 @@ Para instalar todas las dependencias, ejecuta:
 
 ```bash
 npm install
-
+```
 
 ## Ejecución de Pruebas
 
@@ -36,9 +36,10 @@ Pruebas con Cypress, desde la consola de comandos en la raiz del proyecto
 npx cypress open 
 //Ejecutr las pruebas en modo headless con 
 npx cypress run.
-
+```
 
 Pruebas con Kraken-node, desde la consola de comandos en la raiz del proyecto
 
 ```bash
 npx kraken-node run.
+```
