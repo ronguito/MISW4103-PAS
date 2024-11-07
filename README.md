@@ -36,6 +36,32 @@ npm install
 npm install -g cypress
 ```
 
+* Configuracion adicional para Kraken
+
+a) Para que kraken funcione adecuadamente en Windows es necesario instalar ADB (Android Debug Bridge), para ello
+descargue desde la pagina oficial de Android 
+<a href="https://developer.android.com/studio/releases/platform-tools">Descargar ABD</a> siga los siguientes pasos
+
+1. Descomprima los archivos descargados
+2. Copie la carpeta "platform-tools" en el disco C:
+3. Abra el panel de control y busque la opcion Sistema
+4. De clic en opciones avanzadas del sistema.
+5. De clic en el boton Variables de entorno.
+6. En la seccion variables del sistema busque la variable "Path" y de clic sobre ella
+7. De clic en el boton editar y luego de clic en Nuevo
+8. Digite la direccion de la carpeta c:\platform-tools
+9. De clic en Aceptar a todas las ventanas hasta salir de la configuracion.
+10. Para que tenga efecto debe cerrar la consola y volverla a abrir
+
+b) Es posible que se presente un error con la herrameinta Appium utilizada por Kraken para 
+la automatización de pruebas para aplicaciones móviles y de escritorio, si esto ocurre instale Appium de 
+manera glogal
+
+```bash
+npm install -g appium
+```
+
+
 ## Ejecución de Pruebas
 
 Pruebas con Cypress, desde la consola de comandos en la raiz del proyecto
