@@ -17,14 +17,23 @@ escenarios de prueba avanzados en distintos entornos y configuraciones.
 
 ## Prerequisitos
 
-Contar con una instalacion de Ghost de manera local.
+* Contar con una instalacion de Ghost de manera local.
+* Haber configurado manualmente una cuenta en ghost
 
 ## Instalación
+El proceso de instalacion incluye las dos herramientas para ejecutar las pruebas
+desarrolladas en este proyecto.
 
-Para instalar todas las dependencias, ejecuta:
+* Para instalar todas las dependencias ejecute en la consola de comandos desde la raiz del proyecto:
 
 ```bash
 npm install
+```
+
+* Despues de instalar las dependencias instale Cypress de manera global
+ 
+```bash
+npm install -g cypress
 ```
 
 ## Ejecución de Pruebas
