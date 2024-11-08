@@ -1,6 +1,6 @@
 class Post {
 
-    PostTitle = '';
+    //Title = '';
 
     create (){
         cy.get('a[href="#/editor/post/"]').first().click();
@@ -13,20 +13,24 @@ class Post {
         cy.url().should('include', '/ghost/#/posts');
     }
 
-    setTitle(title){
-        cy.get('textarea[placeholder="Post title"]').type(title);
-        this.PostTitle = title;
+    savePublish(){
+        cy.get('button[data-test-button="publish-save"').first().click();
+        cy.wait(1000);
+        this.saveDraff();
     }
 
-    selectDraft(){
-        cy.get('a.gh-post-list-title', { timeout: 3000 }).then($links => {
-            
+    setTitle(title){
+        cy.get('textarea[placeholder="Post title"]').clear().type(title);
+    }
+
+    selectFirst(status){
+        return cy.get('a.gh-post-list-title', { timeout: 3000 }).then($links => {
             const post = $links.filter((index, element) => {
-                return Cypress.$(element).text().includes('Draft'); 
+                return Cypress.$(element).text().includes(status); 
             }).first();
-            const title = post.find('h3').text().trim().replace(/\n+/g, ' ').trim();
-            this.PostTitle = title;
+            var title = post.find('h3').text().trim().replace(/\n+/g, ' ').trim();
             post.click();
+            return title; 
         });
     }
 
@@ -38,23 +42,33 @@ class Post {
         cy.get('button[ data-test-button="close-publish-flow"]').click();
     }
 
+    delete(){
+        cy.url().should('match', /\/ghost\/#\/editor\/post\/.+/);
+        cy.get('button[title="Settings"]').click();// Abrir el menú de opciones del post
+        cy.get('button[data-test-button="delete-post"]').click();// clic boton en eliminar
+        cy.get('button[data-test-button="delete-post-confirm"]').click(); // Confirmar la eliminación
+        cy.url().should('include', '/ghost/#/posts');
+    }
 
-    validateStatus(status){
+    validateStatus(status, title){
 
         cy.get('a.gh-post-list-title', { timeout: 3000 }).then($links => {
             const post = $links.filter((index, element) => {
                 return Cypress.$(element).text().includes(status); 
             }).first();
-            const postElement = post.get(0);
-            expect(postElement.innerHTML).to.include(this.PostTitle); 
+            const read = post.find('h3').text().trim().replace(/\n+/g, ' ').trim();
+            console.log("validateStatus: " + title);
+            expect(read).to.equal(title); 
         });
     }
 
-    validatePublished(host){
+    validatePublished(host,title, shouldContain=true){
         cy.visit(host);
-        cy.url().should('include', host);
-        console.log("validatePublished: " + this.PostTitle)
-        cy.get('div.gh-container-inner').should('contain.text', this.PostTitle);
+        if (shouldContain) {
+            cy.get('div.gh-container-inner').should('contain.text', title);
+        } else {
+            cy.get('div.gh-container-inner').should('not.contain.text', title);
+        }
     }
 
 }

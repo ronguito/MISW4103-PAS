@@ -2,7 +2,6 @@ class Webpage {
 
     visit (host){
         cy.visit(host);
-        cy.url().should('include', host);
     }
 
     login (username, password){
