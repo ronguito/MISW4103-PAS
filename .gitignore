@@ -1,6 +1,7 @@
 /node_modules
 /reports
 /cypress/reports
+/cypress/screenshots
 /package-lock.json
 /.DS_Store
 /.kraken
