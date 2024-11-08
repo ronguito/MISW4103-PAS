@@ -11,19 +11,18 @@ Escenario 4: Eliminar un post publicado y verificar que ya no esté accesible de
 
 Escenario | Asignación
 ----------|-----------
-Escenario 3: Editar el perfil de un colaborador y verificar que los cambios se reflejen en su cuenta.	| Pendiente
-Escenario 4: Cambiar el rol de un usuario y verificar que los permisos se actualicen de acuerdo con el nuevo rol.	| Pendiente
-Escenario 5: Intentar invitar a un usuario con un correo electrónico inválido y verificar que el sistema lo rechace.	| Pendiente
-Escenario 6: Eliminar a un colaborador y verificar que pierda acceso al sistema.	| Pendiente
+Escenario 1: Editar el perfil de un colaborador y verificar que los cambios se reflejen en su cuenta.	| Pendiente
+Escenario 2: Cambiar el rol de un usuario y verificar que los permisos se actualicen de acuerdo con el nuevo rol.	| Pendiente
+Escenario 3: Intentar invitar a un usuario con un correo electrónico inválido y verificar que el sistema lo rechace.	| Pendiente
+Escenario 4: Eliminar a un colaborador y verificar que pierda acceso al sistema.	| Pendiente
 3. Suscripciones y miembros
 
 Escenario | Asignación
 ----------|-----------	
 Escenario 1: Agregar un nuevo suscriptor a través del formulario de suscripción y verificar que aparezca en la lista de miembros.	| Juan Tapia
-Escenario 2: Enviar una notificación a los suscriptores y verificar que todos reciban el mensaje correctamente.	| Juan Tapia
-Escenario 3: Intentar agregar un suscriptor con un correo electrónico duplicado y verificar que el sistema lo rechace.	| Juan Tapia
-Escenario 4: Modificar la información de un suscriptor y verificar que los cambios se actualicen correctamente.	| Juan Tapia
-Escenario 5: Eliminar a un suscriptor y verificar que ya no tenga acceso al contenido exclusivo.	| Juan Tapia
+Escenario 2: Intentar agregar un suscriptor con un correo electrónico duplicado y verificar que el sistema lo rechace.	| Juan Tapia
+Escenario 3: Modificar la información de un suscriptor y verificar que los cambios se actualicen correctamente.	| Juan Tapia
+Escenario 4: Eliminar a un suscriptor y verificar que ya no tenga acceso al contenido exclusivo.	| Juan Tapia
 4. Gestión de páginas
 
 Escenario | Asignación
