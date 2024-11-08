@@ -39,7 +39,7 @@ class Post {
         cy.get('button[data-test-button="continue"]').click();
         cy.get('button[data-test-button="confirm-publish"]').click();
         cy.url().should('include', '/ghost/#/posts');
-        cy.get('button[ data-test-button="close-publish-flow"]').click();
+        cy.get('button[data-test-button="close-publish-flow"]').click();
     }
 
     delete(){
@@ -50,19 +50,18 @@ class Post {
         cy.url().should('include', '/ghost/#/posts');
     }
 
-    validateStatus(status, title){
+    verifyStatus(status, title){
 
         cy.get('a.gh-post-list-title', { timeout: 3000 }).then($links => {
             const post = $links.filter((index, element) => {
                 return Cypress.$(element).text().includes(status); 
             }).first();
             const read = post.find('h3').text().trim().replace(/\n+/g, ' ').trim();
-            console.log("validateStatus: " + title);
             expect(read).to.equal(title); 
         });
     }
 
-    validatePublished(host,title, shouldContain=true){
+    verifyPublished(host,title, shouldContain=true){
         cy.visit(host);
         if (shouldContain) {
             cy.get('div.gh-container-inner').should('contain.text', title);

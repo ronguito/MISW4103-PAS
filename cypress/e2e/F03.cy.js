@@ -31,7 +31,7 @@ describe('F03: Crear y gestionar Publicaciones (posts) ', () => {
       post.saveDraff();
       
       //then
-      post.validateStatus('Draft', title);
+      post.verifyStatus('Draft', title);
 
     });
     
@@ -44,8 +44,8 @@ describe('F03: Crear y gestionar Publicaciones (posts) ', () => {
         post.publish();
 
         // Then
-        post.validateStatus('Published', title);
-        post.validatePublished(config.UrlPublic, title);
+        post.verifyStatus('Published', title);
+        post.verifyPublished(config.UrlPublic, title);
       });
 
     });
@@ -61,8 +61,8 @@ describe('F03: Crear y gestionar Publicaciones (posts) ', () => {
         post.savePublish();
 
         // Then
-        post.validateStatus('Published', newTitle);
-        post.validatePublished(config.UrlPublic, newTitle);
+        post.verifyStatus('Published', newTitle);
+        post.verifyPublished(config.UrlPublic, newTitle);
       });
 	
     });
@@ -78,8 +78,8 @@ describe('F03: Crear y gestionar Publicaciones (posts) ', () => {
         post.delete();
 
         // Then
-        post.validateList(title);
-        post.validatePublished(config.UrlPublic, title, false);
+        post.verifyPublished(config.UrlPublic, title, false);
+        
       });
 
     });
