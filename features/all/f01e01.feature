@@ -1,6 +1,6 @@
 Feature: Configurar opciones generales del sitio
 
-@user11 @web
+@user1 @web
 Scenario: F01E01 Configurar el titulo del sitio
   Given I navigate to page "<UrlLogin>"
   And I wait for 5 seconds

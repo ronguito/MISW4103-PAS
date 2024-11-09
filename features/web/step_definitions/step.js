@@ -1,4 +1,7 @@
 const { Given, When, Then } = require('@cucumber/cucumber');
+const { faker } = require("@faker-js/faker");
+
+var currentPostTitle = '';
 
 //////////////////// F01 configuracion general ///////////////////////////////
 When('I enter email {kraken-string}', async function (email) {
@@ -20,6 +23,10 @@ When('I click on signin', async function() {
 //////////////////// F03 Crear y gestionar Publicaciones (posts) ///////////////////////////////
 
 When('I enter title {string}', async function (text) {
+    if(text=='random'){
+        text = faker.hacker.phrase();
+    }
+    currentPostTitle = text;
     let element = await this.driver.$('textarea[placeholder="Post title"]');
     return await element.setValue(text);
 });
@@ -30,17 +37,23 @@ When('I click on new post', async function () {
 });
 
 When('I click on save post', async function () {
-    let element = await this.driver.$('a[data-test-link="posts"]').click();
+    let element = await this.driver.$('a[data-test-link="posts"]');
     return await element.click();
 });
 
-When('I click on publish', async function () {
-    let element1 = await this.driver.$('button[data-test-button="publish-flow"');
-    await element1.click();
-    let element2 = await this.driver.$('button[data-test-button="continue"');
-    await element2.click();
-    let element3 = await this.driver.$('button[data-test-button="confirm-publish"');
-    return await element3.click();
+When('I click on button publish', async function () {
+    let element = await this.driver.$('button[data-test-button="publish-flow"');
+    return await element.click();
+});
+
+When('I click on button continue', async function () {
+    let element = await this.driver.$('button[data-test-button="continue"');
+    return  await element.click();
+});
+
+When('I click on button confirm', async function () {
+    let element = await this.driver.$('button[data-test-button="confirm-publish"');
+    return await element.click();
 });
 
 When('I click on close publish', async function () {
@@ -57,6 +70,7 @@ When('I select first post {string}', async function (status) {
         const text = await post.getText(); // Obtener texto del post
         if (text.includes(status)) {
             matchedPost = post; // Si coincide, guardar el elemento
+            
             break; // Salir del bucle
         }
     }
@@ -65,16 +79,25 @@ When('I select first post {string}', async function (status) {
     if (!matchedPost) {
         throw new Error(`No se encontró un post con el estado "${status}".`);
     }
+
+    const read = await matchedPost.$('h3').getText();
+    const trimmedText = read.trim().replace(/\n+/g, ' ').trim();
+    currentPostTitle = trimmedText;
+    console.log(trimmedText);
+    
     return await matchedPost.click(); 
 
 });
 
 Then('I verify status {string} for {string}', async function (status, title) {
     
+    if(title=="current"){
+        title = currentPostTitle;
+    }
+    
     const posts = await this.driver.$$('a.gh-post-list-title');
     
     let matchedPost = null;
-
     for (const post of posts) {
         const text = await post.getText(); // Obtener texto del post
         if (text.includes(status)) {
@@ -95,12 +118,14 @@ Then('I verify status {string} for {string}', async function (status, title) {
 });
 
 Then('I verify {string} is published', async function (title) {
+    if(title=="current"){ title = currentPostTitle;  }
     const container = await this.driver.$('div.gh-container-inner');
     const containerText = await container.getText();
     return await containerText.includes(title);
 });
 
 Then('I verify {string} is not published', async function (title) {
+    if(title=="current"){ title = currentPostTitle;  }
     const container = await this.driver.$('div.gh-container-inner');
     const containerText = await container.getText();
     return await !containerText.includes(title);
