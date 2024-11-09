@@ -56,6 +56,11 @@ When('I click on button confirm', async function () {
     return await element.click();
 });
 
+When('I click on button update', async function () {
+    let element = await this.driver.$('button[data-test-button="publish-save"');
+    return await element.click();
+});
+
 When('I click on close publish', async function () {
     let element1 = await this.driver.$('button[data-test-button="close-publish-flow"');
     return await element1.click();

@@ -1,7 +1,7 @@
 Feature: Crear y gestionar Publicaciones (posts) 
 
 @user1 @web
-Scenario: F03E02 Publicar post
+Scenario: F03E03 Modificar un post publicado 
   Given I navigate to page "<UrlLogin>"
   And I wait for 5 seconds
   And I enter email "<UserName>"
@@ -11,17 +11,14 @@ Scenario: F03E02 Publicar post
 
   When I navigate to page "<UrlPost>"
   And I wait for 10 seconds
-  And I select first post 'Draft'
+  And I select first post 'Publish'
   And I wait for 5 seconds
-  And I click on button publish
-  And I wait for 1 seconds
-  And I click on button continue
-  And I wait for 1 seconds 
-  And I click on button confirm 
-  And I wait for 5 seconds
-  And I click on close publish
+  And I enter title "random"
+  And I click on button update
+  And I wait for 2 seconds
+  And I click on save post
 
-  Then I wait for 2 seconds
+  Then I wait for 5 seconds
   And I verify status "Published" for "current"
   And I wait for 2 seconds
   And I navigate to page "<UrlPublic>"
