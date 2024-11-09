@@ -19,6 +19,11 @@ When('I click on signin', async function() {
     return await element.click();
 })
 
+When('I open setting', async function () {
+    let element = await this.driver.$('button[title="Settings"]');
+    return await element.click();
+});
+
 
 //////////////////// F03 Crear y gestionar Publicaciones (posts) ///////////////////////////////
 
@@ -62,8 +67,8 @@ When('I click on button update', async function () {
 });
 
 When('I click on close publish', async function () {
-    let element1 = await this.driver.$('button[data-test-button="close-publish-flow"');
-    return await element1.click();
+    let element = await this.driver.$('button[data-test-button="close-publish-flow"');
+    return await element.click();
 });
 
 When('I select first post {string}', async function (status) {
@@ -92,6 +97,16 @@ When('I select first post {string}', async function (status) {
     
     return await matchedPost.click(); 
 
+});
+
+When("I click on button delete post", async function () {
+    let element = await this.driver.$('button[data-test-button="delete-post"');
+    return await element.click();
+});
+
+When("I click on button delete post confirm", async function () {
+    let element = await this.driver.$('button[data-test-button="delete-post-confirm"');
+    return await element.click();
 });
 
 Then('I verify status {string} for {string}', async function (status, title) {
