@@ -18,4 +18,4 @@ Scenario: F03E01 Crear un nuevo post en estado de borrador
   And I click on save post
 
   Then I wait for 10 seconds
-  And The status for post "current" should be "Draft"
+  And The status for post "postTitle" should be "Draft"

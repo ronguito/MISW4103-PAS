@@ -23,7 +23,7 @@ Scenario: F03E04 Eliminar un post publicado
   Then I wait for 2 seconds
   And I navigate to page "<UrlPublic>"
   And I wait for 5 seconds
-  And The post "current" should not be published
+  And The main page should not contain "postTitle"
 
 
 

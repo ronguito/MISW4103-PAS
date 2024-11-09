@@ -22,11 +22,11 @@ Scenario: F03E02 Publicar post
   And I click on close publish
 
   Then I wait for 2 seconds
-  And The status for post "current" should be "Published"
+  And The status for post "postTitle" should be "Published"
   And I wait for 2 seconds
   And I navigate to page "<UrlPublic>"
   And I wait for 5 seconds
-  And The post "current" should be published
+  And The main page should contain "postTitle"
 
 
 
