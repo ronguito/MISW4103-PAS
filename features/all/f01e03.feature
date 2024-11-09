@@ -1,7 +1,7 @@
 Feature: Configurar opciones generales del sitio
 
 @user1 @web
-Scenario: F01E03 Configurar el color de los botones
+Scenario: F01E03 Cambiar color de los botones
   Given I navigate to page "<UrlLogin>"
   And I wait for 5 seconds
   And I enter email "<UserName>"
