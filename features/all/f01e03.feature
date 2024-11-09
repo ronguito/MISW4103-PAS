@@ -1,7 +1,7 @@
 Feature: Configurar opciones generales del sitio
 
 @user1 @web
-Scenario: F01E01 Configurar el titulo del sitio
+Scenario: F01E03 Cambiar color de los botones
   Given I navigate to page "<UrlLogin>"
   And I wait for 5 seconds
   And I enter email "<UserName>"
@@ -12,18 +12,22 @@ Scenario: F01E01 Configurar el titulo del sitio
 
   When I open setting site
   And I wait for 2 seconds
-  And I click on button edit in "title-and-description"
+  And I click on button edit in "design"
   And I wait for 2 seconds
-  And I enter title site "random"
+  And I click on button design "Brand"
+  And I wait for 2 seconds
+  And I enter color
   And I wait for 2 seconds
   And I click on button save
   And I wait for 2 seconds
+  And I click on button close
   And I close setting site
 
   Then I wait for 2 seconds
   And I navigate to page "<UrlPublic>"
   And I wait for 5 seconds
-  And The main page should contain "pageTitle"
-  
+  And The head should contain color
+
+
 
 

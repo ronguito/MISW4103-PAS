@@ -1,7 +1,7 @@
 Feature: Configurar opciones generales del sitio
 
 @user1 @web
-Scenario: F01E01 Configurar el titulo del sitio
+Scenario: F01E02 Configurar descripcion de la pagina
   Given I navigate to page "<UrlLogin>"
   And I wait for 5 seconds
   And I enter email "<UserName>"
@@ -14,7 +14,7 @@ Scenario: F01E01 Configurar el titulo del sitio
   And I wait for 2 seconds
   And I click on button edit in "title-and-description"
   And I wait for 2 seconds
-  And I enter title site "random"
+  And I enter description site "random"
   And I wait for 2 seconds
   And I click on button save
   And I wait for 2 seconds
@@ -23,7 +23,8 @@ Scenario: F01E01 Configurar el titulo del sitio
   Then I wait for 2 seconds
   And I navigate to page "<UrlPublic>"
   And I wait for 5 seconds
-  And The main page should contain "pageTitle"
-  
+  And The main page should contain "pageDescription"
+
+
 
 
