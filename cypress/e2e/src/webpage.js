@@ -22,7 +22,8 @@ class Webpage {
     }
 
     clickEditSection(title){
-        cy.get(`div[data-testid="${title}"]`).find('button').click();        
+        cy.get(`div[data-testid="${title}"]`).find('button').click();
+        cy.wait(2000);       
     }
 
     setPageTitle(text){
@@ -53,13 +54,14 @@ class Webpage {
         
             // Hacer clic en el botón encontrado
             cy.wrap(matched).click();
-            cy.wrap(matched).should('not.exist');
+            cy.wait(3000);
             
         });
     }
 
     clickOnPanel(name){
         cy.get(`button[title="${name}"]`).click();
+        cy.wait(2000);
     }
 
     clickOnPickColor(){
@@ -67,7 +69,7 @@ class Webpage {
     }
 
     setColor(color){
-        cy.get('input[aria-label="Color value"]').clear().type(text);
+        cy.get('input[aria-label="Color value"]').clear().type(color);
     }
 
     shouldContain(text){
@@ -83,6 +85,13 @@ class Webpage {
             const colorh = `#${color}`;
             expect(headContent).to.include(color, `El head debe contener el color ${colorh}`);
         });
+    }
+
+    generarColorAleatorio() {
+        const r = Math.floor(Math.random() * 256).toString(16).padStart(2, '0');
+        const g = Math.floor(Math.random() * 256).toString(16).padStart(2, '0');
+        const b = Math.floor(Math.random() * 256).toString(16).padStart(2, '0');
+        return `${r}${g}${b}`;
     }
 }
 

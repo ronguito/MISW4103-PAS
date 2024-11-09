@@ -49,12 +49,26 @@ describe('F01: Configurar opciones generales del sitio ', () => {
         wp.shouldContain(text);		
 	
     });
-    /*
+    
     it('F01E03: Cambiar el color de los botones', () => {
-		
+		const color = wp.generarColorAleatorio();
+        //Give:
+        wp.openSiteSetting();
+        
+        //When
+        wp.clickEditSection("design");
+        wp.clickOnPanel("Brand");
+        wp.setColor(color);
+        wp.clickOnButton("Save");
+        wp.clickOnButton("Close")
+        wp.closeSiteSetting();
+        
+        //then
+        wp.visit(config.UrlPublic);
+        wp.shouldContainColor(color);	
 	
     });
- 
+    /*
     it('F01E04: Cambiar el color de fondo de la pagina', () => {
 		
 	
