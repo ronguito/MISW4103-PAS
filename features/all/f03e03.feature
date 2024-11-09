@@ -13,17 +13,17 @@ Scenario: F03E03 Modificar un post publicado
   And I wait for 10 seconds
   And I select first post 'Publish'
   And I wait for 5 seconds
-  And I enter title "random"
+  And I enter title post "random"
   And I click on button update
   And I wait for 2 seconds
   And I click on save post
 
   Then I wait for 5 seconds
-  And I verify status "Published" for "current"
+  And The status for post "current" should be "Published"
   And I wait for 2 seconds
   And I navigate to page "<UrlPublic>"
   And I wait for 5 seconds
-  And I verify "current" is published
+  And The post "current" should be published
 
 
 

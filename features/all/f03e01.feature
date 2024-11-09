@@ -13,9 +13,9 @@ Scenario: F03E01 Crear un nuevo post en estado de borrador
   And I wait for 10 seconds
   And I click on new post
   And I wait for 5 seconds
-  And I enter title "random"
+  And I enter title post "random"
   And I wait for 2 seconds
   And I click on save post
 
   Then I wait for 10 seconds
-  And I verify status "Draft" for "current"
+  And The status for post "current" should be "Draft"

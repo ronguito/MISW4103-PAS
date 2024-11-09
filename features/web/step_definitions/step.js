@@ -1,9 +1,9 @@
 const { Given, When, Then } = require('@cucumber/cucumber');
 const { faker } = require("@faker-js/faker");
 
-var currentPostTitle = '';
 
 //////////////////// F01 configuracion general ///////////////////////////////
+var pageTitle = '';
 When('I enter email {kraken-string}', async function (email) {
     let element = await this.driver.$('#identification');
     return await element.setValue(email);
@@ -19,15 +19,63 @@ When('I click on signin', async function() {
     return await element.click();
 })
 
-When('I open setting', async function () {
-    let element = await this.driver.$('button[title="Settings"]');
+When('I open setting site', async function () {
+    let element = await this.driver.$('a[data-test-nav="settings"]');
     return await element.click();
+});
+
+When('I close setting site', async function () {
+    let element = await this.driver.$('button[data-testid="exit-settings"]');
+    return await element.click();
+});
+
+When('I click on button edit title', async function () {
+    let element = await this.driver.$('div[data-testid="title-and-description"]');
+    let button = await element.$('button');
+    return await button.click();
+});
+
+When("I click on button save", async function() {
+    const buttons = await this.driver.$$('button');
+    let matched = null;
+
+    for (const button of buttons) {
+        const text = await button.getText();
+        if (text.includes('Save')) {
+            matched = button;
+            break; // Salir del bucle
+        }
+    }
+
+    if (!matched) {
+        throw new Error(`No se encontró un para guardar`);
+    }
+
+    return await matched.click(); 
+});
+
+When('I enter title site {string}', async function (text) {
+    if(text=='random'){
+        text = faker.company.name();
+    }
+    pageTitle = text;
+    let element = await this.driver.$('input[placeholder="Site title"]');
+    return await element.setValue(text);
+});
+
+Then('The page title should be {string}', async function (title) {
+    const actualTitle = await this.driver.getTitle();
+    if(title=="current"){ title = pageTitle;  }
+    if (!actualTitle.includes(title)) {
+        throw new Error(`El título de la página es incorrecto. Se esperaba: "${title}", pero se obtuvo: "${actualTitle}"`);
+    }
 });
 
 
 //////////////////// F03 Crear y gestionar Publicaciones (posts) ///////////////////////////////
+var currentPostTitle = '';
 
-When('I enter title {string}', async function (text) {
+When('I enter title post {string}', async function (text) {
     if(text=='random'){
         text = faker.hacker.phrase();
     }
@@ -71,6 +119,11 @@ When('I click on close publish', async function () {
     return await element.click();
 });
 
+When('I open setting post', async function () {
+    let element = await this.driver.$('button[title="Settings"]');
+    return await element.click();
+});
+
 When('I select first post {string}', async function (status) {
     
     const posts = await this.driver.$$('a.gh-post-list-title');
@@ -109,7 +162,7 @@ When("I click on button delete post confirm", async function () {
     return await element.click();
 });
 
-Then('I verify status {string} for {string}', async function (status, title) {
+Then('The status for post {string} should be {string}', async function (title, status) {
     
     if(title=="current"){
         title = currentPostTitle;
@@ -137,14 +190,14 @@ Then('I verify status {string} for {string}', async function (status, title) {
 
 });
 
-Then('I verify {string} is published', async function (title) {
+Then('The post {string} should be published', async function (title) {
     if(title=="current"){ title = currentPostTitle;  }
     const container = await this.driver.$('div.gh-container-inner');
     const containerText = await container.getText();
     return await containerText.includes(title);
 });
 
-Then('I verify {string} is not published', async function (title) {
+Then('The post {string} should not be published', async function (title) {
     if(title=="current"){ title = currentPostTitle;  }
     const container = await this.driver.$('div.gh-container-inner');
     const containerText = await container.getText();

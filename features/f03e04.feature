@@ -13,7 +13,7 @@ Scenario: F03E04 Eliminar un post publicado
   And I wait for 10 seconds
   And I select first post 'Published'
   And I wait for 5 seconds
-  And I open setting
+  And I open setting post
   And I wait for 1 seconds
   And I click on button delete post
   And I wait for 1 seconds 
@@ -23,7 +23,7 @@ Scenario: F03E04 Eliminar un post publicado
   Then I wait for 2 seconds
   And I navigate to page "<UrlPublic>"
   And I wait for 5 seconds
-  And I verify "current" is not published
+  And The post "current" should not be published
 
 
 
