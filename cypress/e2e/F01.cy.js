@@ -32,24 +32,24 @@ describe('F01: Configurar opciones generales del sitio ', () => {
         wp.shouldContain(title);
         
     });
-    /*
+    
     it('F01E02: Configurar la descripción del sitio', () => {
-        const title = faker.company.name();
+        const text = faker.company.buzzPhrase();
         //Give:
         wp.openSiteSetting();
         
         //When
         wp.clickEditSection("title-and-description");
-        wp.setPageTitle(title);
+        wp.setPageDescription(text);
         wp.clickOnButton("Save");
         wp.closeSiteSetting();
         
         //then
         wp.visit(config.UrlPublic);
-        wp.shouldContain(title);		
+        wp.shouldContain(text);		
 	
     });
-    
+    /*
     it('F01E03: Cambiar el color de los botones', () => {
 		
 	
