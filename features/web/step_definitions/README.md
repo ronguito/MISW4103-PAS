@@ -1,7 +1,6 @@
 # Definicion de funcionalidades
 
 ## F01 - configuracion general
-
 * When 'I enter email {kraken-string}'
 * When 'I enter password {kraken-string}'
 * When 'I click on signin'
