@@ -11,12 +11,12 @@ describe('F01: Configurar opciones generales del sitio ', () => {
 	
     });
     
-    it('F01E03: Cambiar el favicon del sitio y verificar que se actualice en el navegador', () => {
+    it('F01E03: Cambiar el color de los botones', () => {
 		
 	
     });
  
-    it('F01E04: Configurar la cuenta social de facebook del sitio', () => {
+    it('F01E04: Cambiar el color de fondo de la pagina', () => {
 		
 	
     });

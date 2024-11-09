@@ -71,7 +71,7 @@ When('I enter color', async function () {
 });
 
 //da clic sobre un boton para guardar, que contenga la palabra save
-When("I click on button save", async function() {
+When('I click on button save', async function() {
     const buttons = await this.driver.$$('button');
     let matched = null;
     for (const button of buttons) {
@@ -148,17 +148,22 @@ Then('The head should contain color', async function () {
         throw new Error(`El head no contiene el color ${color}`);
     }
 });
-//////////////////// F02 Crear y gestionar Suscripciones y miembros  ///////////////////////////////
 
+
+//////////////////// F02 Crear y gestionar Suscripciones y miembros  ///////////////////////////////
+currentMemberName = '';
+
+// entra el nombre completo del suscriptor
 When('I enter member full name {string}', async function (name) {
     if(name=='random'){
-        name = faker.name.findName();
+        name = faker.person.fullName();
     }
     currentMemberName = name;
     let element = await this.driver.$('input[id="member-name"]');
     return await element.setValue(name);
 });
 
+// entra el correo del suscriptor
 When('I enter member email {string}', async function (email) {
     if(email=='random'){
         email = faker.internet.email();
@@ -170,69 +175,19 @@ When('I enter member email {string}', async function (email) {
     return await element.setValue(email);
 });
 
+// clic en el boton nuevo miembro
 When('I click on new member', async function () {
     let element = await this.driver.$('a[href="#/members/new/"]');
     return await element.click();
 });
 
+// da clic en el boton guardar miembro
 When('I click on save member', async function () {
     let element = await this.driver.$('button[data-test-button="save"]');
     return await element.click();
 });
 
-// When('I click on button publish', async function () {
-//     let element = await this.driver.$('button[data-test-button="publish-flow"');
-//     return await element.click();
-// });
-
-// When('I click on button continue', async function () {
-//     let element = await this.driver.$('button[data-test-button="continue"');
-//     return  await element.click();
-// });
-
-// When('I click on button confirm', async function () {
-//     let element = await this.driver.$('button[data-test-button="confirm-publish"');
-//     return await element.click();
-// });
-
-// When('I click on button update', async function () {
-//     let element = await this.driver.$('button[data-test-button="publish-save"');
-//     return await element.click();
-// });
-
-// When('I click on close publish', async function () {
-//     let element1 = await this.driver.$('button[data-test-button="close-publish-flow"');
-//     return await element1.click();
-// });
-
-// When('I select first post {string}', async function (status) {
-    
-//     const posts = await this.driver.$$('a.gh-post-list-title');
-//     let matchedPost = null;
-
-//     for (const post of posts) {
-//         const text = await post.getText(); // Obtener texto del post
-//         if (text.includes(status)) {
-//             matchedPost = post; // Si coincide, guardar el elemento
-            
-//             break; // Salir del bucle
-//         }
-//     }
-
-//     // Validar que se encontró un post que coincide
-//     if (!matchedPost) {
-//         throw new Error(`No se encontró un post con el estado "${status}".`);
-//     }
-
-//     const read = await matchedPost.$('h3').getText();
-//     const trimmedText = read.trim().replace(/\n+/g, ' ').trim();
-//     currentPostTitle = trimmedText;
-//     console.log(trimmedText);
-    
-//     return await matchedPost.click(); 
-
-// });
-
+// veerifica que el nuevo suscriptor existe por el correo
 Then('I verify new member on list for email {string}', async function (email) {
     
     if(email=="current"){
@@ -273,6 +228,7 @@ Then('I verify new member on list for email {string}', async function (email) {
 
 });
 
+// verifica que existe un error al crear el suscriptor
 Then('I verify it exists an error message', async function () {
     const container = await this.driver.$('p.response');
     const containerText = await container.getText();
@@ -280,135 +236,12 @@ Then('I verify it exists an error message', async function () {
     return await containerText.includes(msg);
 });
 
-// Then('I verify {string} is not published', async function (title) {
-//     if(title=="current"){ title = currentPostTitle;  }
-//     const container = await this.driver.$('div.gh-container-inner');
-//     const containerText = await container.getText();
-//     return await !containerText.includes(title);
-// });
 
-//////////////////// F03 Crear y gestionar Publicaciones (posts) ///////////////////////////////
-// When('I enter title {string}', async function (text) {
-//abre la pagina de configuracion
-When('I open setting site', async function () {
-    let element = await this.driver.$('a[data-test-nav="settings"]');
-    return await element.click();
-});
 
-//cierra la ventana de configuracion
-When('I close setting site', async function () {
-    let element = await this.driver.$('button[data-testid="exit-settings"]');
-    return await element.click();
-});
-
-//da clic sobre el boton edit de una seccion de la configuracion
-When('I click on button edit in {string}', async function (seccion) {
-    let element = await this.driver.$('div[data-testid="'+seccion+'"]');
-    let button = await element.$('button');
-    return await button.click();
-});
-
-//dar clic sobre una ficha del diseño Brand o Page wide
-When('I click on button design {string}', async function (seccion) {
-    let element = await this.driver.$('button[title="'+seccion+'"]');
-    return await element.click();
-});
-
-//da clic sobe pick del color para el fondo
-When('I click on button pick color', async function () {
-    let element = await this.driver.$('button[aria-label="Pick color"]');
-    return await element.click();
-});
-
-//agrega un color aletorio en la caja de color
-When('I enter color', async function () {
-    let element = await this.driver.$('input[aria-label="Color value"]');
-    pageColor = generarColorAleatorio();
-    return await element.setValue(pageColor);
-});
-
-//da clic sobre un boton para guardar, que contenga la palabra save
-When("I click on button save", async function() {
-    const buttons = await this.driver.$$('button');
-    let matched = null;
-    for (const button of buttons) {
-        const text = await button.getText();
-        if (text.includes('Save')) {
-            matched = button;
-            break;
-        }
-    }
-    if (!matched) { throw new Error(`No se encontró un para guardar`);  }
-    return await matched.click(); 
-});
-
-//da clic sobre un boton para cerrar que contenga el texto Close
-When('I click on button close', async function () {
-    const buttons = await this.driver.$$('button');
-    let matched = null;
-    for (const button of buttons) {
-        const text = await button.getText();
-        if (text.includes('Close')) {
-            matched = button;
-            break;
-        }
-    }
-    if (!matched) { throw new Error(`No se encontró un para cerrar`);  }
-    return await matched.click(); 
-});
-
-//escribe un titulo para el sitio
-When('I enter title site {string}', async function (text) {
-    if(text=='random'){
-        text = faker.company.name();
-    }
-    pageTitle = text;
-    let element = await this.driver.$('input[placeholder="Site title"]');
-    return await element.setValue(text);
-});
-
-//escribe una descripcion para el sitio
-When('I enter description site {string}', async function (text) {
-    if(text=='random'){
-        text = faker.company.buzzPhrase();
-    }
-    pageDescription = text;
-    let element = await this.driver.$('input[placeholder="Site description"]');
-    return await element.setValue(text);
-});
-
-// la pagina deberia contener el texto pasado como parametro
-Then('The main page should contain {string}', async function (text) {
-    if(text=="postTitle"){ text = postTitle;  }
-    else if(text=="pageDescription"){ text = pageDescription;  }
-    else if(text=="pageTitle"){ text = pageTitle;  }
-    const container = await this.driver.$('body');
-    const containerText = await container.getText();
-    return await containerText.includes(text);
-});
-
-// la pagina no deberia contener el texto pasado como parametro
-Then('The main page should not contain {string}', async function (text) {
-    if(text=="postTitle"){ text = postTitle;  }
-    else if(text=="pageDescription"){ text = pageDescription;  }
-    else if(text=="pageTitle"){ text = pageTitle;  }
-    const container = await this.driver.$('body');
-    const containerText = await container.getText();
-    return await !containerText.includes(text);
-});
-
-// deberia contener el color suministrado
-Then('The head should contain color', async function () {
-    const headContent = await this.driver.getPageSource();
-    color = "#" + pageColor;
-    if (!headContent.includes(color)) {
-        throw new Error(`El head no contiene el color ${color}`);
-    }
-});
-
-//////////////////// F03 Crear y gestionar Publicaciones (posts) ///////////////////////////////
+//////////////////// F03 Crear y gestionar Publicaciones (posts) //////////////////////////////
 var postTitle = '';
 
+//ingresa el titulo del post
 When('I enter title post {string}', async function (text) {
     if(text=='random'){
         text = faker.hacker.phrase();
@@ -418,46 +251,55 @@ When('I enter title post {string}', async function (text) {
     return await element.setValue(text);
 });
 
+//da clic en el boton nuevo post
 When('I click on new post', async function () {
     let element = await this.driver.$('a[href="#/editor/post/"]');
     return await element.click();
 });
 
+//da click en el boton regresar de la pagina de edicion de post
 When('I click on save post', async function () {
     let element = await this.driver.$('a[data-test-link="posts"]');
     return await element.click();
 });
 
+// da clic en el boton publicar
 When('I click on button publish', async function () {
     let element = await this.driver.$('button[data-test-button="publish-flow"');
     return await element.click();
 });
 
+// da clic en el boton continuar de la ventana publicar
 When('I click on button continue', async function () {
     let element = await this.driver.$('button[data-test-button="continue"');
     return  await element.click();
 });
 
+// da clic en el boton confirmar de la ventana publicar
 When('I click on button confirm', async function () {
     let element = await this.driver.$('button[data-test-button="confirm-publish"');
     return await element.click();
 });
 
+// da clic en el boton actualiar de la pagina de edicion de post
 When('I click on button update', async function () {
     let element = await this.driver.$('button[data-test-button="publish-save"');
     return await element.click();
 });
 
+//cierra la ventana de publicacion
 When('I click on close publish', async function () {
     let element = await this.driver.$('button[data-test-button="close-publish-flow"');
     return await element.click();
 });
 
+// abre la ventana de configuracion para los post
 When('I open setting post', async function () {
     let element = await this.driver.$('button[title="Settings"]');
     return await element.click();
 });
 
+// da clic sobre el primer post que coincida con estado suministrado
 When('I select first post {string}', async function (status) {
     
     const posts = await this.driver.$$('a.gh-post-list-title');
@@ -483,19 +325,22 @@ When('I select first post {string}', async function (status) {
 
 });
 
-When("I click on button delete post", async function () {
+//da clic sobre el boton eliminar post
+When('I click on button delete post', async function () {
     let element = await this.driver.$('button[data-test-button="delete-post"');
     return await element.click();
 });
 
-When("I click on button delete post confirm", async function () {
+// da clic sobre el boton confirmar eliminacion
+When('I click on button delete post confirm', async function () {
     let element = await this.driver.$('button[data-test-button="delete-post-confirm"');
     return await element.click();
 });
 
+// Verifica que el primer post coincidente con el estado tiene el titulo pasado
 Then('The status for post {string} should be {string}', async function (title, status) {
     
-    if(title=="current"){
+    if(title=="postTitle"){
         title = postTitle;
     }
     
@@ -519,18 +364,4 @@ Then('The status for post {string} should be {string}', async function (title, s
     const trimmedText = read.trim().replace(/\n+/g, ' ').trim();
     return await trimmedText.includes(title); 
 
-});
-
-Then('I verify {string} is published', async function (title) {
-    if(title=="current"){ title = currentPostTitle;  }
-    const container = await this.driver.$('div.gh-container-inner');
-    const containerText = await container.getText();
-    return await containerText.includes(title);
-});
-
-Then('I verify {string} is not published', async function (title) {
-    if(title=="current"){ title = currentPostTitle;  }
-    const container = await this.driver.$('div.gh-container-inner');
-    const containerText = await container.getText();
-    return await !containerText.includes(title);
 });
