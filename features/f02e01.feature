@@ -1,7 +1,7 @@
 Feature: Crear y gestionar Publicaciones (posts) 
 
 @user1 @web
-Scenario: F03E01 Crear un nuevo post en estado de borrador
+Scenario: F02E01 Crear un nuevo post en estado de borrador
   Given I navigate to page "<UrlLogin>"
   And I wait for 5 seconds
   And I enter email "<UserName>"

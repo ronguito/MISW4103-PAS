@@ -286,7 +286,7 @@ Then('I verify new member on list for email {string}', async function (email) {
 // });
 
 //////////////////// F03 Crear y gestionar Publicaciones (posts) ///////////////////////////////
-When('I enter title {string}', async function (text) {
+// When('I enter title {string}', async function (text) {
 //abre la pagina de configuracion
 When('I open setting site', async function () {
     let element = await this.driver.$('a[data-test-nav="settings"]');
