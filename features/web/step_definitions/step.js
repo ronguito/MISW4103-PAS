@@ -162,6 +162,8 @@ When('I enter member full name {string}', async function (name) {
 When('I enter member email {string}', async function (email) {
     if(email=='random'){
         email = faker.internet.email();
+    } else if (email === 'current') {
+        email = currentMemberEmail;
     }
     currentMemberEmail = email;
     let element = await this.driver.$('input[id="member-email"]');
@@ -271,12 +273,12 @@ Then('I verify new member on list for email {string}', async function (email) {
 
 });
 
-// Then('I verify {string} is published', async function (title) {
-//     if(title=="current"){ title = currentPostTitle;  }
-//     const container = await this.driver.$('div.gh-container-inner');
-//     const containerText = await container.getText();
-//     return await containerText.includes(title);
-// });
+Then('I verify it exists an error message', async function () {
+    const container = await this.driver.$('p.response');
+    const containerText = await container.getText();
+    const msg = "Member already exists. Attempting to add member with existing email address"
+    return await containerText.includes(msg);
+});
 
 // Then('I verify {string} is not published', async function (title) {
 //     if(title=="current"){ title = currentPostTitle;  }
