@@ -34,7 +34,7 @@ class Webpage {
         cy.get('input[placeholder="Site description"]').clear().type(text);
     }
 
-    clickOnButton(accion)
+    clickOnButton(accion, wait=2000)
     {
         cy.get('button').then((buttons) => {
             let matched = null;
@@ -54,7 +54,7 @@ class Webpage {
         
             // Hacer clic en el botón encontrado
             cy.wrap(matched).click();
-            cy.wait(3000);
+            cy.wait(wait);
             
         });
     }
@@ -70,6 +70,7 @@ class Webpage {
 
     setColor(color){
         cy.get('input[aria-label="Color value"]').clear().type(color);
+        cy.wait(5000);
     }
 
     shouldContain(text){

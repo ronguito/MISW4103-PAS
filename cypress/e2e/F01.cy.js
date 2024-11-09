@@ -68,10 +68,25 @@ describe('F01: Configurar opciones generales del sitio ', () => {
         wp.shouldContainColor(color);	
 	
     });
-    /*
+    
     it('F01E04: Cambiar el color de fondo de la pagina', () => {
-		
+		const color = wp.generarColorAleatorio();
+        //Give:
+        wp.openSiteSetting();
+        
+        //When
+        wp.clickEditSection("design");
+        wp.clickOnPanel("Site wide");
+        wp.clickOnPickColor();
+        wp.setColor(color);
+        wp.clickOnButton("Save");
+        wp.clickOnButton("Close")
+        wp.closeSiteSetting();
+        
+        //then
+        wp.visit(config.UrlPublic);
+        wp.shouldContainColor(color);	
 	
     });
-    */
+    
 });
