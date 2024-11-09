@@ -25,3 +25,32 @@
 * When 'I enter member email {string}'
 * When 'I click on new member'
 * When 'I click on save member'
+* Then 'I verify new member on list for email {string}'
+* Then 'I verify it exists an error message'
+
+## F03 Gestion de Post
+* When 'I enter title post {string}'
+* When 'I click on new post'
+* When 'I click on save post'
+* When 'I click on button publish'
+* When 'I click on button continue'
+* When 'I click on button confirm'
+* When 'I click on button update'
+* When 'I click on close publish
+* When 'I open setting post'
+* When 'I select first post {string}' : Draft | Published
+* When 'I click on button delete post'
+* When 'I click on button delete post confirm'
+* Then 'The status for post {string} should be {string}' : titulo | postTitle : Draft | Published 
+
+
+
+
+
+
+
+
+
+
+
+
