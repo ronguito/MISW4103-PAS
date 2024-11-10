@@ -13,6 +13,7 @@ function generarColorAleatorio() {
 var pageTitle = '';
 var pageDescription = '';
 var pageColor = '';
+var existsMember = false;
 
 //esribe el correo en la caja de texto de login
 When('I enter email {kraken-string}', async function (email) {
@@ -159,7 +160,7 @@ When('I enter member full name {string}', async function (name) {
         name = faker.name.findName();
     }
     currentMemberName = name;
-    let element = await this.driver.$('input[id="member-name"]',{ timeout: 5000 });
+    let element = await this.driver.$('input[id="member-name"]',{ timeout: 8000 });
     return await element.setValue(name);
 });
 
@@ -169,15 +170,22 @@ When('I enter member email {string}', async function (email) {
         email = faker.internet.email();
     } else if (email === 'current') {
         email = currentMemberEmail;
+    } else if (email === 'existent') {
+        email = existentMemberEmail;
     }
     currentMemberEmail = email;
+    // Definición de correo existente
+    if (existsMember == false) {
+        existentMemberEmail=email;
+        existsMember=true;
+    }
     let element = await this.driver.$('input[id="member-email"]');
     return await element.setValue(email);
 });
 
 // clic en el boton nuevo miembro
 When('I click on new member', async function () {
-    let element = await this.driver.$('a[href="#/members/new/"]');
+    let element = await this.driver.$('a[href="#/members/new/"]',{timeout: 5000}) ;
     return await element.click();
 });
 
