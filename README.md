@@ -118,5 +118,5 @@ Nombre | Correo
 -------|---------
 Calletana Lopez  | c.lopezb2@uniandes.edu.co
 Sergio Gelvez | s.gelvezg@uniandes.edu.co
-Raul Gonzalez | r.ramosg@uniandes.edu.co
+Raul Ramos | r.ramosg@uniandes.edu.co
 Juan Tapia | ja.tapia911@uniandes.edu.co
