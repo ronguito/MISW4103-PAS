@@ -156,10 +156,10 @@ currentMemberName = '';
 // entra el nombre completo del suscriptor
 When('I enter member full name {string}', async function (name) {
     if(name=='random'){
-        name = faker.person.fullName();
+        name = faker.name.findName();
     }
     currentMemberName = name;
-    let element = await this.driver.$('input[id="member-name"]');
+    let element = await this.driver.$('input[id="member-name"]',{ timeout: 5000 });
     return await element.setValue(name);
 });
 
@@ -187,6 +187,13 @@ When('I click on save member', async function () {
     return await element.click();
 });
 
+// da clic en el primer elemento de miembros
+When('I click on first member', async function () {
+    const memberLinks = await this.driver.$$('a.gh-list-data',{ timeout: 5000 });
+    const memberfirstLink = memberLinks[0]
+    return await memberfirstLink.click();
+});
+
 // veerifica que el nuevo suscriptor existe por el correo
 Then('I verify new member on list for email {string}', async function (email) {
     
@@ -196,7 +203,6 @@ Then('I verify new member on list for email {string}', async function (email) {
     
     const memberNames = await this.driver.$$('h3.gh-members-list-name');
     const memberEmails = await this.driver.$$('p.gh-members-list-email', { timeout: 5000 });
-    console.log("member Emails:", memberEmails)
     if (memberEmails.length === 0) {
         throw new Error('No se encontraron elementos con el selector p.gh-members-list-email');
     }
@@ -235,6 +241,15 @@ Then('I verify it exists an error message', async function () {
     const msg = "Member already exists. Attempting to add member with existing email address"
     return await containerText.includes(msg);
 });
+
+Then('I verify edited member {string}', async function (name) {
+    if (name="current") {
+        name = currentMemberName;
+    }
+    let element = await this.driver.$$('h3.gh-members-list-name');
+    // console.log("Imprimiendo elementos con clase gh-members-list-name: ", element)
+    return await element.includes(name);
+  });
 
 
 
