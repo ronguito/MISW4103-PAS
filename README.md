@@ -103,7 +103,7 @@ Los archivos de los test estan almacenados en la carpeta "/features/all", alli s
 un archivo .feature por cada escenario, para correr el test es necesario copiar y pegar el 
 test que desea correr a la carpeta "/features", desde aqui se corre el test.
 
-¡Nota importante! Solo se puede correr un test a la ves
+¡Nota importante! Solo se puede correr un test a la vez
 
 Para correr el test ejecute desde la consola de comandos en la raiz del proyecto
 
