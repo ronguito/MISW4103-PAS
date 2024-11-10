@@ -14,7 +14,6 @@
 * When 'I enter title site {string}'
 * When 'I enter color'
 * When 'I enter description site {string}'
-
 * Then 'The main page should contain {string}'
 * Then 'The main page should not contain {string}'
 * Then 'The head should contain color'

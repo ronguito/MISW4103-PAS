@@ -299,6 +299,12 @@ When('I open setting post', async function () {
     return await element.click();
 });
 
+// abre la ventana de configuracion para los post
+When('I close setting post', async function () {
+    let element = await this.driver.$('button[title="Settings"]');
+    return await element.click();
+});
+
 // da clic sobre el primer post que coincida con estado suministrado
 When('I select first post {string}', async function (status) {
     
@@ -364,4 +370,83 @@ Then('The status for post {string} should be {string}', async function (title, s
     const trimmedText = read.trim().replace(/\n+/g, ' ').trim();
     return await trimmedText.includes(title); 
 
+});
+
+
+//////////////////// F03 Crear y gestionar Publicaciones (posts) //////////////////////////////
+var oldUrl = '';
+var newUrl = '';
+
+//da clic en el boton nueva pagina
+When('I click on new page', async function () {
+    let element = await this.driver.$('a[href="#/editor/page/"]');
+    return await element.click();
+});
+
+//ingresa el titulo del post
+When('I enter title page {string}', async function (text) {
+    if(text=='random'){
+        text = faker.hacker.phrase();
+    }
+    postTitle = text;
+    let element = await this.driver.$('textarea[placeholder="Page title"]');
+    return await element.setValue(text);
+});
+
+//da click en el boton regresar de la pagina lista de paginas
+When('I click on save page', async function () {
+    let element = await this.driver.$('a[data-test-link="pages"]');
+    return await element.click();
+});
+
+//obtiene el urlActual
+When('I read url page', async function () {
+    let element = await this.driver.$('input[name="post-setting-slug"]');
+    oldUrl = await element.getValue();
+    return oldUrl; // Devuelve el valor leído
+});
+
+//setea una nueva url a la pagina
+When('I enter url page {string}', async function (url) {
+    if(url=='random') { url = faker.word.noun()}
+    let element = await this.driver.$('input[name="post-setting-slug"]');
+    newUrl = url;
+    return await element.setValue(url);
+});
+
+// Verifica que el primer post coincidente con el estado tiene el titulo pasado
+Then('The status for page {string} should be {string}', async function (title, status) {
+    
+    if(title=="postTitle"){
+        title = postTitle;
+    }
+    
+    const pages = await this.driver.$$('a.gh-post-list-title');
+    
+    let matched = null;
+    for (const page of pages) {
+        const text = await page.getText(); // Obtener texto del post
+        if (text.includes(status)) {
+            matched = page; // Si coincide, guardar el elemento
+            break; // Salir del bucle
+        }
+    }
+
+    // Validar que se encontró un post que coincide
+    if (!matched) {
+        throw new Error(`No se encontró una pagina con el estado "${status}".`);
+    }
+
+    const read = await matched.$('h3').getText();
+    const trimmedText = read.trim().replace(/\n+/g, ' ').trim();
+    return await trimmedText.includes(title); 
+
+});
+
+//visita la url publica de la pagina
+Then('I navigate to page {kraken-string} for url {string}',async function (host, url) {
+    if(url=="old") { url = oldUrl;}
+    if(url=="new") { url = newUrl;}
+    urlPage = host+ "/"+ url
+    await this.driver.executeScript('window.location.href = arguments[0];', [urlPage]);
 });
