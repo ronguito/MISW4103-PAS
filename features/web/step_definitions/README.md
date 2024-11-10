@@ -41,13 +41,14 @@
 * When 'I click on button delete post confirm'
 * Then 'The status for post {string} should be {string}' : titulo | postTitle : Draft | Published 
 
-
-
-
-
-
-
-
+## F04 Gestion de paginas
+* When 'I click on new page'
+* When 'I enter title page {string}'
+* When 'I click on save page'
+* When 'I read url page'
+* When 'I enter url page {string}'
+* Then 'The status for page {string} should be {string}' : titulo | postTitle : Draft | Published 
+* Then 'I navigate to page {kraken-string} for url {string}' : <UrlPublic> : old | new
 
 
 
