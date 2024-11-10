@@ -75,12 +75,15 @@ de sus sistema
 properties.json
 ```bash
 {
-    "UserName": "correo registrado en ghost",
-    "UserPass": "contraseña de ingreso",
+    "UserName": "admin@redfox.com.co",
+    "UserPass": "Admin123++",
     "UrlPublic" : "http://localhost:2368",
     "UrlLogin": "http://localhost:2368/ghost/#/signin",
-    "UrlPost": "http://localhost:2368/ghost/#/posts"
+    "UrlPost": "http://localhost:2368/ghost/#/posts",
+    "UrlPage": "http://localhost:2368/ghost/#/pages",
+    "UrlMember": "http://localhost:2368/ghost/#/members"
 }
+
 ```
 
 * Pruebas con Cypress, desde la consola de comandos en la raiz del proyecto
