@@ -13,7 +13,7 @@ describe('F03: Crear y gestionar Publicaciones (posts) ', () => {
     const post = new Post();
 
     beforeEach(() => {
-      //Give:
+      //Given
       wp.visit(config.UrlLogin);
       wp.login(config.UserName, config.UserPass);
     });
@@ -22,66 +22,70 @@ describe('F03: Crear y gestionar Publicaciones (posts) ', () => {
 		  
       const title = faker.hacker.phrase();
 
-      //Give:
+      //Given
       wp.visit(config.UrlPost);
       
       //When
       post.create();
       post.setTitle(title);
-      post.saveDraff();
+      post.save();
       
-      //then
-      post.validateStatus('Draft', title);
+      //Then
+      post.verifyStatus('Draft', title);
 
     });
     
     it('F03E02: Publicar un post', () => {
-      //Give
+      //Given
       wp.visit(config.UrlPost);
       
       post.selectFirst('Draft').then(title => {
-        // When
+        //When
         post.publish();
 
-        // Then
-        post.validateStatus('Published', title);
-        post.validatePublished(config.UrlPublic, title);
+        //Then
+        post.verifyStatus('Published', title);
+        wp.visit(config.UrlPublic);
+        wp.shouldContain(title);
+
       });
 
     });
     
     it('F03E03: Modificar un post publicado', () => {
       const newTitle = faker.hacker.phrase();
-      //Give
+      //Given
       wp.visit(config.UrlPost);
 
       post.selectFirst('Published').then(title => {
-        // When
+        //When
         post.setTitle(newTitle);
-        post.savePublish();
+        post.update();
 
-        // Then
-        post.validateStatus('Published', newTitle);
-        post.validatePublished(config.UrlPublic, newTitle);
+        //Then
+        post.verifyStatus('Published', newTitle);
+        wp.visit(config.UrlPublic);
+        wp.shouldContain(newTitle);
+        wp.shouldNotContain(title);
+        
       });
 	
     });
-    
 
     it('F03E04: Eliminar un post publicado', () => {
-      //Give
+      //Given
       wp.visit(config.UrlPost);
 
       post.selectFirst('Published').then(title => {
         
-        // When
+        //When
         post.delete();
 
-        // Then
-        post.validateList(title);
-        post.validatePublished(config.UrlPublic, title, false);
+        //Then
+        wp.visit(config.UrlPublic);
+        wp.shouldNotContain(title);
+        
       });
-
     });
 
 });

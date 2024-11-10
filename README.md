@@ -64,7 +64,29 @@ npm install -g appium
 
 ## Ejecución de Pruebas
 
-Pruebas con Cypress, desde la consola de comandos en la raiz del proyecto
+* Configuracion.
+
+Tanto Cypres como Kraken comparte un unico archivo de configuracion inicial de las pruebas, este archivo 
+se encuentra en la raiz del proyecto y se llama properties.json. Es importante revisar y modificar los datos
+de este archivo antes de iniciar las pruebas, alli podra configurar el Usuario, la contraseña y las Url 
+necesarias para algunas de las pruebas. Si es necesario cambie las direcciones Url de acuerdo a la instalacion
+de sus sistema
+
+properties.json
+```bash
+{
+    "UserName": "admin@redfox.com.co",
+    "UserPass": "Admin123++",
+    "UrlPublic" : "http://localhost:2368",
+    "UrlLogin": "http://localhost:2368/ghost/#/signin",
+    "UrlPost": "http://localhost:2368/ghost/#/posts",
+    "UrlPage": "http://localhost:2368/ghost/#/pages",
+    "UrlMember": "http://localhost:2368/ghost/#/members"
+}
+
+```
+
+* Pruebas con Cypress, desde la consola de comandos en la raiz del proyecto
 
 ```bash
 //Ejecutar las pruebas en modo interactivo con 
@@ -73,8 +95,20 @@ npx cypress open
 npx cypress run.
 ```
 
-Pruebas con Kraken-node, desde la consola de comandos en la raiz del proyecto
+
+
+* Pruebas con Kraken-node, desde la consola de comandos en la raiz del proyecto
+
+Los archivos de los test estan almacenados en la carpeta "/features/all", alli se encuentra
+un archivo .feature por cada escenario, para correr el test es necesario copiar y pegar el 
+test que desea correr a la carpeta "/features", desde aqui se corre el test.
+
+¡Nota importante! Solo se puede correr un test a la ves
+
+Para correr el test ejecute desde la consola de comandos en la raiz del proyecto
 
 ```bash
 npx kraken-node run.
 ```
+
+Esto iniciara la prueba en modo visual y cargara un navegador contralado por kraken.
