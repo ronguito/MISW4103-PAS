@@ -1,4 +1,45 @@
-describe('Pruebas de tag en la aplicacion Ghost', () => {
+import Webpage from './src/webpage';
+import { beforeEach } from 'mocha';
+import Tag from './src/tag';
+
+const { faker } = require('@faker-js/faker');
+
+const config = Cypress.env('config');
+
+
+describe('F05: Gestionar Etiquetas (tags) de contenido ', () => {
+	
+    const wps = new Webpage();
+    const tag = new Tag();
+
+    beforeEach(() => {
+      //Give:
+      wps.visit(config.UrlLogin);
+      wps.login(config.UserName, config.UserPass);
+    });
+    
+    it('F05E01: Crear un nuevo tag en estado de borrador', () => {
+		  
+      const titleTag = faker.hacker.phrase();
+
+      //Give:
+      wps.visit(config.UrlTag);
+      
+      //When
+
+      tag.createTag();
+      tag.setForm(titleTag);
+      
+      //then
+      //tag.validateStatus('Draft', title);
+
+    });   
+    
+
+});
+
+
+/*describe('Pruebas de tag en la aplicacion Ghost', () => {
 	
   beforeEach(() => {
       // Visitar la página de inicio de sesión de Ghost
@@ -30,3 +71,4 @@ describe('Pruebas de tag en la aplicacion Ghost', () => {
       
   });   
 });
+*/
