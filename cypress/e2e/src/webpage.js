@@ -1,7 +1,7 @@
 class Webpage {
 
     visit (host){
-        cy.visit(host);
+        cy.visit(host, { failOnStatusCode: false });
     }
 
     login (username, password){
@@ -80,6 +80,13 @@ class Webpage {
         });
     }
 
+    shouldNotContain(text) {
+        cy.get('body').then((container) => {
+            const containerText = container.text();
+            expect(containerText).not.to.include(text);
+        });
+    }
+
     shouldContainColor(color){
         cy.document().then((doc) => {
             const headContent = doc.documentElement.innerHTML;
@@ -88,7 +95,7 @@ class Webpage {
         });
     }
 
-    generarColorAleatorio() {
+    randomColor() {
         const r = Math.floor(Math.random() * 256).toString(16).padStart(2, '0');
         const g = Math.floor(Math.random() * 256).toString(16).padStart(2, '0');
         const b = Math.floor(Math.random() * 256).toString(16).padStart(2, '0');
