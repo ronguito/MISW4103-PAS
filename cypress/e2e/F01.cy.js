@@ -10,7 +10,7 @@ describe('F01: Configurar opciones generales del sitio ', () => {
     const wp = new Webpage();
 
     beforeEach(() => {
-        //Give:
+        //Given
         wp.visit(config.UrlLogin);
         wp.login(config.UserName, config.UserPass);
     });
@@ -18,7 +18,7 @@ describe('F01: Configurar opciones generales del sitio ', () => {
     it('F01E01: Configurar el título del sitio', () => {
 		
         const title = faker.company.name();
-        //Give:
+        //Given
         wp.openSiteSetting();
         
         //When
@@ -27,7 +27,7 @@ describe('F01: Configurar opciones generales del sitio ', () => {
         wp.clickOnButton("Save");
         wp.closeSiteSetting();
         
-        //then
+        //Then
         wp.visit(config.UrlPublic);
         wp.shouldContain(title);
         
@@ -35,7 +35,7 @@ describe('F01: Configurar opciones generales del sitio ', () => {
     
     it('F01E02: Configurar la descripción del sitio', () => {
         const text = faker.company.buzzPhrase();
-        //Give:
+        //Given
         wp.openSiteSetting();
         
         //When
@@ -44,15 +44,15 @@ describe('F01: Configurar opciones generales del sitio ', () => {
         wp.clickOnButton("Save");
         wp.closeSiteSetting();
         
-        //then
+        //Then
         wp.visit(config.UrlPublic);
         wp.shouldContain(text);		
 	
     });
     
     it('F01E03: Cambiar el color de los botones', () => {
-		const color = wp.generarColorAleatorio();
-        //Give:
+		const color = wp.randomColor();
+        //Given
         wp.openSiteSetting();
         
         //When
@@ -63,15 +63,15 @@ describe('F01: Configurar opciones generales del sitio ', () => {
         wp.clickOnButton("Close")
         wp.closeSiteSetting();
         
-        //then
+        //Then
         wp.visit(config.UrlPublic);
         wp.shouldContainColor(color);	
 	
     });
     
     it('F01E04: Cambiar el color de fondo de la pagina', () => {
-		const color = wp.generarColorAleatorio();
-        //Give:
+		const color = wp.randomColor();
+        //Given
         wp.openSiteSetting();
         
         //When
@@ -83,7 +83,7 @@ describe('F01: Configurar opciones generales del sitio ', () => {
         wp.clickOnButton("Close")
         wp.closeSiteSetting();
         
-        //then
+        //Then
         wp.visit(config.UrlPublic);
         wp.shouldContainColor(color);	
 	
