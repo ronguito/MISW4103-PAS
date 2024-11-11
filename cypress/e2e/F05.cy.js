@@ -18,57 +18,59 @@ describe('F05: Gestionar Etiquetas (tags) de contenido ', () => {
       wps.login(config.UserName, config.UserPass);
     });
     
-    it('F05E01: Crear un nuevo tag en estado de borrador', () => {
+    it('F05E01: Crear un nuevo tag', () => {
 		  
-      const titleTag = faker.hacker.phrase();
+      const nameTag = faker.hacker.phrase();
 
       //Give:
       wps.visit(config.UrlTag);
       
       //When
 
-      tag.createTag();
-      tag.setForm(titleTag);
+      tag.selectTag();
+      tag.setNameTag(nameTag);
+      tag.saveTag();
+      
       
       //then
-      //tag.validateStatus('Draft', title);
+      wps.visit(config.UrlTag);
+      tag.verifyTag(nameTag);
 
     });   
     
+    it('F05E03: Editar un tag', () => {
+      const nameTag2 = faker.hacker.phrase();
+      //Given
+      wps.visit(config.UrlPost);
+
+      //When
+      tag.selectTag();
+      tag.editFirstTag();
+      tag.setNameTag(nameTag2);
+      tag.saveTag();
+
+      //then
+      wps.visit(config.UrlTag);
+      tag.verifyTag(nameTag2);
+    });
+
+    it('F05E04: Eliminar un tag', () => {
+      const nameTag3 = faker.hacker.phrase();
+      //Given
+      wps.visit(config.UrlPost);
+
+      //When
+      tag.selectTag();
+      tag.setNameTag(nameTag3);
+      tag.saveTag();
+      wps.visit(config.UrlPost);
+      tag.editFirstTag();
+      tag.deleteTag();
+      tag.confirmDeleteTag();
+      //then
+
+      tag.verifyTagDelete(nameTag3);
+    });
 
 });
-
-
-/*describe('Pruebas de tag en la aplicacion Ghost', () => {
-	
-  beforeEach(() => {
-      // Visitar la página de inicio de sesión de Ghost
-      cy.visit('http://localhost:2368/ghost/#/signin');
-
-      // Give: Iniciar sesión (reemplaza 'tu_correo' y 'tu_contraseña' con credenciales válidas)
-      cy.get('input[name="identification"]').type('s.gelvezg@uniandes.edu.co');
-      
-      //when:
-      cy.get('input[name="password"]').type('Seangego.01');
-      cy.get('button[type="submit"]').click();
-      
-
-      // Esperar a que la página principal de Ghost se cargue
-      cy.url().should('include', '/ghost/#/dashboard');
-  });   
-  
-  it('01-Debería crear un nuevo tag', () => {
-      // Navegar al editor de publicaciones
-      cy.get('a[href="#/tags/"]').click();
-
-      cy.url().should('include', '/ghost/#/tags');
-
-      cy.get('a[href="#/tags/new/"]').click();  
-
-      cy.url().should('include', '/ghost/#/tags/new');
-
-      cy.get('input[name="name"]').type('nombre de tag prueba');
-      
-  });   
-});
-*/
+    

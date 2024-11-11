@@ -2,31 +2,56 @@ class Tag {
 
     //Title = '';
 
-    createTag (){
+    selectTag (){
          
         cy.get('a[href*="#/tags/new/"]').click();
         cy.url().should('include', '/ghost/#/tags/new');
     }  
     
-    setForm (titulo){
-        console.log("entro a llenar el formulario");
-        cy.url().should('include', '/ghost/#/tags/new');
-        //cy.scrollTo('top');
-
-        var inpu =cy.get('input[name="name"]', { timeout: 10000 }) // espera hasta 10 segundos
-        //console.log(inpu);
-        if(inpu.should('exist')){
-            inpu.type("jsadjfasklfjñklasjfklñjafkljkldfasjkl");
-            console.log("llego");
-        }
-        //cy.get('#tag-name').should('exist').click();
-        //cy.get('input[name="name"]').type('Texto a escribir').should('have.value', 'Texto a escribir');
-        
-        cy.get('input[data-test-input="tag-slug"]').should('exist');
-        
+    setNameTag (name){       
+        cy.get('input[name="name"]', { timeout: 5000 }).should('exist').should('be.visible').clear().type(name);        
     }  
 
+    saveTag(){
+        cy.get('button[data-test-button="save"]').click({ force: true });
+        cy.wait(3000);
+    }
+
+    verifyTag(name){
+
+        cy.get('gh-tag-list-name', { timeout: 5000 }).then($links => {
+            const member = $links.filter((index, element) => {
+                return Cypress.$(element).text().includes(name); 
+            }).first();
+        });
+    }
+
+    editFirstTag (){
+        cy.get('gh-tag-list-name', {timeout:5000}).first().click();
+        cy.url().should('match', /\/ghost\/#\/tag\/.+/);
+    }
+
+    deleteTag(){
+        cy.get('button[data-test-button="delete-tag"]').click({ force: true });
+        cy.wait(3000);
+    }  
+
+    confirmDeleteTag(){
+        cy.get('button[data-test-button="confirm"]').click({ force: true });
+        cy.wait(3000);
+    }  
     
+    verifyTagDelete(name){
+
+        cy.get('gh-tag-list-name', { timeout: 5000 }).then($links => {
+            const member = $links.filter((index, element) => {
+                if (Cypress.$(element).text().includes(name)){
+                    return false;
+                }
+                return true; 
+            }).first();
+        });
+    }
 
 }
 

@@ -473,3 +473,91 @@ Then('I navigate to page {kraken-string} for url {string}',async function (host,
     urlPage = host+ "/"+ url
     await this.driver.executeScript('window.location.href = arguments[0];', [urlPage]);
 });
+
+
+//////////////////// F05: Gestionar Etiquetas (tags) de contenido //////////////////////////////
+var postTitle = '';
+
+//ingresar a nuevo tag
+When('I click on new tag', async function () {
+    let element = await this.driver.$('a[href="#/tags/new/"]',{timeout: 5000}) ;
+    return await element.click();
+});
+
+// entra el nombre tag
+When('I enter tag full name {string}', async function (name) {
+    if(name=='random'){
+        name = faker.name.findName();
+    }
+    currenttagName = name;
+    let element = await this.driver.$('input[id="tag-name"]',{ timeout: 8000 });
+    return await element.setValue(name);
+});
+
+// da clic en el boton guardar tag
+When('I click on save tag', async function () {
+    let element = await this.driver.$('button[data-test-button="save"]');
+    return await element.click();
+});
+
+
+// veerifica que el nuevo tag
+Then('I verify new tag', async function (name) {
+    
+    if(name=="current"){
+        name = currenttagName;
+    } 
+
+    const namesTag = await this.driver.$$('gh-tag-list-name', { timeout: 5000 });
+    if (namesTag.length === 0) {
+        throw new Error('No se encontraron elementos con el selector gh-tag-list-name');
+    }
+    
+    let matchedTag = null;
+    for (const nameTag of namesTag) {
+        const text = await nameTag.getText(); 
+        if (text.includes(name)) {
+            matchedTag = nameTag; 
+            break; 
+        }
+    }
+
+    // Validar que se encontró un tag que coincida el nombre
+    if (!matchedTag) {
+        throw new Error(`No se encontró el tag "${name}".`);
+    }
+
+    return true;
+
+});
+
+// da clic en el boton settings
+When('I click on button settings', async function () {
+    let element = await this.driver.$('button[title="Settings"');
+    return await element.click();
+});
+
+// Seleccionar tag
+When('I click on button settings', async function () {
+    let element = await this.driver.$('button[title="Settings"');
+    return await element.click();
+});
+
+// da clic en el primer tag
+When('I click on first tag', async function () {
+    const memberLinks = await this.driver.$$('gh-tag-list-name',{ timeout: 5000 });
+    const memberfirstLink = memberLinks[0]
+    return await memberfirstLink.click();
+});
+
+// da clic en el boton delete tag
+When('I click on delete tag', async function () {
+    let element = await this.driver.$('button[data-test-button="delete-tag"]');
+    return await element.click();
+});
+
+// da clic en el boton confirmar delete tag
+When('I click on confirm delete tag', async function () {
+    let element = await this.driver.$('button[data-test-button="confirm"]');
+    return await element.click();
+});
