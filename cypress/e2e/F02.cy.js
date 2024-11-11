@@ -65,32 +65,19 @@ describe('F02: Crear y gestionar members ', () => {
     it('F02E03: Editar un member', () => {
       const name1 = faker.person.fullName();
       const email1 = faker.internet.email();
-      const name2 = faker.person.fullName();
-      const email2 = faker.internet.email();
 
       //Given
       wp.visit(config.UrlMember);
       
       //When
-      // Crear primer member
-      member.create();
-      member.setName(name1);
-      member.setEmail(email1);
-      member.save();
-      wp.visit(config.UrlMember);
-      // Crear segundo member
-      member.create();
-      member.setName(name2);
-      member.setEmail(email2);
-      member.save();
-
-      // Editar segundo member
       member.editFirstMember();
+      member.setName(name1);
       member.setEmail(email1);
       member.save();
       
       //Then
-      member.verifyMemberName(name);
+      wp.visit(config.UrlMember);
+      member.verifyMemberName(name1);
 	
     });
 
@@ -102,14 +89,19 @@ describe('F02: Crear y gestionar members ', () => {
       wp.visit(config.UrlMember);
       
       //When
-      member.editFirstMember();
+      member.create();
       member.setName(name);
+      member.setEmail(email);
       member.save();
       wp.visit(config.UrlMember);
-      
+      member.editLastMember();
+      member.setEmail(email);
+      member.save();
+
       //Then
       let msg = "Member already exists. Attempting to add member with existing email address"
       member.verifyErrorMessage(msg);
+
     });
 
 });

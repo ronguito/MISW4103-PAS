@@ -10,15 +10,20 @@ class Member {
     }
 
     editFirstMember (){
-        cy.wait(5000)
-        cy.get('a[class="gh-list-data"]', {timeout:5000}).first().click();
-        cy.url().should('include', '/ghost/#/members');
-        
+        cy.get('a.gh-list-data', {timeout:5000}).first().click();
+        cy.url().should('match', /\/ghost\/#\/members\/.+/);
+
+    }
+
+    editLastMember (){
+        cy.get('a.gh-list-data', {timeout:5000}).last().click();
+        cy.url().should('match', /\/ghost\/#\/members\/.+/);
+
     }
 
     save(){
-        cy.get('a[data-test-button="save"]').click();
-        cy.url().should('include', '/ghost/#/members');
+        cy.get('button[data-test-button="save"]').click({ force: true });
+        cy.wait(3000);
     }
 
     setName(name){
@@ -52,8 +57,7 @@ class Member {
     }
 
     verifyMemberName(name){
-
-        cy.get('p.gh-members-list-name', { timeout: 5000 }).then($links => {
+        cy.get('h3.gh-members-list-name', { timeout: 3000 }).then($links => {
             const member = $links.filter((index, element) => {
                 return Cypress.$(element).text().includes(name); 
             }).first();
