@@ -76,10 +76,11 @@ properties.json
 ```bash
 {
     "UserName": "admin@redfox.com.co",
-    "UserPass": "Admin123++",
+    "UserPass": "Admin123+",
     "UrlPublic" : "http://localhost:2368",
     "UrlLogin": "http://localhost:2368/ghost/#/signin",
     "UrlPost": "http://localhost:2368/ghost/#/posts",
+    "UrlTag": "http://localhost:2368/ghost/#/tags",
     "UrlPage": "http://localhost:2368/ghost/#/pages",
     "UrlMember": "http://localhost:2368/ghost/#/members"
 }

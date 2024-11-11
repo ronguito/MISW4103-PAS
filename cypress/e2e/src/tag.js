@@ -19,7 +19,7 @@ class Tag {
 
     verifyTag(name){
 
-        cy.get('gh-tag-list-name', { timeout: 5000 }).then($links => {
+        cy.get('a[title="Edit tag"]', { timeout: 5000 }).then($links => {
             const member = $links.filter((index, element) => {
                 return Cypress.$(element).text().includes(name); 
             }).first();
@@ -27,8 +27,8 @@ class Tag {
     }
 
     editFirstTag (){
-        cy.get('gh-tag-list-name', {timeout:5000}).first().click();
-        cy.url().should('match', /\/ghost\/#\/tag\/.+/);
+        cy.get('a[title="Edit tag"]', {timeout:2000}).first().click();
+        cy.url().should('match', /\/ghost\/#\/tags\/.+/);
     }
 
     deleteTag(){
@@ -38,18 +38,13 @@ class Tag {
 
     confirmDeleteTag(){
         cy.get('button[data-test-button="confirm"]').click({ force: true });
-        cy.wait(3000);
+        cy.url().should('include', '/ghost/#/tags');
     }  
     
     verifyTagDelete(name){
-
-        cy.get('gh-tag-list-name', { timeout: 5000 }).then($links => {
-            const member = $links.filter((index, element) => {
-                if (Cypress.$(element).text().includes(name)){
-                    return false;
-                }
-                return true; 
-            }).first();
+        cy.get('section.view-container').then((container) => {
+            const containerText = container.text();
+            expect(containerText).not.to.include(name);
         });
     }
 

@@ -20,7 +20,7 @@ describe('F05: Gestionar Etiquetas (tags) de contenido ', () => {
     
     it('F05E01: Crear un nuevo tag', () => {
 		  
-      const nameTag = faker.hacker.phrase();
+      const nameTag = faker.hacker.verb();
 
       //Give:
       wps.visit(config.UrlTag);
@@ -39,12 +39,11 @@ describe('F05: Gestionar Etiquetas (tags) de contenido ', () => {
     });   
     
     it('F05E03: Editar un tag', () => {
-      const nameTag2 = faker.hacker.phrase();
+      const nameTag2 = faker.hacker.verb();
       //Given
-      wps.visit(config.UrlPost);
+      wps.visit(config.UrlTag);
 
       //When
-      tag.selectTag();
       tag.editFirstTag();
       tag.setNameTag(nameTag2);
       tag.saveTag();
@@ -55,21 +54,19 @@ describe('F05: Gestionar Etiquetas (tags) de contenido ', () => {
     });
 
     it('F05E04: Eliminar un tag', () => {
-      const nameTag3 = faker.hacker.phrase();
+      const nameTag3 = faker.hacker.verb();
       //Given
-      wps.visit(config.UrlPost);
+      wps.visit(config.UrlTag);
 
       //When
-      tag.selectTag();
-      tag.setNameTag(nameTag3);
-      tag.saveTag();
-      wps.visit(config.UrlPost);
+      wps.visit(config.UrlTag);
       tag.editFirstTag();
       tag.deleteTag();
       tag.confirmDeleteTag();
       //then
 
       tag.verifyTagDelete(nameTag3);
+
     });
 
 });
