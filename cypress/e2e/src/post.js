@@ -9,6 +9,7 @@ class Post {
     }
 
     save(){
+        cy.wait(5000);
         cy.get('a[data-test-link="posts"]').click();
         cy.url().should('include', '/ghost/#/posts');
     }
