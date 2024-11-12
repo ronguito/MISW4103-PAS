@@ -157,7 +157,7 @@ currentMemberName = '';
 // entra el nombre completo del suscriptor
 When('I enter member full name {string}', async function (name) {
     if(name=='random'){
-        name = faker.name.findName();
+        name = faker.person.fullName();
     }
     currentMemberName = name;
     let element = await this.driver.$('input[id="member-name"]',{ timeout: 8000 });
