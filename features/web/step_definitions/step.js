@@ -487,7 +487,7 @@ When('I click on new tag', async function () {
 // entra el nombre tag
 When('I enter tag full name {string}', async function (name) {
     if(name=='random'){
-        name = faker.name.findName();
+        name = faker.person.fullName();
     }
     currenttagName = name;
     let element = await this.driver.$('input[id="tag-name"]',{ timeout: 8000 });
