@@ -8,6 +8,15 @@ function generarColorAleatorio() {
     return `${r}${g}${b}`;
 }
 
+//visita la url publica de la pagina
+
+Given('I navigate to page {kraken-string} {kraken-string} {kraken-string}',async function (host, port, url) {
+    if(url=="old") { url = oldUrl;}
+    if(url=="new") { url = newUrl;}
+    urlPage = host + ":" + port +  url
+    await this.driver.executeScript('window.location.href = arguments[0];', [urlPage]);
+});
+
 
 //////////////////// F01 configuracion general ///////////////////////////////
 var pageTitle = '';
@@ -17,19 +26,19 @@ var existsMember = false;
 
 //esribe el correo en la caja de texto de login
 When('I enter email {kraken-string}', async function (email) {
-    let element = await this.driver.$('#identification');
+    let element = await this.driver.$('input[name="identification"]');
     return await element.setValue(email);
 });
 
 //escribe la contraseña en la caja de texto
 When('I enter password {kraken-string}', async function (password) {
-    let element = await this.driver.$('#password');
+    let element = await this.driver.$('input[name="password"]');
     return await element.setValue(password);
 });
 
 // da clic en el boton iniciar sesion
 When('I click on signin', async function() {
-	let element = await this.driver.$('[data-test-button="sign-in"]');
+	let element = await this.driver.$('[type="submit"]');
     return await element.click();
 })
 
@@ -270,7 +279,7 @@ When('I enter title post {string}', async function (text) {
         text = faker.hacker.phrase();
     }
     postTitle = text;
-    let element = await this.driver.$('textarea[placeholder="Post title"]');
+    let element = await this.driver.$('textarea.gh-editor-title');
     return await element.setValue(text);
 });
 
@@ -282,7 +291,7 @@ When('I click on new post', async function () {
 
 //da click en el boton regresar de la pagina de edicion de post
 When('I click on save post', async function () {
-    let element = await this.driver.$('a[data-test-link="posts"]');
+    let element = await this.driver.$('a.gh-editor-back-button');
     return await element.click();
 });
 
@@ -373,12 +382,13 @@ Then('The status for post {string} should be {string}', async function (title, s
         title = postTitle;
     }
     
-    const posts = await this.driver.$$('a.gh-post-list-title');
+    const posts = await this.driver.$$('li.gh-list-row');
+    const statusLc = status.toLowerCase();
     
     let matchedPost = null;
     for (const post of posts) {
         const text = await post.getText(); // Obtener texto del post
-        if (text.includes(status)) {
+        if (text.toLowerCase().includes(statusLc)) {
             matchedPost = post; // Si coincide, guardar el elemento
             break; // Salir del bucle
         }
@@ -386,7 +396,7 @@ Then('The status for post {string} should be {string}', async function (title, s
 
     // Validar que se encontró un post que coincide
     if (!matchedPost) {
-        throw new Error(`No se encontró un post con el estado "${status}".`);
+        throw new Error(`No se encontró un post con el estado "${statusLc}".`);
     }
 
     const read = await matchedPost.$('h3').getText();
@@ -426,6 +436,7 @@ When('I click on save page', async function () {
 When('I read url page', async function () {
     let element = await this.driver.$('input[name="post-setting-slug"]');
     oldUrl = await element.getValue();
+    oldUrl = "/" + oldUrl;
     return oldUrl; // Devuelve el valor leído
 });
 
@@ -433,7 +444,7 @@ When('I read url page', async function () {
 When('I enter url page {string}', async function (url) {
     if(url=='random') { url = faker.word.noun()}
     let element = await this.driver.$('input[name="post-setting-slug"]');
-    newUrl = url;
+    newUrl = "/" + url;
     return await element.setValue(url);
 });
 

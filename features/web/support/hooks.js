@@ -36,7 +36,9 @@ AfterStep(async function (step) {
     const EscenarioName = step.pickle.name.replace(/[^a-zA-Z0-9]/g, '_').slice(0, 6);
 
     // Ruta para guardar capturas de pantalla
-    const screenshotsDir = path.resolve(process.cwd(), properties.screenshotsDirKraken);
+    const port = properties.Port
+    const screenshotsDir = path.resolve(process.cwd(), properties.results + "/kraken/" + port );
+   
 
     // Crear el directorio si no existe
     if (!fs.existsSync(screenshotsDir)) {
@@ -44,8 +46,9 @@ AfterStep(async function (step) {
     }
 
     // Generar el nombre del archivo de captura con contador y texto del paso
-    const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
-    const screenshotName = `${EscenarioName}_${stepText}-${timestamp}.png`;
+    //const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+    //const screenshotName = `${EscenarioName}_${stepText}-${timestamp}.png`;
+    const screenshotName = `${EscenarioName}_${stepText}.png`;
     const screenshotPath = path.join(screenshotsDir, screenshotName);
 
     // Tomar la captura de pantalla y guardarla

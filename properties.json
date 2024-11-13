@@ -1,11 +1,13 @@
 {
     "UserName": "admin@redfox.com.co",
     "UserPass": "Admin123++",
-    "UrlPublic" : "http://localhost:2368",
-    "UrlLogin": "http://localhost:2368/ghost/#/signin",
-    "UrlPost": "http://localhost:2368/ghost/#/posts",
-    "UrlTag": "http://localhost:2368/ghost/#/tags",
-    "UrlPage": "http://localhost:2368/ghost/#/pages",
-    "UrlMember": "http://localhost:2368/ghost/#/members",
-    "screenshotsDirKraken": "./features/web/step_definitions/screenshots"
+    "Host": "http://localhost",
+    "Port": 2368,
+    "UrlPublic" : "",
+    "UrlLogin": "/ghost/#/signin",
+    "UrlPost": "/ghost/#/posts",
+    "UrlTag": "/ghost/#/tags",
+    "UrlPage": "/ghost/#/pages",
+    "UrlMember": "/ghost/#/members",
+    "results": "./results"
 }
