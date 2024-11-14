@@ -5,9 +5,9 @@ class Webpage {
     }
 
     login (username, password){
-        cy.get('input[name="identification"]').type(username);
-        cy.get('input[name="password"]').type(password);
-        cy.get('button[type="submit"]').click();
+        cy.get('input[name="identification"]', {timeout:5000}).type(username);
+        cy.get('input[name="password"]', {timeout:5000}).type(password);
+        cy.get('button[type="submit"]', {timeout:5000}).click();
         cy.url().should('include', '/ghost/#/dashboard');
     }
 
