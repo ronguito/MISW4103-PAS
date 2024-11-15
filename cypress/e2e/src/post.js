@@ -43,12 +43,21 @@ class Post {
     }
 
     publish(){
-        cy.get('button[data-test-button="publish-flow"').first().click();
-        cy.get('button[data-test-button="continue"]').click();
-        cy.captureImage();
-        cy.get('button[data-test-button="confirm-publish"]').click();
-        cy.url().should('include', '/ghost/#/posts');
-        cy.get('button[data-test-button="close-publish-flow"]').click();
+        if(this.Port==2345){
+            cy.get('a.gh-publishmenu-trigger').first().click();
+            cy.get('button[data-test-button="continue"]').click();
+            cy.captureImage();
+            cy.get('button[data-test-button="confirm-publish"]').click();
+            cy.url().should('include', '/ghost/#/posts');
+            cy.get('button[data-test-button="close-publish-flow"]').click();
+        }else{
+            cy.get('button[data-test-button="publish-flow"').first().click();
+            cy.get('button[data-test-button="continue"]').click();
+            cy.captureImage();
+            cy.get('button[data-test-button="confirm-publish"]').click();
+            cy.url().should('include', '/ghost/#/posts');
+            cy.get('button[data-test-button="close-publish-flow"]').click();
+        }
     }
 
     delete(){

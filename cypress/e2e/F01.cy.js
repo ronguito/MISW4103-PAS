@@ -22,10 +22,9 @@ describe('F01: Configurar opciones generales del sitio ', () => {
         wp.openSiteSetting();
         
         //When
-        wp.clickEditSection("title-and-description");
+        wp.clickEditSection("Title & description");
         wp.setPageTitle(title);
         wp.clickOnButton("Save");
-        wp.closeSiteSetting();
         
         //Then
         wp.visit(config.UrlPublic);
@@ -42,8 +41,7 @@ describe('F01: Configurar opciones generales del sitio ', () => {
         wp.clickEditSection("title-and-description");
         wp.setPageDescription(text);
         wp.clickOnButton("Save");
-        wp.closeSiteSetting();
-        
+   
         //Then
         wp.visit(config.UrlPublic);
         wp.shouldContain(text);		
