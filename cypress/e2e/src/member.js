@@ -1,12 +1,13 @@
 class Member {
 
     //Title = '';
+    Port = '';
 
     create (){
         cy.wait(5000)
         cy.get('a[href="#/members/new/"]', {timeout:5000}).first().click();
         cy.url().should('include', '/ghost/#/members/new');
-        
+        cy.captureImage();
     }
 
     editFirstMember (){
@@ -21,27 +22,26 @@ class Member {
 
     }
 
-    save(){
-        cy.get('button[data-test-button="save"]').click({ force: true });
-        cy.wait(3000);
-    }
-
     setName(name){
         cy.wait(5000)
         cy.get('input[id="member-name"]')
-        .should('be.visible')
-        .should('not.be.disabled')
-        .then(($input) => {
-        if ($input.length > 0) {
-        cy.wrap($input).clear().type(name);
-        } else {
-        cy.log('El campo "member-name" no está disponible');
-        }
-        });
+            .then(($input) => {
+                if ($input.length > 0) {
+                    cy.wrap($input).clear({force:true}).type(name,{force:true});
+                } else {
+                    cy.log('El campo "member-name" no está disponible');
+                }
+            });
+        cy.captureImage();
+       
     }
 
     setEmail(email){
-        cy.get('input[id="member-email"]', { timeout: 5000 }).should('exist').should('be.visible').clear().type(email);
+        cy.get('input[id="member-email"]', { timeout: 5000 })
+            .should('exist')
+            .clear({force:true})
+            .type(email,{force:true});
+        cy.captureImage();
     }
 
 
@@ -65,11 +65,13 @@ class Member {
     }
 
     verifyErrorMessage(msg){
-        cy.get('p.response', { timeout: 5000 }).then($links => {
+        const selector = this.Port==2345? 'div.gh-alert-content':'p.response'
+        cy.get(selector, { timeout: 5000 }).then($links => {
             const member = $links.filter((index, element) => {
                 return Cypress.$(element).text().includes(msg); 
             }).first();
         });
+        cy.captureImage();
     }
 
 }

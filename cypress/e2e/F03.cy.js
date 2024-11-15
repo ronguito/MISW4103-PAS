@@ -14,8 +14,11 @@ describe('F03: Crear y gestionar Publicaciones (posts) ', () => {
 
     beforeEach(() => {
       //Given
+      wp.setHost(config.Host, config.Port)
       wp.visit(config.UrlLogin);
       wp.login(config.UserName, config.UserPass);
+      post.Port = config.Port;
+
     });
     
     it('F03E01: Crear un nuevo post en estado de borrador', () => {
@@ -31,6 +34,7 @@ describe('F03: Crear y gestionar Publicaciones (posts) ', () => {
       post.save();
       
       //Then
+      wp.visit(config.UrlPost);
       post.verifyStatus('Draft', title);
 
     });
@@ -44,6 +48,7 @@ describe('F03: Crear y gestionar Publicaciones (posts) ', () => {
         post.publish();
 
         //Then
+        wp.visit(config.UrlPost);
         post.verifyStatus('Published', title);
         wp.visit(config.UrlPublic);
         wp.shouldContain(title);
@@ -51,6 +56,7 @@ describe('F03: Crear y gestionar Publicaciones (posts) ', () => {
       });
 
     });
+    
     
     it('F03E03: Modificar un post publicado', () => {
       const newTitle = faker.hacker.phrase();
@@ -61,8 +67,10 @@ describe('F03: Crear y gestionar Publicaciones (posts) ', () => {
         //When
         post.setTitle(newTitle);
         post.update();
+        post.save();
 
         //Then
+        wp.visit(config.UrlPost);
         post.verifyStatus('Published', newTitle);
         wp.visit(config.UrlPublic);
         wp.shouldContain(newTitle);
@@ -71,7 +79,8 @@ describe('F03: Crear y gestionar Publicaciones (posts) ', () => {
       });
 	
     });
-
+    
+   
     it('F03E04: Eliminar un post publicado', () => {
       //Given
       wp.visit(config.UrlPost);
@@ -87,5 +96,5 @@ describe('F03: Crear y gestionar Publicaciones (posts) ', () => {
         
       });
     });
-
+   
 });

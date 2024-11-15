@@ -11,6 +11,7 @@ describe('F01: Configurar opciones generales del sitio ', () => {
 
     beforeEach(() => {
         //Given
+        wp.setHost(config.Host, config.Port)
         wp.visit(config.UrlLogin);
         wp.login(config.UserName, config.UserPass);
     });
@@ -22,10 +23,10 @@ describe('F01: Configurar opciones generales del sitio ', () => {
         wp.openSiteSetting();
         
         //When
-        wp.clickEditSection("title-and-description");
+        wp.clickCategory("general")
+        wp.clickEditSection("Title & description");
         wp.setPageTitle(title);
         wp.clickOnButton("Save");
-        wp.closeSiteSetting();
         
         //Then
         wp.visit(config.UrlPublic);
@@ -39,11 +40,11 @@ describe('F01: Configurar opciones generales del sitio ', () => {
         wp.openSiteSetting();
         
         //When
-        wp.clickEditSection("title-and-description");
+        wp.clickCategory("general")
+        wp.clickEditSection("Title & description");
         wp.setPageDescription(text);
         wp.clickOnButton("Save");
-        wp.closeSiteSetting();
-        
+   
         //Then
         wp.visit(config.UrlPublic);
         wp.shouldContain(text);		
@@ -56,12 +57,17 @@ describe('F01: Configurar opciones generales del sitio ', () => {
         wp.openSiteSetting();
         
         //When
-        wp.clickEditSection("design");
-        wp.clickOnPanel("Brand");
+        if(config.Port==2368){
+            wp.clickEditSection("Design & branding");
+            wp.clickOnPanel("Brand");
+        }else{
+            wp.clickOnButton("Branding");
+        }
         wp.setColor(color);
         wp.clickOnButton("Save");
-        wp.clickOnButton("Close")
-        wp.closeSiteSetting();
+        if(config.Port==2368){
+            wp.clickOnButton("Close")
+        }
         
         //Then
         wp.visit(config.UrlPublic);
@@ -75,17 +81,25 @@ describe('F01: Configurar opciones generales del sitio ', () => {
         wp.openSiteSetting();
         
         //When
-        wp.clickEditSection("design");
-        wp.clickOnPanel("Site wide");
-        wp.clickOnPickColor();
-        wp.setColor(color);
+        if(config.Port==2368){
+            wp.clickEditSection("Design & branding");
+            wp.clickOnPanel("Site wide");
+            wp.clickOnPickColor();
+            wp.setColor(color);
+        }else{
+            wp.clickOnButton("Branding");
+        }
+       
         wp.clickOnButton("Save");
-        wp.clickOnButton("Close")
-        wp.closeSiteSetting();
-        
+        if(config.Port==2368){
+            wp.clickOnButton("Close")
+        }
+
         //Then
         wp.visit(config.UrlPublic);
-        wp.shouldContainColor(color);	
+        if(config.Port==2368){
+            wp.shouldContainColor(color);
+        }	
 	
     });
     

@@ -1,19 +1,36 @@
 class Webpage {
 
-    visit (host){
-        cy.visit(host, { failOnStatusCode: false });
+    Host = '';
+    Port = '';
+
+    setHost(h, p){
+        this.Host = h;
+        this.Port = p;
+    }
+
+    visit (url){
+        const urlPage = this.Host + ":" + this.Port + url
+        cy.visit(urlPage, { failOnStatusCode: false });
+        cy.url().should('include', urlPage);
+        cy.captureImage();
+        cy.wait(5000);
     }
 
     login (username, password){
         cy.get('input[name="identification"]', {timeout:5000}).type(username);
         cy.get('input[name="password"]', {timeout:5000}).type(password);
-        cy.get('button[type="submit"]', {timeout:5000}).click();
+        cy.captureImage();
+        cy.get('button[type="submit"]').click();
+        cy.wait(5000);
         cy.url().should('include', '/ghost/#/dashboard');
+        cy.captureImage();
     }
 
     openSiteSetting(){
-        cy.get('a[data-test-nav="settings"]').first().click();
-        cy.url().should('include', '/ghost/#/settings');     
+        cy.get('a[href="#/settings/"]').first().click();
+        cy.url().should('include', '/ghost/#/settings');   
+        cy.captureImage(); 
+        cy.wait(5000); 
     }
 
     closeSiteSetting(){
@@ -21,20 +38,54 @@ class Webpage {
         cy.url().should('include', '/ghost/#/dashboard');     
     }
 
+    clickCategory(category){
+        if(this.Port==2345){
+            cy.get(`a[href="#/settings/${category}/"]`).first().click();
+            cy.url().should('include', `/ghost/#/settings/${category}`);
+        }
+    }
+
+
     clickEditSection(title){
-        cy.get(`div[data-testid="${title}"]`).find('button').click();
-        cy.wait(2000);       
+        const eName = (this.Port==2345)? 'div.gh-expandable-block':'div.is-not-editing';
+        cy.get(eName, { timeout: 3000 }).then($links => {
+            const block = $links.filter((index, element) => {
+                return Cypress.$(element).text().includes(title); 
+            }).first();
+            var button = block.find('button');
+            button.click();
+        });
     }
 
     setPageTitle(text){
-        cy.get('input[placeholder="Site title"]').clear().type(text);
+        if(this.Port==2345){
+            cy.contains('.gh-expandable-title', 'Title & description')
+            .parents('.gh-expandable-block')
+            .find('input')
+            .first()
+            .clear()
+            .type(text, { force: true });
+        }else{
+            cy.get('input[placeholder="Site title"]').clear().type(text);
+        }
+        cy.captureImage(); 
     }
 
     setPageDescription(text){
-        cy.get('input[placeholder="Site description"]').clear().type(text);
+        if(this.Port==2345){
+            cy.contains('.gh-expandable-title', 'Title & description')
+            .parents('.gh-expandable-block')
+            .find('input')
+            .eq(1)
+            .clear()
+            .type(text, { force: true });
+        }else{
+            cy.get('input[placeholder="Site description"]').clear().type(text);
+            cy.captureImage();
+        }
     }
 
-    clickOnButton(accion, wait=2000)
+    clickOnButton(accion, wait=5000)
     {
         cy.get('button').then((buttons) => {
             let matched = null;
@@ -62,6 +113,7 @@ class Webpage {
     clickOnPanel(name){
         cy.get(`button[title="${name}"]`).click();
         cy.wait(2000);
+        cy.captureImage(); 
     }
 
     clickOnPickColor(){
@@ -69,7 +121,11 @@ class Webpage {
     }
 
     setColor(color){
-        cy.get('input[aria-label="Color value"]').clear().type(color);
+        // Definir el selector según el valor de this.Puerto
+        const selector = (this.Port == 2345) ? 'input[name="accent-color"].gh-input' : 'input[aria-label="Color value"';
+        cy.get(selector)
+            .clear({ force: true })
+            .type(color, { force: true });
         cy.wait(5000);
     }
 

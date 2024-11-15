@@ -2,12 +2,12 @@
     "UserName": "admin@redfox.com.co",
     "UserPass": "Admin123++",
     "Host": "http://localhost",
-    "Port": 2368,
+    "Port": 2345,
     "UrlPublic" : "",
     "UrlLogin": "/ghost/#/signin",
     "UrlPost": "/ghost/#/posts",
     "UrlTag": "/ghost/#/tags",
     "UrlPage": "/ghost/#/pages",
     "UrlMember": "/ghost/#/members",
-    "results": "./results"
+    "Results": "./results"
 }
