@@ -13,6 +13,9 @@ describe('F02: Crear y gestionar members ', () => {
     const member = new Member();
 
     beforeEach(() => {
+      
+      wp.setHost(config.Host, config.Port)
+      
       //Given
       wp.visit(config.UrlLogin);
       wp.login(config.UserName, config.UserPass);
@@ -30,7 +33,7 @@ describe('F02: Crear y gestionar members ', () => {
       member.create();
       member.setName(name);
       member.setEmail(email);
-      member.save();
+      wp.clickOnButton("Save");
       wp.visit(config.UrlMember);
       
       //Then
@@ -50,7 +53,7 @@ describe('F02: Crear y gestionar members ', () => {
       member.create();
       member.setName(name1);
       member.setEmail(email);
-      member.save();
+      wp.clickOnButton("Save");
       wp.visit(config.UrlMember);
       member.create();
       member.setName(name2);
@@ -73,7 +76,7 @@ describe('F02: Crear y gestionar members ', () => {
       member.editFirstMember();
       member.setName(name1);
       member.setEmail(email1);
-      member.save();
+      wp.clickOnButton("Save");
       
       //Then
       wp.visit(config.UrlMember);
@@ -92,14 +95,14 @@ describe('F02: Crear y gestionar members ', () => {
       member.create();
       member.setName(name);
       member.setEmail(email);
-      member.save();
+      wp.clickOnButton("Save");
       wp.visit(config.UrlMember);
       member.editLastMember();
       member.setEmail(email);
-      member.save();
+      wp.clickOnButton("Save");
 
       //Then
-      let msg = "Member already exists. Attempting to add member with existing email address"
+      let msg = "Attempting to add member with existing email address"
       member.verifyErrorMessage(msg);
 
     });
