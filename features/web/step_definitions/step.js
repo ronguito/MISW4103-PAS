@@ -478,10 +478,10 @@ Then('The status for page {string} should be {string}', async function (title, s
 });
 
 //visita la url publica de la pagina
-Then('I navigate to page {kraken-string} for url {string}',async function (host, url) {
+Then('I navigate to page public {kraken-string} {kraken-string} {kraken-string}',async function (host, port, url) {
     if(url=="old") { url = oldUrl;}
     if(url=="new") { url = newUrl;}
-    urlPage = host+ "/"+ url
+    urlPage = host+ ":" + port + url
     await this.driver.executeScript('window.location.href = arguments[0];', [urlPage]);
 });
 
