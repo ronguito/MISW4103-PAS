@@ -9,5 +9,5 @@
     "UrlTag": "/ghost/#/tags",
     "UrlPage": "/ghost/#/pages",
     "UrlMember": "/ghost/#/members",
-    "results": "./results"
+    "Results": "./results"
 }

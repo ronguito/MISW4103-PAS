@@ -1,19 +1,33 @@
 class Webpage {
 
-    visit (host){
-        cy.visit(host, { failOnStatusCode: false });
+    Host = '';
+    Port = '';
+
+    setHost(h, p){
+        this.Host = h;
+        this.Port = p;
+    }
+
+    visit (url){
+        const urlPage = this.Host + ":" + this.Port + url
+        cy.visit(urlPage, { failOnStatusCode: false });
+        cy.url().should('include', urlPage);
+        cy.captureImage();
     }
 
     login (username, password){
         cy.get('input[name="identification"]', {timeout:5000}).type(username);
         cy.get('input[name="password"]', {timeout:5000}).type(password);
+        cy.captureImage();
         cy.get('button[type="submit"]', {timeout:5000}).click();
         cy.url().should('include', '/ghost/#/dashboard');
+        cy.captureImage();
     }
 
     openSiteSetting(){
         cy.get('a[data-test-nav="settings"]').first().click();
-        cy.url().should('include', '/ghost/#/settings');     
+        cy.url().should('include', '/ghost/#/settings');   
+        cy.captureImage();  
     }
 
     closeSiteSetting(){
@@ -23,7 +37,8 @@ class Webpage {
 
     clickEditSection(title){
         cy.get(`div[data-testid="${title}"]`).find('button').click();
-        cy.wait(2000);       
+        cy.wait(2000);
+        cy.captureImage();       
     }
 
     setPageTitle(text){

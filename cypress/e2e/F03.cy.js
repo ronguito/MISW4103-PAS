@@ -14,8 +14,10 @@ describe('F03: Crear y gestionar Publicaciones (posts) ', () => {
 
     beforeEach(() => {
       //Given
+      wp.setHost(config.Host, config.Port)
       wp.visit(config.UrlLogin);
       wp.login(config.UserName, config.UserPass);
+
     });
     
     it('F03E01: Crear un nuevo post en estado de borrador', () => {
@@ -31,6 +33,7 @@ describe('F03: Crear y gestionar Publicaciones (posts) ', () => {
       post.save();
       
       //Then
+      wp.visit(config.UrlPost);
       post.verifyStatus('Draft', title);
 
     });
