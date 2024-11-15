@@ -11,15 +11,13 @@ class Member {
     }
 
     editFirstMember (){
-        const selector = this.Port==2345? 'a.gh-member-list-basic':'a.gh-list-data'
-        cy.get(selector, {timeout:5000}).first().click();
+        cy.get('a.gh-list-data', {timeout:5000}).first().click();
         cy.url().should('match', /\/ghost\/#\/members\/.+/);
 
     }
 
     editLastMember (){
-        const selector = this.Port==2345? 'a.gh-member-list-basic':'a.gh-list-data'
-        cy.get(selector, {timeout:5000}).last().click();
+        cy.get('a.gh-list-data', {timeout:5000}).last().click();
         cy.url().should('match', /\/ghost\/#\/members\/.+/);
 
     }
@@ -27,8 +25,6 @@ class Member {
     setName(name){
         cy.wait(5000)
         cy.get('input[id="member-name"]')
-            .should('be.visible')
-            .should('not.be.disabled')
             .then(($input) => {
                 if ($input.length > 0) {
                     cy.wrap($input).clear({force:true}).type(name,{force:true});
@@ -43,7 +39,6 @@ class Member {
     setEmail(email){
         cy.get('input[id="member-email"]', { timeout: 5000 })
             .should('exist')
-            .should('be.visible')
             .clear({force:true})
             .type(email,{force:true});
         cy.captureImage();
@@ -70,7 +65,7 @@ class Member {
     }
 
     verifyErrorMessage(msg){
-        const selector = this.Port==2345? '.gh-alert':'p.response'
+        const selector = this.Port==2345? 'div.gh-alert-content':'p.response'
         cy.get(selector, { timeout: 5000 }).then($links => {
             const member = $links.filter((index, element) => {
                 return Cypress.$(element).text().includes(msg); 

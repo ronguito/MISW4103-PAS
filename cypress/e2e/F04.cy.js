@@ -13,6 +13,8 @@ describe('F04: Crear y gestionar Paginas', () => {
     const page = new Page();
 
     beforeEach(() => {
+      page.Port = config.Port;
+      wp.setHost(config.Host, config.Port)
       //Given
       wp.visit(config.UrlLogin);
       wp.login(config.UserName, config.UserPass);
@@ -45,6 +47,7 @@ describe('F04: Crear y gestionar Paginas', () => {
           page.publish();
           
           //Then
+          wp.visit(config.UrlPage);
           page.verifyStatus('Published', title);
           const urlPage = `${config.UrlPublic}/${url}`;
           wp.visit(urlPage);
@@ -69,6 +72,7 @@ describe('F04: Crear y gestionar Paginas', () => {
           page.save();
           
           //Then
+          wp.visit(config.UrlPage);
           page.verifyStatus('Published', title);
           
           wp.visit(oldUrlPage);

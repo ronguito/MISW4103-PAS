@@ -15,10 +15,11 @@ describe('F02: Crear y gestionar members ', () => {
     beforeEach(() => {
       
       wp.setHost(config.Host, config.Port)
-      
+      member.Port = config.Port;
       //Given
       wp.visit(config.UrlLogin);
       wp.login(config.UserName, config.UserPass);
+
     });
     
     it('F03E01: Crear un nuevo member', () => {
@@ -58,6 +59,7 @@ describe('F02: Crear y gestionar members ', () => {
       member.create();
       member.setName(name2);
       member.setEmail(email);
+      wp.clickOnButton("Save");
       
       //Then
       let msg = "Member already exists. Attempting to add member with existing email address"
@@ -83,7 +85,7 @@ describe('F02: Crear y gestionar members ', () => {
       member.verifyMemberName(name1);
 	
     });
-
+    
     it('F02E04: Editar un member con email duplicado', () => {
       const name = faker.person.fullName();
       const email = faker.internet.email();
