@@ -38,6 +38,20 @@ class Post {
         cy.captureImage();
     }
 
+    setTag(tag) {
+        const open = 'button[title="Settings"]';
+        const close = this.Port == 2345? 'button[aria-label="Close"]': open;
+        cy.get(open).click({ force: true }); 
+        cy.wait(1000);
+        cy.get('#tag-input ul input').click();
+        cy.get('li').filter((index, element) => {
+            return Cypress.$(element).text().includes(tag);
+        }).first().click();
+        cy.captureImage();
+        cy.get(close).click({ force: true }); 
+        cy.wait(1000);
+    }
+
     selectFirst(status){
         return cy.get('li.gh-posts-list-item', { timeout: 3000 }).then($links => {
             const post = $links.filter((index, element) => {

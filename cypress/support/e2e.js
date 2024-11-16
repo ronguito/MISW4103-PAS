@@ -49,18 +49,19 @@ Cypress.on('uncaught:exception', (err, runnable) => {
 beforeEach(() => {
     // Reiniciar el contador cuando cambie de escenario (basado en el nombre del test)
     const testName = Cypress.currentTest.title.replace(/[^a-zA-Z0-9]/g, '_').slice(0, 6);
+    
     if (testName !== currentTestName) {
         screenshotCounter = 0;  // Reiniciar contador al cambiar de escenario
         currentTestName = testName; // Guardar el nombre del escenario actual
-        
-
-
+        const folder = `./${Cypress.env('config').Results}/cypress/${Cypress.env('config').Port}`;
+        cy.log(folder + "::" + testName);
+        const datos = [folder, testName]
+        cy.task('clearScreenshots', datos).then((message) => {
+            cy.log(message);
+        });
     }
 });
 
 before(() => {
-    const folder = `./${Cypress.env('config').Results}/cypress/${Cypress.env('config').Port}`;
-    cy.task('clearScreenshots', folder).then((message) => {
-        cy.log(message);
-    });
+    
 });
