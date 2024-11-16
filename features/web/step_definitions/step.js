@@ -9,11 +9,13 @@ function generarColorAleatorio() {
 }
 
 //visita la url publica de la pagina
+Port = 2368;
 
 Given('I navigate to page {kraken-string} {kraken-string} {kraken-string}',async function (host, port, url) {
     if(url=="old") { url = oldUrl;}
     if(url=="new") { url = newUrl;}
     urlPage = host + ":" + port +  url
+    Port = port;
     await this.driver.executeScript('window.location.href = arguments[0];', [urlPage]);
 });
 
@@ -44,70 +46,45 @@ When('I click on signin', async function() {
 
 //abre la pagina de configuracion
 When('I open setting site', async function () {
-    let element = await this.driver.$('a[data-test-nav="settings"]');
+    let element = await this.driver.$('a[href="#/settings/"]');
     return await element.click();
 });
 
 //cierra la ventana de configuracion
 When('I close setting site', async function () {
-    let element = await this.driver.$('button[data-testid="exit-settings"]');
-    return await element.click();
+    if(Port!=2345){
+        let element = await this.driver.$('button[data-testid="exit-settings"]');
+        return await element.click();
+    }
+});
+
+When('I click on category {string}', async function (category) {
+    if(Port==2345){
+        let element = await this.driver.$(`a[href="#/settings/${category}/"]`);
+        return await element.click();
+    }
 });
 
 //da clic sobre el boton edit de una seccion de la configuracion
-When('I click on button edit in {string}', async function (seccion) {
-    let element = await this.driver.$('div[data-testid="'+seccion+'"]');
-    let button = await element.$('button');
-    return await button.click();
-});
+When('I click on button edit section {string}', async function (title) {
 
-//dar clic sobre una ficha del diseño Brand o Page wide
-When('I click on button design {string}', async function (seccion) {
-    let element = await this.driver.$('button[title="'+seccion+'"]');
-    return await element.click();
-});
-
-//da clic sobe pick del color para el fondo
-When('I click on button pick color', async function () {
-    let element = await this.driver.$('button[aria-label="Pick color"]');
-    return await element.click();
-});
-
-//agrega un color aletorio en la caja de color
-When('I enter color', async function () {
-    let element = await this.driver.$('input[aria-label="Color value"]');
-    pageColor = generarColorAleatorio();
-    return await element.setValue(pageColor);
-});
-
-//da clic sobre un boton para guardar, que contenga la palabra save
-When('I click on button save', async function() {
-    const buttons = await this.driver.$$('button');
-    let matched = null;
-    for (const button of buttons) {
-        const text = await button.getText();
-        if (text.includes('Save')) {
-            matched = button;
-            break;
+    const eName = Port == '2345' ? 'div.gh-expandable-block' : 'div.is-not-editing';
+    // Obtener todos los bloques que coinciden con el selector
+    const blocks = await this.driver.$$(eName);
+    for (let block of blocks) {
+        const text = await block.getText();
+        if (text.includes(title)) {
+            // Buscar el botón dentro del bloque
+            const button = await block.$('button');
+            if (button) {
+                return await button.click(); // Hacer clic en el botón y salir
+            } else {
+                throw new Error(`No se encontró un botón en el bloque con el título: ${title}`);
+            }
         }
     }
-    if (!matched) { throw new Error(`No se encontró un para guardar`);  }
-    return await matched.click(); 
-});
-
-//da clic sobre un boton para cerrar que contenga el texto Close
-When('I click on button close', async function () {
-    const buttons = await this.driver.$$('button');
-    let matched = null;
-    for (const button of buttons) {
-        const text = await button.getText();
-        if (text.includes('Close')) {
-            matched = button;
-            break;
-        }
-    }
-    if (!matched) { throw new Error(`No se encontró un para cerrar`);  }
-    return await matched.click(); 
+    // Si ningún bloque coincide, lanzar un error
+    throw new Error(`No se encontró ninguna sección con el título: ${title}`);
 });
 
 //escribe un titulo para el sitio
@@ -116,8 +93,18 @@ When('I enter title site {string}', async function (text) {
         text = faker.company.name();
     }
     pageTitle = text;
-    let element = await this.driver.$('input[placeholder="Site title"]');
-    return await element.setValue(text);
+    if(Port==2345){
+        let inputs = await this.driver.$$('input'); // Seleccionar todos los inputs
+        for (const input of inputs) {
+        if (await input.isDisplayed()) { // Verificar si el input es visible
+            await input.clearValue(); // Limpiar el contenido
+            return await input.setValue(text); // Escribir el texto deseado
+        }
+}
+    }else{
+        let element = await this.driver.$('input[placeholder="Site title"]');
+        return await element.setValue(text);
+    }
 });
 
 //escribe una descripcion para el sitio
@@ -126,9 +113,101 @@ When('I enter description site {string}', async function (text) {
         text = faker.company.buzzPhrase();
     }
     pageDescription = text;
-    let element = await this.driver.$('input[placeholder="Site description"]');
-    return await element.setValue(text);
+    if(Port==2345){
+
+        let inputs = await this.driver.$$('input'); // Seleccionar todos los inputs
+        let visibleCount = 0;
+        
+        for (const input of inputs) {
+            if (await input.isDisplayed()) { // Verificar si el input es visible
+                visibleCount++; // Incrementar el contador de inputs visibles
+                if (visibleCount === 2) { // Si es el segundo input visible
+                    await input.clearValue(); // Limpiar el contenido
+                    return await input.setValue(text); // Escribir el texto deseado
+                }
+            }
+        }
+
+    }else{
+        let element = await this.driver.$('input[placeholder="Site description"]');
+        return await element.setValue(text);
+    }
 });
+
+//dar clic sobre una ficha del diseño Brand o Page wide
+When('I click on button edit design', async function () {
+    // Obtener todos los bloques que coinciden con el selector
+    if(Port==2345){
+        const buttons = await this.driver.$$('button');
+        let matched = null;
+        for (const button of buttons) {
+            const text = await button.getText();
+            if (text.includes('Branding')) {
+                matched = button;
+                break;
+            }
+        }
+        if (!matched) { throw new Error(`No se encontró boton ${name}`);  }
+        return await matched.click(); 
+    }else{
+        const blocks = await this.driver.$$('div.is-not-editing');
+        for (let block of blocks) {
+            const text = await block.getText();
+            if (text.includes('Design & branding')) {
+                // Buscar el botón dentro del bloque
+                const button = await block.$('button');
+                if (button) {
+                    return await button.click(); // Hacer clic en el botón y salir
+                } else {
+                    throw new Error(`No se encontró un botón en el bloque con el título: ${title}`);
+                }
+            }
+        }
+    }
+    // Si ningún bloque coincide, lanzar un error
+    throw new Error(`No se encontró ninguna sección con el título: ${title}`);
+});
+
+
+//da clic sobe pick del color para el fondo
+When('I click on panel site wide', async function () {
+    if(Port!=2345){
+        let element = await this.driver.$('button[title="Site wide"]');
+        return await element.click();
+    }
+});
+
+//da clic sobe pick del color para el fondo
+When('I click on pick color', async function () {
+    if(Port!=2345){
+        let element = await this.driver.$('button[aria-label="Pick color"]');
+        return await element.click();
+    }
+});
+
+//agrega un color aletorio en la caja de color
+When('I enter color', async function () {
+    const selector = (Port == 2345) ? 'input[name="accent-color"].gh-input' : 'input[aria-label="Color value"';
+    let element = await this.driver.$(selector);
+    pageColor = generarColorAleatorio();
+    return await element.setValue(pageColor);
+});
+
+//da clic sobre un boton para guardar, que contenga la palabra save
+When('I click on button {string}', async function(name) {
+    const buttons = await this.driver.$$('button');
+    let matched = null;
+    for (const button of buttons) {
+        const text = await button.getText();
+        if (text.includes(name)) {
+            matched = button;
+            break;
+        }
+    }
+    if (!matched) { throw new Error(`No se encontró boton ${name}`);  }
+    return await matched.click(); 
+});
+
 
 // la pagina deberia contener el texto pasado como parametro
 Then('The main page should contain {string}', async function (text) {

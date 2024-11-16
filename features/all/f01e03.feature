@@ -2,7 +2,7 @@ Feature: Configurar opciones generales del sitio
 
 @user1 @web
 Scenario: F01E03 Cambiar color de los botones
-  Given I navigate to page "<UrlLogin>"
+  Given I navigate to page "<Host>" "<Port>" "<UrlLogin>"
   And I wait for 5 seconds
   And I enter email "<UserName>"
   And I enter password "<UserPass>"
@@ -12,19 +12,15 @@ Scenario: F01E03 Cambiar color de los botones
 
   When I open setting site
   And I wait for 2 seconds
-  And I click on button edit in "design"
-  And I wait for 2 seconds
-  And I click on button design "Brand"
-  And I wait for 2 seconds
+  And I click on button edit design
+  And I wait for 5 seconds
   And I enter color
   And I wait for 2 seconds
-  And I click on button save
-  And I wait for 2 seconds
-  And I click on button close
-  And I close setting site
+  And I click on button "Save"
+  And I wait for 5 seconds
 
   Then I wait for 2 seconds
-  And I navigate to page "<UrlPublic>"
+  And I navigate to page "<Host>" "<Port>" "<UrlPublic>"
   And I wait for 5 seconds
   And The head should contain color
 

@@ -1,8 +1,8 @@
 Feature: Configurar opciones generales del sitio
 
 @user1 @web
-Scenario: F01E01 Configurar el titulo del sitio
-  Given I navigate to page "<UrlLogin>"
+Scenario: F01E04 Cambiar color de fondo de la pagina
+  Given I navigate to page "<Host>" "<Port>" "<UrlLogin>"
   And I wait for 5 seconds
   And I enter email "<UserName>"
   And I enter password "<UserPass>"
@@ -12,18 +12,24 @@ Scenario: F01E01 Configurar el titulo del sitio
 
   When I open setting site
   And I wait for 2 seconds
-  And I click on button edit in "title-and-description"
+  And I click on button edit design
+  And I wait for 5 seconds
+  And I click on panel site wide
   And I wait for 2 seconds
-  And I enter title site "random"
+  And I click on pick color
   And I wait for 2 seconds
-  And I click on button save
+  And I enter color
   And I wait for 2 seconds
-  And I close setting site
+  And I click on button "Save"
+  And I wait for 5 seconds
 
   Then I wait for 2 seconds
-  And I navigate to page "<UrlPublic>"
+  And I navigate to page "<Host>" "<Port>" "<UrlPublic>"
   And I wait for 5 seconds
-  And The main page should contain "pageTitle"
+  And The head should contain color
+
   
+
+
 
 
