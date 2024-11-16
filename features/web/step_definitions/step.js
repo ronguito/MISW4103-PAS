@@ -277,11 +277,6 @@ When('I click on new member', async function () {
     return await element.click();
 });
 
-// da clic en el boton guardar miembro
-When('I click on save member', async function () {
-    let element = await this.driver.$('button[data-test-button="save"]');
-    return await element.click();
-});
 
 // da clic en el primer elemento de miembros
 When('I click on first member', async function () {
@@ -332,9 +327,10 @@ Then('I verify new member on list for email {string}', async function (email) {
 
 // verifica que existe un error al crear el suscriptor
 Then('I verify it exists an error message', async function () {
-    const container = await this.driver.$('p.response');
+    const selector = Port==2345? 'div.gh-alert-content':'p.response'
+    const container = await this.driver.$(selector);
     const containerText = await container.getText();
-    const msg = "Member already exists. Attempting to add member with existing email address"
+    const msg = "Attempting to add member with existing email address"
     return await containerText.includes(msg);
 });
 
@@ -352,6 +348,12 @@ Then('I verify edited member {string}', async function (name) {
 //////////////////// F03 Crear y gestionar Publicaciones (posts) //////////////////////////////
 var postTitle = '';
 
+//da clic en el boton nuevo post
+When('I click on new post', async function () {
+    let element = await this.driver.$('a[href="#/editor/post/"]');
+    return await element.click();
+});
+
 //ingresa el titulo del post
 When('I enter title post {string}', async function (text) {
     if(text=='random'){
@@ -362,12 +364,6 @@ When('I enter title post {string}', async function (text) {
     return await element.setValue(text);
 });
 
-//da clic en el boton nuevo post
-When('I click on new post', async function () {
-    let element = await this.driver.$('a[href="#/editor/post/"]');
-    return await element.click();
-});
-
 //da click en el boton regresar de la pagina de edicion de post
 When('I click on save post', async function () {
     let element = await this.driver.$('a.gh-editor-back-button');
@@ -376,32 +372,57 @@ When('I click on save post', async function () {
 
 // da clic en el boton publicar
 When('I click on button publish', async function () {
-    let element = await this.driver.$('button[data-test-button="publish-flow"');
-    return await element.click();
+    if(Port==2345){
+        let element = await this.driver.$('div.gh-publishmenu-trigger');
+        return await element.click();
+    }else{
+        let element = await this.driver.$('button[data-test-button="publish-flow"]');
+        return await element.click();
+    }
 });
 
 // da clic en el boton continuar de la ventana publicar
 When('I click on button continue', async function () {
-    let element = await this.driver.$('button[data-test-button="continue"');
-    return  await element.click();
+    if(Port==2345){
+        
+    }else{
+        let element = await this.driver.$('button[data-test-button="continue"]');
+        return  await element.click();
+    }
 });
 
 // da clic en el boton confirmar de la ventana publicar
 When('I click on button confirm', async function () {
-    let element = await this.driver.$('button[data-test-button="confirm-publish"');
-    return await element.click();
+    if(Port==2345){
+        let element = await this.driver.$('button.gh-publishmenu-button');
+        return await element.click();
+    }else{
+        let element = await this.driver.$('button[data-test-button="confirm-publish"]');
+        return await element.click();
+    }
 });
 
 // da clic en el boton actualiar de la pagina de edicion de post
 When('I click on button update', async function () {
-    let element = await this.driver.$('button[data-test-button="publish-save"');
-    return await element.click();
+    if(Port==2345){
+        let element = await this.driver.$('div.gh-publishmenu-trigger');
+        await element.click();
+        let element2 = await this.driver.$('button.gh-publishmenu-button');
+        return await element2.click();
+    }else{
+        let element = await this.driver.$('button[data-test-button="publish-save"]');
+        return await element.click();
+    }
 });
 
 //cierra la ventana de publicacion
 When('I click on close publish', async function () {
-    let element = await this.driver.$('button[data-test-button="close-publish-flow"');
-    return await element.click();
+    if(Port==2345){
+        
+    }else{
+        let element = await this.driver.$('button[data-test-button="close-publish-flow"]');
+        return await element.click();
+    }
 });
 
 // abre la ventana de configuracion para los post
@@ -419,12 +440,13 @@ When('I close setting post', async function () {
 // da clic sobre el primer post que coincida con estado suministrado
 When('I select first post {string}', async function (status) {
     
-    const posts = await this.driver.$$('a.gh-post-list-title');
+    const posts = await this.driver.$$('li.gh-posts-list-item');
     let matchedPost = null;
 
     for (const post of posts) {
         const text = await post.getText(); // Obtener texto del post
-        if (text.includes(status)) {
+        const statusLc = status.toLowerCase();
+        if (text.toLowerCase().includes(statusLc)) {
             matchedPost = post; // Si coincide, guardar el elemento
             break; 
         }
@@ -436,21 +458,23 @@ When('I select first post {string}', async function (status) {
     }
 
     const read = await matchedPost.$('h3').getText();
+    const butt = await matchedPost.$$('a'); // Obtener todos los enlaces
+    const firstButton = butt[0];
     const trimmedText = read.trim().replace(/\n+/g, ' ').trim();
     postTitle = trimmedText;
-    return await matchedPost.click(); 
+    return await firstButton.click(); 
 
 });
 
 //da clic sobre el boton eliminar post
 When('I click on button delete post', async function () {
-    let element = await this.driver.$('button[data-test-button="delete-post"');
+    let element = await this.driver.$('.settings-menu-delete-button');
     return await element.click();
 });
 
 // da clic sobre el boton confirmar eliminacion
 When('I click on button delete post confirm', async function () {
-    let element = await this.driver.$('button[data-test-button="delete-post-confirm"');
+    let element = await this.driver.$('.gh-btn-red');
     return await element.click();
 });
 
@@ -492,22 +516,6 @@ var newUrl = '';
 //da clic en el boton nueva pagina
 When('I click on new page', async function () {
     let element = await this.driver.$('a[href="#/editor/page/"]');
-    return await element.click();
-});
-
-//ingresa el titulo del post
-When('I enter title page {string}', async function (text) {
-    if(text=='random'){
-        text = faker.hacker.phrase();
-    }
-    postTitle = text;
-    let element = await this.driver.$('textarea[placeholder="Page title"]');
-    return await element.setValue(text);
-});
-
-//da click en el boton regresar de la pagina lista de paginas
-When('I click on save page', async function () {
-    let element = await this.driver.$('a[data-test-link="pages"]');
     return await element.click();
 });
 

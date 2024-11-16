@@ -54,7 +54,7 @@ AfterStep(async function (step) {
     // Tomar la captura de pantalla y guardarla
     try {
         if (fs.existsSync(screenshotPath)) {
-            fs.unlinkSync(filePath);
+            fs.unlinkSync(screenshotPath);
         }
         await driver.saveScreenshot(screenshotPath);
         console.log(`Captura de pantalla guardada: ${screenshotPath}`);
