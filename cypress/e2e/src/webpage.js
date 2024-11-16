@@ -21,7 +21,7 @@ class Webpage {
         cy.get('input[name="password"]', {timeout:5000}).type(password);
         cy.captureImage();
         cy.get('button[type="submit"]').click();
-        cy.wait(5000);
+        cy.wait(8000);
         cy.url().should('include', '/ghost/#/dashboard');
         cy.captureImage();
     }

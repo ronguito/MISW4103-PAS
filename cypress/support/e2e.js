@@ -31,8 +31,8 @@ Cypress.on('command:end', (command) => {
 */
 Cypress.Commands.add('captureImage', () => {
     screenshotCounter++;  // Incrementar el contador con cada captura
-    const testName = Cypress.currentTest.title.replace(/[^a-zA-Z0-9]/g, '_').slice(0, 6); // Limpiar el nombre del test
-    const screenshotName = `${testName}_step_${screenshotCounter}`; // Generar el nombre del archivo
+    //const testName = Cypress.currentTest.title.replace(/[^a-zA-Z0-9]/g, '_').slice(0, 6); // Limpiar el nombre del test
+    const screenshotName = `${currentTestName}_step_${screenshotCounter}`; // Generar el nombre del archivo
     // Tomar la captura de pantalla con el nombre generado
     cy.screenshot(screenshotName);
 });
@@ -54,9 +54,8 @@ beforeEach(() => {
         screenshotCounter = 0;  // Reiniciar contador al cambiar de escenario
         currentTestName = testName; // Guardar el nombre del escenario actual
         const folder = `./${Cypress.env('config').Results}/cypress/${Cypress.env('config').Port}`;
-        cy.log(folder + "::" + testName);
-        const datos = [folder, testName]
-        cy.task('clearScreenshots', datos).then((message) => {
+
+        cy.task('clearScreenshots', [folder, testName] ).then((message) => {
             cy.log(message);
         });
     }

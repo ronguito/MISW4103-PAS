@@ -96,7 +96,7 @@ describe('F05: Gestionar Etiquetas (tags) de contenido ', () => {
       tag.deleteTag();
       tag.confirmDeleteTag();
       //then
-
+      wps.visit(config.UrlTag);
       tag.verifyTagDelete(nameTag3);
 
     });
