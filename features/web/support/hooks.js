@@ -37,7 +37,7 @@ AfterStep(async function (step) {
 
     // Ruta para guardar capturas de pantalla
     const port = properties.Port
-    const screenshotsDir = path.resolve(process.cwd(), properties.results + "/kraken/" + port );
+    const screenshotsDir = path.resolve(process.cwd(), properties.Results + "/kraken/" + port );
    
 
     // Crear el directorio si no existe
@@ -53,6 +53,9 @@ AfterStep(async function (step) {
 
     // Tomar la captura de pantalla y guardarla
     try {
+        if (fs.existsSync(screenshotPath)) {
+            fs.unlinkSync(filePath);
+        }
         await driver.saveScreenshot(screenshotPath);
         console.log(`Captura de pantalla guardada: ${screenshotPath}`);
     } catch (error) {
