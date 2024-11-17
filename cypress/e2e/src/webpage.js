@@ -12,8 +12,8 @@ class Webpage {
         const urlPage = this.Host + ":" + this.Port + url
         cy.visit(urlPage, { failOnStatusCode: false });
         cy.url().should('include', urlPage);
-        cy.captureImage();
         cy.wait(5000);
+        cy.captureImage();
     }
 
     login (username, password){
@@ -21,16 +21,17 @@ class Webpage {
         cy.get('input[name="password"]', {timeout:5000}).type(password);
         cy.captureImage();
         cy.get('button[type="submit"]').click();
-        cy.wait(5000);
+        cy.wait(8000);
         cy.url().should('include', '/ghost/#/dashboard');
         cy.captureImage();
     }
 
     openSiteSetting(){
         cy.get('a[href="#/settings/"]').first().click();
-        cy.url().should('include', '/ghost/#/settings');   
+        cy.url().should('include', '/ghost/#/settings');  
+        cy.wait(5000);  
         cy.captureImage(); 
-        cy.wait(5000); 
+        
     }
 
     closeSiteSetting(){
@@ -81,8 +82,8 @@ class Webpage {
             .type(text, { force: true });
         }else{
             cy.get('input[placeholder="Site description"]').clear().type(text);
-            cy.captureImage();
         }
+        cy.captureImage();
     }
 
     clickOnButton(accion, wait=5000)

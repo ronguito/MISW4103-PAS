@@ -22,7 +22,7 @@ describe('F02: Crear y gestionar members ', () => {
 
     });
     
-    it('F03E01: Crear un nuevo member', () => {
+    it('F02E01: Crear un nuevo member', () => {
 		  
       const name = faker.person.fullName();
       const email = faker.internet.email();

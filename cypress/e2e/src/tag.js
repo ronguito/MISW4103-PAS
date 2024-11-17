@@ -2,19 +2,31 @@ class Tag {
 
     //Title = '';
 
-    selectTag (){
+    create (){
          
         cy.get('a[href*="#/tags/new/"]').click();
         cy.url().should('include', '/ghost/#/tags/new');
+        cy.captureImage();
     }  
     
-    setNameTag (name){       
-        cy.get('input[name="name"]', { timeout: 5000 }).should('exist').should('be.visible').clear().type(name);        
-    }  
+    setName (name){ 
+        cy.wait(2000);     
+        cy.get('#tag-name', { timeout: 5000 }).clear({force:true}).type(name,{force:true});        
+        cy.captureImage();
+    } 
 
-    saveTag(){
-        cy.get('button[data-test-button="save"]').click({ force: true });
-        cy.wait(3000);
+    getName(){
+        cy.wait(1000);
+        return cy.get('#tag-name').invoke('val').then((name) => {
+            return cy.wrap(name); // Devuelve el valor de forma segura dentro de la cadena de Cypress
+        });       
+    }
+
+    getUrl(){
+        cy.wait(1000);
+        return cy.get('input[name="slug"]').invoke('val').then((url) => {
+            return cy.wrap(url); // Devuelve el valor de forma segura dentro de la cadena de Cypress
+        });       
     }
 
     verifyTag(name){
@@ -32,19 +44,24 @@ class Tag {
     }
 
     deleteTag(){
-        cy.get('button[data-test-button="delete-tag"]').click({ force: true });
+        cy.get('button.gh-btn-red').click({ force: true });
         cy.wait(3000);
+        cy.captureImage();
     }  
 
     confirmDeleteTag(){
-        cy.get('button[data-test-button="confirm"]').click({ force: true });
+        cy.get('.modal-content').find('button.gh-btn-red').click();
         cy.url().should('include', '/ghost/#/tags');
     }  
     
     verifyTagDelete(name){
-        cy.get('section.view-container').then((container) => {
-            const containerText = container.text();
-            expect(containerText).not.to.include(name);
+        cy.get('a[title="Edit tag"]', { timeout: 5000 }).then($links => {
+            const matchingLinks = $links.filter((index, element) => {
+                return Cypress.$(element).text().includes(name);
+            });
+    
+            // Verifica que no se encontraron elementos coincidentes
+            expect(matchingLinks.length).to.eq(0, `No se encontraron enlaces con el nombre: ${name}`);
         });
     }
 
