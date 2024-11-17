@@ -41,7 +41,9 @@ async function executeTest(){
             diffBounds: data.diffBounds,
             analysisTime: data.analysisTime
         }
-
+        if(!fs.existsSync('./results/kraken/compare')){
+            fs.mkdirSync('./results/kraken/compare', { recursive: true });
+        }
         fs.writeFileSync(`./results/kraken/compare/${ss68}.png`, data.getBuffer());
         
     }
