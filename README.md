@@ -109,13 +109,13 @@ test que desea correr a la carpeta "/features", desde aqui se corre el test.
 Para correr el test ejecute desde la consola de comandos en la raiz del proyecto
 
 ```bash
-npx kraken-node run.
+npx kraken-node run
 ```
 
 Esto iniciara la prueba en modo visual y cargara un navegador contralado por kraken.
 
 
-*Ejecución de informe de comparación de imagenes
+## Ejecución de informe de comparación de imagenes
 
 Para realizar la comparación de las prueba con las dos version de Ghost se debe seguir los siguiente pasos.
 
@@ -157,11 +157,11 @@ npx cypress run.
 la imagenes de la versión 5.96
 4. Cambiar el puerto del archivo properties al de la versión 5.4
 5. Se ejcuta de nuevo el comando del paso 2.
-6. Para la libreria Resemble ejecutamos el comando 
+6. Para la libreria PixelMatch ejecutamos el comando 
 ```bash
-node vrt-cypress.js
+node pixelmatch_cypress.js
 ```
-7. Verificar el informe generado en la ruta ./results/cypress/reporte_comparacion_cypress.html
+7. Verificar el informe generado en la ruta ./results/cypress/reporte_pixiematch_comparacion_cypress.html
 
 
 ## Integrantes
