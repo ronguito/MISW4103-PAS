@@ -31,6 +31,7 @@ async function executeTest(){
                 break;
             }
         }
+        if(!ss68) { console.log("No encontrado pareja:", ss45git); continue; }
         arregloNombre.push(ss68.trim());
         const data = await compareImages(
             fs.readFileSync(`./results/kraken/2345/${ss45}`),
@@ -91,7 +92,7 @@ function createReport(datetime, resInfo){
     return `
     <html>
         <head>
-            <title>  Reporte de comparación de la verión 5.96 y 5.4 de Ghost </title>
+            <title>  Reporte de comparación de la verión 5.96 y 4.5 de Ghost </title>
             <link href="index.css" type="text/css" rel="stylesheet">
         </head>
         <body>
