@@ -12,8 +12,8 @@ async function executeTest(){
     let datetime = new Date().toISOString().replace(/:/g,".");
     
     
-    const base = fs.readdirSync("./results/kraken/2345")
-    const rc = fs.readdirSync("./results/kraken/2368")
+    const base = fs.readdirSync("./results/cypress/2345")
+    const rc = fs.readdirSync("./results/cypress/2368")
     for (let i = 0; i < base.length; i++) {
 
         ss45 = base[i];
@@ -29,8 +29,8 @@ async function executeTest(){
         }
         arregloNombre.push(ss68.trim());
         const data = await compareImages(
-            fs.readFileSync(`./results/kraken/2345/${ss45}`),
-            fs.readFileSync(`./results/kraken/2368/${ss68}`),
+            fs.readFileSync(`./results/cypress/2345/${ss45}`),
+            fs.readFileSync(`./results/cypress/2368/${ss68}`),
             options
         );
 
@@ -43,13 +43,13 @@ async function executeTest(){
             analysisTime: data.analysisTime
         }
 
-        fs.writeFileSync(`./results/kraken/compare/${ss68}`, data.getBuffer());
+        fs.writeFileSync(`./results/cypress/compare/${ss68}`, data.getBuffer());
         
     }
-    fs.writeFileSync(`./results/kraken/reporte_comparacion_kraken.html`, createReport(datetime, resultInfo));
-    fs.copyFileSync('./index.css', `./results/kraken/index.css`);
+    fs.writeFileSync(`./results/cypress/reporte_comparacion_cypress.html`, createReport(datetime, resultInfo));
+    fs.copyFileSync('./index.css', `./results/cypress/index.css`);
     console.log('------------------------------------------------------------------------------------');
-    console.log("Execution finished. Check the report under the results folder");
+    console.log("Finalizo ejecución");
     console.log(arregloNombre);
     return resultInfo;  
   }
@@ -67,17 +67,17 @@ function browser(b, info){
     <div class="imgline">
       <div class="imgcontainer">
         <span class="imgname">Reference</span>
-        <img class="img2" src="../kraken/2368/${b}" id="refImage" label="Reference">
+        <img class="img2" src="../cypress/2368/${b}" id="refImage" label="Reference">
       </div>
       <div class="imgcontainer">
         <span class="imgname">Test</span>
-        <img class="img2" src="../kraken/2345/${b}" id="testImage" label="Test">
+        <img class="img2" src="../cypress/2345/${b}" id="testImage" label="Test">
       </div>
     </div>
     <div class="imgline">
       <div class="imgcontainer">
         <span class="imgname">Diff</span>
-        <img class="imgfull" src="../kraken/compare/${b}".png" id="diffImage" label="Diff">
+        <img class="imgfull" src="../cypress/compare/${b}".png" id="diffImage" label="Diff">
       </div>
     </div>
   </div>`
@@ -87,12 +87,11 @@ function createReport(datetime, resInfo){
     return `
     <html>
         <head>
-            <title>  Reporte de comparación de la verión 5.96 y 5.4 de Ghost </title>
+            <title> Reporte de comparación de la verión 5.96 y 5.4 de Ghost </title>
             <link href="index.css" type="text/css" rel="stylesheet">
         </head>
         <body>
-            <h1>Reporte de comparación de la verión 5.96 y 5.4 de Ghost con la ejecución de pruebas automatizadas con Kraken 
-                 
+            <h1>Reporte de comparación de la verión 5.96 y 5.4 de Ghost con la ejecución de pruebas automatizadas con Cypress                 
             </h1>
             <p>Executed: ${datetime}</p>
             <div id="visualizer">

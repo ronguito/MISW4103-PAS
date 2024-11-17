@@ -6,3 +6,8 @@
 /package-lock.json
 /.DS_Store
 /.kraken
+node_modules/
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/

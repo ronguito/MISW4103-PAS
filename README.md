@@ -114,6 +114,56 @@ npx kraken-node run.
 
 Esto iniciara la prueba en modo visual y cargara un navegador contralado por kraken.
 
+
+*Ejecución de informe de comparación de imagenes
+
+Para realizar la comparación de las prueba con las dos version de Ghost se debe seguir los siguiente pasos.
+
+Kraken:
+
+1. Validar el puerto configurado en el archivo properties en el parametro "Port", el cual para nuestro caso la versión 5.96 de Ghost corre en el puerto 2368 
+y la versión 4.5 corre en el puerto 2345. Por defecto esta el puerto 2368, con el cual inciamos las pruebas. En dado caso que los puertos del ambiente donde 
+se va a ejecutar el proyecto cambian, se debe cambiar este parametro.
+
+2. Ejecutar el siguiente comando, para corre la pruebas de kraken. (este comando toma el archivo feature que esta en /feature/web)
+```bash
+npx kraken-node run
+```
+3. Este comando ejecuta las prueba y toma los pantallazos de cada paso y los guarda en la carpeta /results/Kraken/<puerto_configurado>. Con esto ya tenemos 
+la imagenes de la versión 5.96
+4. Cambiar el puerto del archivo properties al de la versión 5.4
+5. Se ejcuta de nuevo el comando del paso 2.
+6. Para la libreria Resemble ejecutamos el comando 
+```bash
+node vrt-kraken.js
+```
+7. Verificar el informe generado en la ruta ./results/kraken/reporte_comparacion_kraken.html
+
+
+Cypress:
+
+1. Validar el puerto configurado en el archivo properties en el parametro "Port", el cual para nuestro caso la versión 5.96 de Ghost corre en el puerto 2368 
+y la versión 4.5 corre en el puerto 2345. Por defecto esta el puerto 2368, con el cual inciamos las pruebas. En dado caso que los puertos del ambiente donde 
+se va a ejecutar el proyecto cambian, se debe cambiar este parametro.
+
+2. Ejecutar alguno de los siguientes comandos, para corre la pruebas de Cypress. 
+```bash
+//Ejecutar las pruebas en modo interactivo con 
+npx cypress open 
+//Ejecutr las pruebas en modo headless con 
+npx cypress run.
+```
+3. Al ejecutar el paso anterio se van  tomando los pantallazos de cada paso y los guarda en la carpeta /results/cypress/<puerto_configurado>. Con esto ya tenemos 
+la imagenes de la versión 5.96
+4. Cambiar el puerto del archivo properties al de la versión 5.4
+5. Se ejcuta de nuevo el comando del paso 2.
+6. Para la libreria Resemble ejecutamos el comando 
+```bash
+node vrt-cypress.js
+```
+7. Verificar el informe generado en la ruta ./results/cypress/reporte_comparacion_cypress.html
+
+
 ## Integrantes
 Nombre | Correo
 -------|---------
