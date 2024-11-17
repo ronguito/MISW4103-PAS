@@ -115,7 +115,7 @@ npx kraken-node run.
 Esto iniciara la prueba en modo visual y cargara un navegador contralado por kraken.
 
 
-*Ejecución de informe de comparación de imagenes
+* Ejecución de informe de comparación de imagenes
 
 Para realizar la comparación de las prueba con las dos version de Ghost se debe seguir los siguiente pasos.
 
