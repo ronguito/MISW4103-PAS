@@ -543,45 +543,6 @@ When('I enter url page {string}', async function (url) {
     return await element.setValue(url);
 });
 
-<<<<<<< HEAD
-// Verifica que el primer post coincidente con el estado tiene el titulo pasado
-Then('The status for page {string} should be {string}', async function (title, status) {
-    
-    if(title=="postTitle"){
-        title = postTitle;
-    }
-    
-    const pages = await this.driver.$$('a.gh-post-list-title');
-    
-    let matched = null;
-    for (const page of pages) {
-        const text = await page.getText(); // Obtener texto del post
-        if (text.includes(status)) {
-            matched = page; // Si coincide, guardar el elemento
-            break; // Salir del bucle
-        }
-    }
-
-    // Validar que se encontró un post que coincide
-    if (!matched) {
-        throw new Error(`No se encontró una pagina con el estado "${status}".`);
-    }
-
-    const read = await matched.$('h3').getText();
-    const trimmedText = read.trim().replace(/\n+/g, ' ').trim();
-    return await trimmedText.includes(title); 
-
-});
-
-//visita la url publica de la pagina
-Then('I navigate to page public {kraken-string} {kraken-string} {kraken-string}',async function (host, port, url) {
-    if(url=="old") { url = oldUrl;}
-    if(url=="new") { url = newUrl;}
-    urlPage = host+ ":" + port + url
-    await this.driver.executeScript('window.location.href = arguments[0];', [urlPage]);
-});
-=======
->>>>>>> 9cfe36e1382b00acda7b79301c24628cb174340f
 
 
 //////////////////// F05: Gestionar Etiquetas (tags) de contenido //////////////////////////////
