@@ -10,12 +10,15 @@ function generarColorAleatorio() {
 
 //visita la url publica de la pagina
 Port = 2368;
+Host = 'localhost'
 
 Given('I navigate to page {kraken-string} {kraken-string} {kraken-string}',async function (host, port, url) {
     if(url=="old") { url = oldUrl;}
     if(url=="new") { url = newUrl;}
+    if(url=="tag") { url = currenttagUrl;}
     urlPage = host + ":" + port +  url
     Port = port;
+    Host = host;
     await this.driver.executeScript('window.location.href = arguments[0];', [urlPage]);
 });
 
@@ -433,8 +436,13 @@ When('I open setting post', async function () {
 
 // abre la ventana de configuracion para los post
 When('I close setting post', async function () {
-    let element = await this.driver.$('button[title="Settings"]');
-    return await element.click();
+    if(Port==2345){
+        let element = await this.driver.$('button[aria-label="Close"]');
+        return await element.click();
+    }else{
+        let element = await this.driver.$('button[title="Settings"]');
+        return await element.click();
+    }
 });
 
 // da clic sobre el primer post que coincida con estado suministrado
@@ -509,7 +517,7 @@ Then('The status for post {string} should be {string}', async function (title, s
 });
 
 
-//////////////////// F03 Crear y gestionar Publicaciones (posts) //////////////////////////////
+//////////////////// F04 Crear y gestionar paginas //////////////////////////////
 var oldUrl = '';
 var newUrl = '';
 
@@ -535,46 +543,11 @@ When('I enter url page {string}', async function (url) {
     return await element.setValue(url);
 });
 
-// Verifica que el primer post coincidente con el estado tiene el titulo pasado
-Then('The status for page {string} should be {string}', async function (title, status) {
-    
-    if(title=="postTitle"){
-        title = postTitle;
-    }
-    
-    const pages = await this.driver.$$('a.gh-post-list-title');
-    
-    let matched = null;
-    for (const page of pages) {
-        const text = await page.getText(); // Obtener texto del post
-        if (text.includes(status)) {
-            matched = page; // Si coincide, guardar el elemento
-            break; // Salir del bucle
-        }
-    }
-
-    // Validar que se encontró un post que coincide
-    if (!matched) {
-        throw new Error(`No se encontró una pagina con el estado "${status}".`);
-    }
-
-    const read = await matched.$('h3').getText();
-    const trimmedText = read.trim().replace(/\n+/g, ' ').trim();
-    return await trimmedText.includes(title); 
-
-});
-
-//visita la url publica de la pagina
-Then('I navigate to page {kraken-string} for url {string}',async function (host, url) {
-    if(url=="old") { url = oldUrl;}
-    if(url=="new") { url = newUrl;}
-    urlPage = host+ "/"+ url
-    await this.driver.executeScript('window.location.href = arguments[0];', [urlPage]);
-});
 
 
 //////////////////// F05: Gestionar Etiquetas (tags) de contenido //////////////////////////////
-var postTitle = '';
+var currenttagName = '';
+var currenttagUrl = '';
 
 //ingresar a nuevo tag
 When('I click on new tag', async function () {
@@ -585,77 +558,113 @@ When('I click on new tag', async function () {
 // entra el nombre tag
 When('I enter tag full name {string}', async function (name) {
     if(name=='random'){
-        name = faker.person.fullName();
+        name = faker.hacker.noun();
     }
     currenttagName = name;
     let element = await this.driver.$('input[id="tag-name"]',{ timeout: 8000 });
     return await element.setValue(name);
 });
 
-// da clic en el boton guardar tag
-When('I click on save tag', async function () {
-    let element = await this.driver.$('button[data-test-button="save"]');
-    return await element.click();
-});
-
-
 // veerifica que el nuevo tag
-Then('I verify new tag', async function (name) {
+Then('I verify new tag {string}', async function (title) {
     
-    if(name=="current"){
-        name = currenttagName;
-    } 
-
-    const namesTag = await this.driver.$$('gh-tag-list-name', { timeout: 5000 });
-    if (namesTag.length === 0) {
-        throw new Error('No se encontraron elementos con el selector gh-tag-list-name');
+    if(title=="current"){
+        title = currenttagName;
     }
     
+    const tags = await this.driver.$$('a[title="Edit tag"]');
+
     let matchedTag = null;
-    for (const nameTag of namesTag) {
-        const text = await nameTag.getText(); 
-        if (text.includes(name)) {
-            matchedTag = nameTag; 
-            break; 
+    for (const tag of tags) {
+        const text = await tag.getText(); // Obtener texto del tag
+        if (text.includes(title)) {
+            matchedTag = tag; // Si coincide, guardar el elemento
+            break; // Salir del bucle
         }
     }
 
-    // Validar que se encontró un tag que coincida el nombre
+    // Validar que se encontró un post que coincide
     if (!matchedTag) {
-        throw new Error(`No se encontró el tag "${name}".`);
+        throw new Error(`No se encontró un tag con el titulo "${title}".`);
     }
 
     return true;
 
 });
 
-// da clic en el boton settings
-When('I click on button settings', async function () {
-    let element = await this.driver.$('button[title="Settings"');
-    return await element.click();
-});
-
-// Seleccionar tag
-When('I click on button settings', async function () {
-    let element = await this.driver.$('button[title="Settings"');
-    return await element.click();
-});
-
 // da clic en el primer tag
 When('I click on first tag', async function () {
-    const memberLinks = await this.driver.$$('gh-tag-list-name',{ timeout: 5000 });
+    const memberLinks = await this.driver.$$('a[title="Edit tag"]',{ timeout: 5000 });
     const memberfirstLink = memberLinks[0]
     return await memberfirstLink.click();
 });
 
+//obtinee le nombre del tag
+When('I get the tag name', async function () {
+    const input = await this.driver.$('#tag-name'); // Selecciona el elemento del input
+    const name = await input.getValue(); // Obtiene el valor del input
+    currenttagName = name;
+    return name; // Devuelve el valor obtenido
+});
+
+//obtinee le nombre del tag
+When('I get the tag url', async function () {
+    const input = await this.driver.$('input[name="slug"]'); // Selecciona el elemento del input
+    const name = await input.getValue(); // Obtiene el valor del input
+    currenttagUrl = '/tag/' + name + '/';
+    return name; // Devuelve el valor obtenido
+});
+
+//setear tag a post
+When('I set tag to post', async function () {
+    // Seleccionar el input y hacer clic
+    const input = await this.driver.$('#tag-input ul input');
+    await input.click();
+    tag = currenttagName;
+    // Obtener la lista de elementos y filtrar
+    const elements = await this.driver.$$('li');
+    for (const element of elements) {
+        const text = await element.getText();
+        if (text.includes(tag)) {
+            await element.click(); // Haz clic en el primer elemento que coincide
+            break; // Sal del bucle después de hacer clic
+        }
+    }
+});
+
 // da clic en el boton delete tag
 When('I click on delete tag', async function () {
-    let element = await this.driver.$('button[data-test-button="delete-tag"]');
+    let element = await this.driver.$('button.gh-btn-red');
     return await element.click();
 });
 
 // da clic en el boton confirmar delete tag
 When('I click on confirm delete tag', async function () {
-    let element = await this.driver.$('button[data-test-button="confirm"]');
-    return await element.click();
+    let element = await this.driver.$('.modal-content');
+    const del = await element.$('button.gh-btn-red');
+    return await del.click();
+});
+
+When('I verify that the tag {string} is deleted', async function (name) {
+    if(name=="current"){
+        name = currenttagName;
+    }
+    
+    const links = await this.driver.$$('a[title="Edit tag"]'); // Encuentra todos los elementos con el selector
+    let found = false;
+
+    // Itera por los enlaces encontrados
+    for (const link of links) {
+        const text = await link.getText(); // Obtiene el texto de cada enlace
+        if (text.includes(name)) {
+            found = true; // Si encuentra coincidencia, marca como encontrado
+            break;
+        }
+    }
+
+    // Verifica que no se encontró ningún enlace que coincida
+    if (found) {
+        throw new Error(`Se encontró un enlace con el nombre: ${name}`);
+    }
+    return true;
 });

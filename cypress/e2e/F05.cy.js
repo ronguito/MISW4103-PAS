@@ -39,27 +39,9 @@ describe('F05: Gestionar Etiquetas (tags) de contenido ', () => {
       wps.visit(config.UrlTag);
       tag.verifyTag(nameTag);
 
-    });   
-    
-    it('F05E02: Editar un tag', () => {
-      const nameTag2 = faker.hacker.verb();
-      
-      //Given
-      wps.visit(config.UrlTag);
-
-      //When
-      tag.editFirstTag();
-      tag.setName(nameTag2);
-      wps.clickOnButton("Save");
-
-      //then
-      wps.visit(config.UrlTag);
-      tag.verifyTag(nameTag2);
-
     });
     
-
-    it('F05E03: Asignar un tag a un post', () => {
+    it('F05E02: Asignar un tag a un post', () => {
       //Given 
       wps.visit(config.UrlTag);
       tag.editFirstTag();
@@ -83,8 +65,24 @@ describe('F05: Gestionar Etiquetas (tags) de contenido ', () => {
         });
       });
     });
-   
     
+    it('F05E03: Editar un tag', () => {
+      const nameTag2 = faker.hacker.verb();
+      
+      //Given
+      wps.visit(config.UrlTag);
+
+      //When
+      tag.editFirstTag();
+      tag.setName(nameTag2);
+      wps.clickOnButton("Save");
+
+      //then
+      wps.visit(config.UrlTag);
+      tag.verifyTag(nameTag2);
+
+    });
+        
     it('F05E04: Eliminar un tag', () => {
       const nameTag3 = faker.hacker.verb();
       //Given
