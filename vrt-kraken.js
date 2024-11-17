@@ -9,6 +9,10 @@ async function executeTest(){
     
     let resultInfo = {}
     let datetime = new Date().toISOString().replace(/:/g,".");
+
+    if(!fs.existsSync('./results/kraken/compare')){
+        fs.mkdirSync('./results/kraken/compare', { recursive: true });
+    }
     
     const base = fs.readdirSync("./results/kraken/2345")
     const rc = fs.readdirSync("./results/kraken/2368")
@@ -41,9 +45,7 @@ async function executeTest(){
             diffBounds: data.diffBounds,
             analysisTime: data.analysisTime
         }
-        if(!fs.existsSync('./results/kraken/compare')){
-            fs.mkdirSync('./results/kraken/compare', { recursive: true });
-        }
+
         fs.writeFileSync(`./results/kraken/compare/${ss68}.png`, data.getBuffer());
         
     }
