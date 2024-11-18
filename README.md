@@ -76,13 +76,16 @@ properties.json
 ```bash
 {
     "UserName": "admin@redfox.com.co",
-    "UserPass": "Admin123+",
-    "UrlPublic" : "http://localhost:2368",
-    "UrlLogin": "http://localhost:2368/ghost/#/signin",
-    "UrlPost": "http://localhost:2368/ghost/#/posts",
-    "UrlTag": "http://localhost:2368/ghost/#/tags",
-    "UrlPage": "http://localhost:2368/ghost/#/pages",
-    "UrlMember": "http://localhost:2368/ghost/#/members"
+    "UserPass": "Admin123++",
+    "Host": "http://localhost",
+    "Port": 2345,
+    "UrlPublic" : "",
+    "UrlLogin": "/ghost/#/signin",
+    "UrlPost": "/ghost/#/posts",
+    "UrlTag": "/ghost/#/tags",
+    "UrlPage": "/ghost/#/pages",
+    "UrlMember": "/ghost/#/members",
+    "Results": "./results"
 }
 
 ```
@@ -92,7 +95,8 @@ properties.json
 ```bash
 //Ejecutar las pruebas en modo interactivo con 
 npx cypress open 
-//Ejecutr las pruebas en modo headless con 
+
+//Ejecutar las pruebas en modo headless con 
 npx cypress run.
 ```
 
@@ -114,54 +118,72 @@ npx kraken-node run
 
 Esto iniciara la prueba en modo visual y cargara un navegador contralado por kraken.
 
+Para correr todas las pruebas en secuencia, se implemento un script automatizado que inyecta 
+la prueba en la carpeta de features de kraken y corre automanticamente todos los test. Si un test falla el comando reinicia desde el primero nuevamente.
+
+Ejecute desde la consola el comando
+```bash
+node kraken.js
+```
+
 
 ## Ejecución de informe de comparación de imagenes
 
+* Requisitos: 
+Tener instalada la version 4.5 de Ghost en el puerto 2345.
+Tener instalada la version 5.96 de Ghost en el puerto 2368.
+NOTA: Si instalo Ghost en un puerto diferente las pruebas van a fallar
+
 Para realizar la comparación de las prueba con las dos version de Ghost se debe seguir los siguiente pasos.
 
-Kraken:
+* Correr las pruebas de las versiones
 
-1. Validar el puerto configurado en el archivo properties en el parametro "Port", el cual para nuestro caso la versión 5.96 de Ghost corre en el puerto 2368 
-y la versión 4.5 corre en el puerto 2345. Por defecto esta el puerto 2368, con el cual inciamos las pruebas. En dado caso que los puertos del ambiente donde 
-se va a ejecutar el proyecto cambian, se debe cambiar este parametro.
+1. Validar el puerto configurado en el archivo properties en el parametro "Port", para la version de Ghost que desea probar de acuerdo a los requisitos previos.
+Ghost versión 4.5 puerto 2345. 
+Ghost version 5.96 puerto 2368.
 
-2. Ejecutar el siguiente comando, para corre la pruebas de kraken. (este comando toma el archivo feature que esta en /feature/web)
+2. Ejecutar el comando adecuado de acuerdo a la herramienta que desea utilizar para realizar las pruebas.
+* Kraken
 ```bash
-npx kraken-node run
+//correr test por test individual
+npx kraken-node run 
+
+//correr todos los test
+node kraken.js
 ```
-3. Este comando ejecuta las prueba y toma los pantallazos de cada paso y los guarda en la carpeta /results/Kraken/<puerto_configurado>. Con esto ya tenemos 
-la imagenes de la versión 5.96
-4. Cambiar el puerto del archivo properties al de la versión 5.4
-5. Se ejcuta de nuevo el comando del paso 2.
-6. Para la libreria Resemble ejecutamos el comando 
+* Cypress
+```bash
+//correr test en modo interactivo 
+cypress open 
+
+//correr en modo headless
+cypress run
+```
+3. Las prueba ejecutadas generan los pantallazos de cada paso y los guarda en la carpeta /results/<herramienta_de_prueba>/<puerto_configurado>. Con esto ya tenemos la imagenes de la versión seleccionada de acuerdo al puerto.
+
+4. Cambiar el puerto del archivo properties al de la versión que desea probar y repetir el proceso del paso 2, con la misma herramienta.
+
+* Correr los test de regresion visual
+
+Si uso la herramienta Kraken para las pruebas, el test se corre con el siguiente comando 
 ```bash
 node vrt-kraken.js
 ```
-7. Verificar el informe generado en la ruta ./results/kraken/reporte_comparacion_kraken.html
+El informe de la prueba se genera en la ruta ./results/kraken/index.html
 
 
-Cypress:
+Si uso la herramienta Cypress para las pruebas el test se corre con el siguiente comando:
 
-1. Validar el puerto configurado en el archivo properties en el parametro "Port", el cual para nuestro caso la versión 5.96 de Ghost corre en el puerto 2368 
-y la versión 4.5 corre en el puerto 2345. Por defecto esta el puerto 2368, con el cual inciamos las pruebas. En dado caso que los puertos del ambiente donde 
-se va a ejecutar el proyecto cambian, se debe cambiar este parametro.
-
-2. Ejecutar alguno de los siguientes comandos, para corre la pruebas de Cypress. 
-```bash
-//Ejecutar las pruebas en modo interactivo con 
-npx cypress open 
-//Ejecutr las pruebas en modo headless con 
-npx cypress run.
-```
-3. Al ejecutar el paso anterio se van  tomando los pantallazos de cada paso y los guarda en la carpeta /results/cypress/<puerto_configurado>. Con esto ya tenemos 
-la imagenes de la versión 5.96
-4. Cambiar el puerto del archivo properties al de la versión 5.4
-5. Se ejcuta de nuevo el comando del paso 2.
-6. Para la libreria PixelMatch ejecutamos el comando 
 ```bash
 node pixelmatch_cypress.js
 ```
-7. Verificar el informe generado en la ruta ./results/cypress/reporte_pixiematch_comparacion_cypress.html
+El informe de la prueba se genera en la ruta ./results/kraken/pixelmatch.html
+
+Si desea correr todos los test indistintamente de la herramienta usada se debe correr el siguinte comando
+```bash
+vrt
+```
+Esto corre todos los test de regresion visual incluido el test de Blockstop configurado para las pruebas con cypres, y abre automaticamente los reportes html de los test.
 
 
 ## Integrantes
