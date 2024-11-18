@@ -1,0 +1,244 @@
+{
+  "id": "visual-regression-test",
+  "viewports": [
+    {
+      "name": "desktop",
+      "width": 1024,
+      "height": 768
+    }
+  ],
+  "scenarios": [
+    {
+      "label": "F05E01_step_1",
+      "referenceUrl": "./results/cypress/2368/F05E01_step_1.png",
+      "url": "./results/cypress/2345/F05E01_step_1.png",
+      "selectors": [
+        "document"
+      ],
+      "misMatchThreshold": 0.2,
+      "readyEvent": null,
+      "delay": 500
+    },
+    {
+      "label": "F05E01_step_2",
+      "referenceUrl": "./results/cypress/2368/F05E01_step_2.png",
+      "url": "./results/cypress/2345/F05E01_step_2.png",
+      "selectors": [
+        "document"
+      ],
+      "misMatchThreshold": 0.2,
+      "readyEvent": null,
+      "delay": 500
+    },
+    {
+      "label": "F05E01_step_3",
+      "referenceUrl": "./results/cypress/2368/F05E01_step_3.png",
+      "url": "./results/cypress/2345/F05E01_step_3.png",
+      "selectors": [
+        "document"
+      ],
+      "misMatchThreshold": 0.2,
+      "readyEvent": null,
+      "delay": 500
+    },
+    {
+      "label": "F05E01_step_4",
+      "referenceUrl": "./results/cypress/2368/F05E01_step_4.png",
+      "url": "./results/cypress/2345/F05E01_step_4.png",
+      "selectors": [
+        "document"
+      ],
+      "misMatchThreshold": 0.2,
+      "readyEvent": null,
+      "delay": 500
+    },
+    {
+      "label": "F05E01_step_5",
+      "referenceUrl": "./results/cypress/2368/F05E01_step_5.png",
+      "url": "./results/cypress/2345/F05E01_step_5.png",
+      "selectors": [
+        "document"
+      ],
+      "misMatchThreshold": 0.2,
+      "readyEvent": null,
+      "delay": 500
+    },
+    {
+      "label": "F05E01_step_6",
+      "referenceUrl": "./results/cypress/2368/F05E01_step_6.png",
+      "url": "./results/cypress/2345/F05E01_step_6.png",
+      "selectors": [
+        "document"
+      ],
+      "misMatchThreshold": 0.2,
+      "readyEvent": null,
+      "delay": 500
+    },
+    {
+      "label": "F05E03_step_1",
+      "referenceUrl": "./results/cypress/2368/F05E03_step_1.png",
+      "url": "./results/cypress/2345/F05E03_step_1.png",
+      "selectors": [
+        "document"
+      ],
+      "misMatchThreshold": 0.2,
+      "readyEvent": null,
+      "delay": 500
+    },
+    {
+      "label": "F05E03_step_2",
+      "referenceUrl": "./results/cypress/2368/F05E03_step_2.png",
+      "url": "./results/cypress/2345/F05E03_step_2.png",
+      "selectors": [
+        "document"
+      ],
+      "misMatchThreshold": 0.2,
+      "readyEvent": null,
+      "delay": 500
+    },
+    {
+      "label": "F05E03_step_3",
+      "referenceUrl": "./results/cypress/2368/F05E03_step_3.png",
+      "url": "./results/cypress/2345/F05E03_step_3.png",
+      "selectors": [
+        "document"
+      ],
+      "misMatchThreshold": 0.2,
+      "readyEvent": null,
+      "delay": 500
+    },
+    {
+      "label": "F05E03_step_4",
+      "referenceUrl": "./results/cypress/2368/F05E03_step_4.png",
+      "url": "./results/cypress/2345/F05E03_step_4.png",
+      "selectors": [
+        "document"
+      ],
+      "misMatchThreshold": 0.2,
+      "readyEvent": null,
+      "delay": 500
+    },
+    {
+      "label": "F05E03_step_5",
+      "referenceUrl": "./results/cypress/2368/F05E03_step_5.png",
+      "url": "./results/cypress/2345/F05E03_step_5.png",
+      "selectors": [
+        "document"
+      ],
+      "misMatchThreshold": 0.2,
+      "readyEvent": null,
+      "delay": 500
+    },
+    {
+      "label": "F05E03_step_6",
+      "referenceUrl": "./results/cypress/2368/F05E03_step_6.png",
+      "url": "./results/cypress/2345/F05E03_step_6.png",
+      "selectors": [
+        "document"
+      ],
+      "misMatchThreshold": 0.2,
+      "readyEvent": null,
+      "delay": 500
+    },
+    {
+      "label": "F05E03_step_7",
+      "referenceUrl": "./results/cypress/2368/F05E03_step_7.png",
+      "url": "./results/cypress/2345/F05E03_step_7.png",
+      "selectors": [
+        "document"
+      ],
+      "misMatchThreshold": 0.2,
+      "readyEvent": null,
+      "delay": 500
+    },
+    {
+      "label": "F05E03_step_8",
+      "referenceUrl": "./results/cypress/2368/F05E03_step_8.png",
+      "url": "./results/cypress/2345/F05E03_step_8.png",
+      "selectors": [
+        "document"
+      ],
+      "misMatchThreshold": 0.2,
+      "readyEvent": null,
+      "delay": 500
+    },
+    {
+      "label": "F05E04_step_1",
+      "referenceUrl": "./results/cypress/2368/F05E04_step_1.png",
+      "url": "./results/cypress/2345/F05E04_step_1.png",
+      "selectors": [
+        "document"
+      ],
+      "misMatchThreshold": 0.2,
+      "readyEvent": null,
+      "delay": 500
+    },
+    {
+      "label": "F05E04_step_2",
+      "referenceUrl": "./results/cypress/2368/F05E04_step_2.png",
+      "url": "./results/cypress/2345/F05E04_step_2.png",
+      "selectors": [
+        "document"
+      ],
+      "misMatchThreshold": 0.2,
+      "readyEvent": null,
+      "delay": 500
+    },
+    {
+      "label": "F05E04_step_3",
+      "referenceUrl": "./results/cypress/2368/F05E04_step_3.png",
+      "url": "./results/cypress/2345/F05E04_step_3.png",
+      "selectors": [
+        "document"
+      ],
+      "misMatchThreshold": 0.2,
+      "readyEvent": null,
+      "delay": 500
+    },
+    {
+      "label": "F05E04_step_4",
+      "referenceUrl": "./results/cypress/2368/F05E04_step_4.png",
+      "url": "./results/cypress/2345/F05E04_step_4.png",
+      "selectors": [
+        "document"
+      ],
+      "misMatchThreshold": 0.2,
+      "readyEvent": null,
+      "delay": 500
+    },
+    {
+      "label": "F05E04_step_5",
+      "referenceUrl": "./results/cypress/2368/F05E04_step_5.png",
+      "url": "./results/cypress/2345/F05E04_step_5.png",
+      "selectors": [
+        "document"
+      ],
+      "misMatchThreshold": 0.2,
+      "readyEvent": null,
+      "delay": 500
+    },
+    {
+      "label": "F05E04_step_6",
+      "referenceUrl": "./results/cypress/2368/F05E04_step_6.png",
+      "url": "./results/cypress/2345/F05E04_step_6.png",
+      "selectors": [
+        "document"
+      ],
+      "misMatchThreshold": 0.2,
+      "readyEvent": null,
+      "delay": 500
+    }
+  ],
+  "paths": {
+    "bitmaps_reference": "./results/cypress/2368",
+    "bitmaps_test": "./results/cypress/compare",
+    "html_report": "./results/cypress",
+    "ci_report": "./results/cypress"
+  },
+  "engine": "puppeteer",
+  "report": [
+    "browser"
+  ],
+  "debug": true,
+  "fileNameTemplate": "{scenarioLabel}"
+}

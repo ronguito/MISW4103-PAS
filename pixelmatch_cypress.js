@@ -4,6 +4,10 @@ const { PNG } = require('pngjs');
 (async () => {
   const pixelmatch = (await import('pixelmatch')).default;
   const arregloNombre = new Array();
+
+    if(!fs.existsSync('./results/kraken/compare')){
+        fs.mkdirSync('./results/kraken/compare', { recursive: true });
+    }
     let datetime = new Date().toISOString().replace(/:/g,".");
     const base = fs.readdirSync("./results/cypress/2345")
     const rc = fs.readdirSync("./results/cypress/2368")
@@ -19,6 +23,7 @@ const { PNG } = require('pngjs');
               break;
           }
       }
+      if(!ss68) { console.log("No encontrado pareja:", ss45); continue; }
       arregloNombre.push(ss68.trim());
       
       const img1 = PNG.sync.read(fs.readFileSync(`./results/cypress/2345/${ss45}`));
@@ -67,7 +72,7 @@ const { PNG } = require('pngjs');
     return `
     <html>
         <head>
-            <title> Reporte de comparación de la verión 5.96 y 5.4 de Ghost </title>
+            <title> Reporte de comparación de la verión 5.96 y 4.5 de Ghost </title>
             <link href="index.css" type="text/css" rel="stylesheet">
         </head>
         <style>
@@ -130,5 +135,5 @@ const { PNG } = require('pngjs');
     </html>`
   }
   
-  fs.writeFileSync(`./results/cypress/reporte_pixiematch_comparacion_cypress.html`, createReport(datetime));
+  fs.writeFileSync(`./results/cypress/pixiematch.html`, createReport(datetime));
 })();

@@ -31,7 +31,7 @@ async function executeTest(){
                 break;
             }
         }
-        if(!ss68) { console.log("No encontrado pareja:", ss45git); continue; }
+        if(!ss68) { console.log("No encontrado pareja:", ss45); continue; }
         arregloNombre.push(ss68.trim());
         const data = await compareImages(
             fs.readFileSync(`./results/kraken/2345/${ss45}`),
@@ -51,7 +51,7 @@ async function executeTest(){
         fs.writeFileSync(`./results/kraken/compare/${ss68}`, data.getBuffer());
         
     }
-    fs.writeFileSync(`./results/kraken/reporte_comparacion_kraken.html`, createReport(datetime, resultInfo));
+    fs.writeFileSync(`./results/kraken/index.html`, createReport(datetime, resultInfo));
     fs.copyFileSync('./index.css', `./results/kraken/index.css`);
     console.log('------------------------------------------------------------------------------------');
     console.log("Execution finished. Check the report under the results folder");
