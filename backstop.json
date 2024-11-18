@@ -231,7 +231,7 @@
   ],
   "paths": {
     "bitmaps_reference": "./results/cypress/2368",
-    "bitmaps_test": "./results/cypress/compare",
+    "bitmaps_test": "./results/cypress/backstop",
     "html_report": "./results/cypress",
     "ci_report": "./results/cypress"
   },
