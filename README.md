@@ -177,7 +177,7 @@ Si uso la herramienta Cypress para las pruebas el test se corre con el siguiente
 ```bash
 node pixelmatch_cypress.js
 ```
-El informe de la prueba se genera en la ruta ./results/kraken/pixelmatch.html
+El informe de la prueba se genera en la ruta ./results/cypress/pixelmatch.html
 
 Si desea correr todos los test indistintamente de la herramienta usada se debe correr el siguinte comando
 ```bash

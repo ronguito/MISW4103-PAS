@@ -21,7 +21,7 @@ fs.readdir(sourceDir, (err, files) => {
   // Función para ejecutar el ciclo de copia, ejecución y borrado
   const processFile = () => {
     if (index >= featureFiles.length) {
-      console.log('Todos los tests han sido ejecutados.');
+      console.log('Todos los tests han sido procesados.');
       return;
     }
 
@@ -33,6 +33,8 @@ fs.readdir(sourceDir, (err, files) => {
     fs.copyFile(sourceFile, targetFile, (copyErr) => {
       if (copyErr) {
         console.error(`Error copiando el archivo ${file}:`, copyErr);
+        index++;
+        processFile(); // Continuar con el siguiente archivo
         return;
       }
 
@@ -41,22 +43,20 @@ fs.readdir(sourceDir, (err, files) => {
       // Ejecutar el test con Kraken
       exec('npx kraken-node run', (execErr, stdout, stderr) => {
         if (execErr) {
-          console.error(`Error ejecutando el test para ${file}:`, execErr);
+          console.error(`Error ejecutando el test para ${file}:`, execErr.message);
           console.error(stderr);
-          return;
+        } else {
+          console.log(`Test para ${file} ejecutado con éxito.`);
+          console.log(stdout);
         }
-
-        console.log(`Test para ${file} ejecutado con éxito.`);
-        console.log(stdout);
 
         // Borrar el archivo después de ejecutar el test
         fs.unlink(targetFile, (unlinkErr) => {
           if (unlinkErr) {
             console.error(`Error borrando el archivo ${file}:`, unlinkErr);
-            return;
+          } else {
+            console.log(`Archivo ${file} borrado después de la ejecución.`);
           }
-
-          console.log(`Archivo ${file} borrado después de la ejecución.`);
 
           // Incrementar el índice y procesar el siguiente archivo
           index++;
