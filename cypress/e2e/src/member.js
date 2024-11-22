@@ -74,6 +74,17 @@ class Member {
         cy.captureImage();
     }
 
+    deleteMember(){
+        if(this.Port==2345){
+            cy.get('button.gh-btn-red').first().click();
+            cy.get('.modal-content').find('button.gh-btn-red').first().click();
+        }else{
+            cy.get('button[data-test-button="member-actions"]').first().click();
+            cy.get('button[data-test-button="delete-member"]').click();
+            cy.get('button[data-test-button="confirm"]').click();
+        }
+    }
+
 }
 
 export default Member;

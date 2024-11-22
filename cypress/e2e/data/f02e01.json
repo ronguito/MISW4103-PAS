@@ -5,5 +5,12 @@
         "field":"name",
         "data": "Frank Kafka",
         "email":"example@gmail.com"  
+    },
+    {
+        "description": "1- Configurar el título del sitio con datos validos",
+        "strategy": "pool", 
+        "field":"name",
+        "data": ["Frank Kafka","Juan Tapia", "Pedro Fernandez","Hector Perez"],
+        "email":"example@gmail.com"  
     }
 ]
