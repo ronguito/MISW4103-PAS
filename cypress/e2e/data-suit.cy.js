@@ -99,6 +99,9 @@ describe('Suit de Escenarios: Prueba de diferentes escenarios de inyeccion de da
 		  
         const name1 = faker.person.fullName();
         const email1 = faker.internet.email();
+
+        let name;
+        let email;
   
         f02e01.forEach((scenario) => {
 

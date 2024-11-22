@@ -1,0 +1,9 @@
+[
+    {
+        "description": "1- Configurar el título del sitio con datos validos",
+        "strategy": "priori", 
+        "field":"name",
+        "data": "Frank Kafka",
+        "email":"example@gmail.com"  
+    }
+]
