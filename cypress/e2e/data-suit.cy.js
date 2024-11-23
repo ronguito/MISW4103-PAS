@@ -113,11 +113,17 @@ describe('Suit de Escenarios: Prueba de diferentes escenarios de inyeccion de da
             member.setEmail(email);
             wp.clickOnButton("Save");
             wp.visit(config.UrlMember);
-            
             //Then
-            member.verifyMemberEmail(email);
-            member.editFirstMember()
-            member.deleteMember()
+            if (scenario.email_tipo == "invalid") {
+                member.checkInvalidEmail()
+            } else {
+            //Then
+                member.verifyMemberEmail(email);
+                member.editFirstMember()
+                member.deleteMember()
+            }
+            
+
 
         });
       });  

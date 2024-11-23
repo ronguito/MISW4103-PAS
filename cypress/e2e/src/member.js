@@ -84,6 +84,17 @@ class Member {
             cy.get('button[data-test-button="confirm"]').click();
         }
     }
+    
+    checkInvalidEmail() {
+        const selector = this.Port==2345? 'div.gh-alert-content':'p.response'
+        const msg= 'Invalid Email.'
+        cy.get(selector, { timeout: 5000 }).then($links => {
+            const member = $links.filter((index, element) => {
+                return Cypress.$(element).text().includes(msg); 
+            }).first();
+        });
+        cy.get('div.modal-footer').find('button.gh-btn-red').first().click();
+    }
 
 }
 

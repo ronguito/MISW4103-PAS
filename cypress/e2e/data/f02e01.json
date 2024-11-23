@@ -4,6 +4,7 @@
         "strategy": "priori", 
         "field":"name",
         "data": "Frank Kafka",
+	"email_tipo":"valid",
         "email":"example@gmail.com"  
     },
     {
@@ -11,6 +12,7 @@
         "strategy": "pool", 
         "field":"name",
         "data": ["Frank Kafka","Juan Tapia", "Pedro Fernandez","Hector Perez","Leon Tolstoi","Isaac Newton"],
+	"email_tipo":"valid",
         "email":"example@gmail.com"  
     },
     {
@@ -18,6 +20,7 @@
         "strategy": "random", 
         "field":"name",
         "data": "person.fullName",
+	"email_tipo":"valid",
         "email":"example@gmail.com"  
     },
     {
@@ -25,6 +28,7 @@
         "strategy": "priori", 
         "field":"name",
         "data": "1234 2344",
+	"email_tipo":"valid",
         "email":"example@gmail.com"  
     },
     {
@@ -32,6 +36,7 @@
         "strategy": "pool", 
         "field":"name",
         "data": ["1245","3234", "4567","6578","7689","1234"],
+	"email_tipo":"valid",
         "email":"example@gmail.com"  
     },
     {
@@ -39,6 +44,7 @@
         "strategy": "random", 
         "field":"name",
         "data": "number.int",
+	"email_tipo":"valid",
         "email":"example@gmail.com"  
     },
     {
@@ -46,6 +52,7 @@
         "strategy": "priori", 
         "field":"name",
         "data": "Ju@n P3r3z",
+	"email_tipo":"valid",
         "email":"correo@gmail.com"  
     },
     {
@@ -53,6 +60,7 @@
         "strategy": "pool", 
         "field":"name",
         "data": ["Luis %&$#$","Pedro $&%6", "&%#!","rt$%","KAKDD&/&$","<<<>>>>"],
+	"email_tipo":"valid",
         "email":"cuenta@gmail.com"  
     },
     {
@@ -60,6 +68,7 @@
         "strategy": "random", 
         "field":"name",
         "data": "string.alphanumeric",
+	"email_tipo":"valid",
         "email":"ejemplo@gmail.com"  
     },
     {
@@ -67,6 +76,7 @@
         "strategy": "priori", 
         "field":"name",
         "data": "Maximiliano Eduardo González Pérez",
+	"email_tipo":"valid",
         "email":"correo@gmail.com"  
     },
     {
@@ -80,6 +90,7 @@
             "Juan Nepomuceno de Jesús María de los Ángeles Fernández Rivas",
             "Miguel Ángel Gabriel de la Santísima Trinidad Pérez Martínez"
           ],
+	"email_tipo":"valid",
         "email":"cuenta@gmail.com"  
     },
     {
@@ -87,7 +98,198 @@
         "strategy": "random", 
         "field":"name",
         "data": "person.fullName",
+	"email_tipo":"valid",
         "email":"ejemplo@gmail.com"  
+    },
+    {
+        "description": "43- Crear suscriptor con nombre corto y correo válido",
+        "strategy": "priori", 
+        "field":"name",
+        "data": "Leo",
+	"email_tipo":"valid",
+        "email":"correo@gmail.com"  
+    },
+    {
+        "description": "44- Crear suscriptor con nombre corto y correo válido",
+        "strategy": "pool", 
+        "field":"name",
+        "data": [
+            "Leo",
+            "Eva",
+            "Teo",
+            "Sem",
+            "Noé"
+          ],
+	"email_tipo":"valid",
+        "email":"cuenta@gmail.com"  
+    },
+    {
+        "description": "45- Crear suscriptor con nombre corto y correo válido",
+        "strategy": "random", 
+        "field":"name",
+        "data": "person.firstName",
+	"email_tipo":"valid",
+        "email":"ejemplo@gmail.com"  
+    },
+    {
+        "description": "46- Crear suscriptor con nombre con espacios y correo válido",
+        "strategy": "priori", 
+        "field":"name",
+        "data": "Frank   Kafka  ",
+	"email_tipo":"valid",
+        "email":"example@gmail.com"  
+    },
+    {
+        "description": "47- Crear suscriptor con nombre con espacios y correo válido",
+        "strategy": "pool", 
+        "field":"name",
+        "data": ["Frank  Kafka "," Juan  Tapia ", " Pedro  Fernandez   ","  Hector  Perez " ,"  Leon Tolstoi","Isaac Newton   "],
+	"email_tipo":"valid",
+        "email":"example@gmail.com"  
+    },
+    {
+        "description": "48- Crear suscriptor con nombre con espacios y correo válido",
+        "strategy": "random", 
+        "field":"name",
+        "data": "person.fullName",
+	"email_tipo":"valid",
+        "email":"example@gmail.com"  
+    },
+    {
+        "description": "49- Crear suscriptor con nombre con mayúsculas y correo válido",
+        "strategy": "priori", 
+        "field":"name",
+        "data": "Frank   Kafka  ",
+	"email_tipo":"valid",
+        "email":"example@gmail.com"  
+    },
+    {
+        "description": "50- Crear suscriptor con nombre con mayúsculas y correo válido",
+        "strategy": "pool", 
+        "field":"name",
+        "data": ["Frank  Kafka "," Juan  Tapia ", " Pedro  Fernandez   ","  Hector  Perez " ,"  Leon Tolstoi","Isaac Newton   "],
+	"email_tipo":"valid",
+        "email":"example@gmail.com"  
+    }, 
+    {
+        "description": "51- Crear suscriptor con nombre válido y correo .edu.co",
+        "strategy": "priori", 
+        "field":"email",
+        "data": "example@DOMINIO.edu.co",
+	"email_tipo":"valid",
+        "name":"Frank Kafka"  
+    },
+    {
+        "description": "52- Crear suscriptor con nombre válido y correo .edu.co",
+        "strategy": "pool", 
+        "field":"email.edu.co",
+        "data": ["example@DOMINIO.edu.co","example@gmail.edu.co","example@hotmail.edu.co","example@yahoo.edu.co"],
+	"email_tipo":"valid",
+        "name":"Frank Kafka"  
+    },
+    {
+        "description": "53- Crear suscriptor con nombre válido y correo edu.co",
+        "strategy": "random", 
+        "field":"email",
+        "data": "internet.email",
+	"email_tipo":"valid",
+        "name":"Frank Kafka"
+    },
+    {
+        "description": "54- Crear suscriptor con nombre válido y correo válido ",
+        "strategy": "priori", 
+        "field":"email",
+        "data": "example@DOMINIO.edu.co",
+	"email_tipo":"valid",
+        "name":"Frank Kafka"  
+    },
+    {
+        "description": "55- Crear suscriptor con nombre válido y correo ",
+        "strategy": "pool", 
+        "field":"email.edu.co",
+        "data": ["example@gmail.com","example@gmail.com.mx","example@hotmail.com.xx","example@yahoo.com.sd"],
+	"email_tipo":"valid",
+        "name":"Frank Kafka"  
+    },
+    {
+        "description": "56- Crear suscriptor con nombre válido y correo válido",
+        "strategy": "random", 
+        "field":"email",
+        "data": "internet.email",
+	"email_tipo":"valid",
+        "name":"Frank Kafka"
+    },
+    {
+        "description": "57- Crear suscriptor con nombre válido y correo válido ",
+        "strategy": "priori", 
+        "field":"email",
+        "data": "example@DOMINIO.otro.sx",
+	"email_tipo":"valid",
+        "name":"Frank Kafka"  
+    },
+    {
+        "description": "58- Crear suscriptor con nombre válido y correo ",
+        "strategy": "pool", 
+        "field":"email.edu.co",
+        "data": ["example1@otro.odx.com","example2@otro.odx.com","example3@otro.odx.com","example4@otro.odx.com"],
+	"email_tipo":"valid",
+        "name":"Frank Kafka"  
+    },
+    {
+        "description": "59- Crear suscriptor con nombre válido y correo válido",
+        "strategy": "random", 
+        "field":"email",
+        "data": "internet.email",
+	"email_tipo":"valid",
+        "name":"Frank Kafka"
+    },
+    {
+        "description": "60- Crear suscriptor con nombre válido y correo largo ",
+        "strategy": "priori", 
+        "field":"email",
+        "data": "example123asl.asdflkta.adkkjjka.attoa@DOMINIO.otro.sx",
+	"email_tipo":"valid",
+        "name":"Juan Tapia"  
+    },
+    {
+        "description": "61- Crear suscriptor con nombre válido y correo largo",
+        "strategy": "pool", 
+        "field":"email.edu.co",
+        "data": ["aldkq2345kfilaoasdsdfa@otro.odx.com","sdfadsfaghhghjjfhdg4d5df5@otro.odx.com","sfgw434bfhgh55yth5@otro.odx.com","fssdfhw5t54657657556fghsf@otro.odx.com"],
+	"email_tipo":"valid",
+        "name":"Juan Tapia"  
+    },
+    {
+        "description": "62- Crear suscriptor con nombre válido y correo válido",
+        "strategy": "random", 
+        "field":"email",
+        "data": "internet.email",
+	"email_tipo":"valid",
+        "name":"Juan Tapia"
+    },
+    {
+        "description": "63- Crear suscriptor con nombre válido y correo con espacios ",
+        "strategy": "priori", 
+        "field":"email",
+        "data": "example12    asdflkta.adkkjjka.attoa@DOMINIO.otro.sx",
+        "email_tipo":"invalid",
+        "name":"Juan Tapia"  
+    },
+    {
+        "description": "64- Crear suscriptor con nombre válido y correo con espacios",
+        "strategy": "pool", 
+        "field":"email.edu.co",
+        "data": ["aldkq    kfilaoasdsdfa@otro.odx.com","sdfadsfag    hdg4d5df5@otro.odx.com","sfgw434bfhg   5yth5@otro.odx.com","fssdfhw  657657556fghsf@otro.odx.com"],
+        "email_tipo":"invalid",
+        "name":"Juan Tapia"  
+    },
+    {
+        "description": "65- Crear suscriptor con nombre válido y correo válido",
+        "strategy": "random", 
+        "field":"email",
+        "data": "internet.email",
+        "email_tipo":"invalid",
+        "name":"Juan Tapia"
     }
-    
+      
 ]
