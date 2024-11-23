@@ -61,7 +61,6 @@ describe('Suit de Escenarios: Prueba de diferentes escenarios de inyeccion de da
         const text1 = faker.company.buzzPhrase();
 
         f01e02.forEach((scenario) => {
-        f01e02.forEach((scenario) => {
 
             cy.log(`Escenario: ${scenario.description}; Estrategia: ${scenario.strategy}, Datos - ${scenario.data}`);
 
@@ -76,11 +75,6 @@ describe('Suit de Escenarios: Prueba de diferentes escenarios de inyeccion de da
             wp.setPageDescription(text);
             wp.clickOnButton("Save");
     
-            //Then
-            wp.visit(config.UrlPublic);
-            wp.shouldContain(text);		
-        });
-    });
             //Then
             wp.visit(config.UrlPublic);
             wp.shouldContain(text);		
@@ -152,23 +146,12 @@ describe('Suit de Escenarios: Prueba de diferentes escenarios de inyeccion de da
       });
 
       it('Suit F04E01: Crear un nueva pagina en estado de borrador', () => {
-      it('Suit F04E01: Crear un nueva pagina en estado de borrador', () => {
 		  
         const title1 = faker.hacker.phrase();
         f04e01.forEach((scenario) => {
 
             cy.log(`Escenario: ${scenario.description}; Estrategia: ${scenario.strategy}, Datos - ${scenario.data}`);
 
-            let title = scenario.data;
-            if(scenario.strategy=="random"){
-                const partes = scenario.data.split('.'); // Dividir en ['string', 'alphanumeric']
-                title = faker[partes[0]][partes[1]](); 
-            }else if(scenario.strategy=="pool"){
-                const indice = Math.floor(Math.random() * scenario.data.length);
-                title = scenario.data[indice];
-            }
-            //Given
-            wp.visit(config.UrlPage);
             let title = getValue(scenario);
             //Given
             wp.visit(config.UrlPage);
@@ -191,14 +174,7 @@ describe('Suit de Escenarios: Prueba de diferentes escenarios de inyeccion de da
 
             cy.log(`Escenario: ${scenario.description}; Estrategia: ${scenario.strategy}, Datos - ${scenario.data}`);
 
-            let nameTag = scenario.data;
-            if(scenario.strategy=="random"){
-                const partes = scenario.data.split('.'); // Dividir en ['string', 'alphanumeric']
-                nameTag = faker[partes[0]][partes[1]](); 
-            }else if(scenario.strategy=="pool"){
-                const indice = Math.floor(Math.random() * scenario.data.length);
-                nameTag = scenario.data[indice];
-            } 
+            let nameTag = getValue(scenario);
 
             //Give:
             wp.visit(config.UrlTag);
@@ -215,3 +191,16 @@ describe('Suit de Escenarios: Prueba de diferentes escenarios de inyeccion de da
       });
     
 });
+
+function getValue(scenario){
+
+    let value = scenario.data;
+    if(scenario.strategy=="random"){
+        const partes = scenario.data.split('.'); // Dividir en ['string', 'alphanumeric']
+        value = faker[partes[0]][partes[1]](); 
+    }else if(scenario.strategy=="pool"){
+        const indice = Math.floor(Math.random() * scenario.data.length);
+        value = scenario.data[indice];
+    } 
+    return value; 
+}
