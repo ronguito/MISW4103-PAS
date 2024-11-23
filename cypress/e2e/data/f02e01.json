@@ -1,16 +1,93 @@
 [
     {
-        "description": "1- Configurar el título del sitio con datos validos",
+        "description": "28- Crear un miembro con datos validos",
         "strategy": "priori", 
         "field":"name",
         "data": "Frank Kafka",
         "email":"example@gmail.com"  
     },
     {
-        "description": "1- Configurar el título del sitio con datos validos",
+        "description": "29- Crear un miembro con datos validos",
         "strategy": "pool", 
         "field":"name",
-        "data": ["Frank Kafka","Juan Tapia", "Pedro Fernandez","Hector Perez"],
+        "data": ["Frank Kafka","Juan Tapia", "Pedro Fernandez","Hector Perez","Leon Tolstoi","Isaac Newton"],
         "email":"example@gmail.com"  
+    },
+    {
+        "description": "30- Crear un miembro con datos validos",
+        "strategy": "random", 
+        "field":"name",
+        "data": "person.fullName",
+        "email":"example@gmail.com"  
+    },
+    {
+        "description": "31- Crear suscriptor con nombre inválido y correo válido",
+        "strategy": "priori", 
+        "field":"name",
+        "data": "1234 2344",
+        "email":"example@gmail.com"  
+    },
+    {
+        "description": "32- Crear suscriptor con nombre inválido y correo válido",
+        "strategy": "pool", 
+        "field":"name",
+        "data": ["1245","3234", "4567","6578","7689","1234"],
+        "email":"example@gmail.com"  
+    },
+    {
+        "description": "33- Crear suscriptor con nombre inválido y correo válido",
+        "strategy": "random", 
+        "field":"name",
+        "data": "number.int",
+        "email":"example@gmail.com"  
+    },
+    {
+        "description": "34- Crear suscriptor con nombre con caracteres especiales y correo válido",
+        "strategy": "priori", 
+        "field":"name",
+        "data": "Ju@n P3r3z",
+        "email":"correo@gmail.com"  
+    },
+    {
+        "description": "35- Crear suscriptor con nombre con caracteres especiales y correo válido",
+        "strategy": "pool", 
+        "field":"name",
+        "data": ["Luis %&$#$","Pedro $&%6", "&%#!","rt$%","KAKDD&/&$","<<<>>>>"],
+        "email":"cuenta@gmail.com"  
+    },
+    {
+        "description": "36- Crear suscriptor con nombre con caracteres especiales y correo válido",
+        "strategy": "random", 
+        "field":"name",
+        "data": "string.alphanumeric",
+        "email":"ejemplo@gmail.com"  
+    },
+    {
+        "description": "40- Crear suscriptor con nombre largo y correo válido",
+        "strategy": "priori", 
+        "field":"name",
+        "data": "Maximiliano Eduardo González Pérez",
+        "email":"correo@gmail.com"  
+    },
+    {
+        "description": "41- Crear suscriptor con nombre largo y correo válido",
+        "strategy": "pool", 
+        "field":"name",
+        "data": [
+            "José Antonio de la Trinidad Bolívar Palacios Ponte y Blanco",
+            "Manuel María Buenaventura Ignacio de la Concepción Pérez Rojas",
+            "Francisco Esteban de Paula Marcial Antonio Pérez Palacios",
+            "Juan Nepomuceno de Jesús María de los Ángeles Fernández Rivas",
+            "Miguel Ángel Gabriel de la Santísima Trinidad Pérez Martínez"
+          ],
+        "email":"cuenta@gmail.com"  
+    },
+    {
+        "description": "42- Crear suscriptor con nombre largo y correo válido",
+        "strategy": "random", 
+        "field":"name",
+        "data": "person.fullName",
+        "email":"ejemplo@gmail.com"  
     }
+    
 ]
