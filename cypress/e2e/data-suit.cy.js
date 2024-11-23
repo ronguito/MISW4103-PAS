@@ -191,14 +191,14 @@ describe('Suit de Escenarios: Prueba de diferentes escenarios de inyeccion de da
 
             cy.log(`Escenario: ${scenario.description}; Estrategia: ${scenario.strategy}, Datos - ${scenario.data}`);
 
-    //         let nameTag = scenario.data;
-    //         if(scenario.strategy=="random"){
-    //             const partes = scenario.data.split('.'); // Dividir en ['string', 'alphanumeric']
-    //             nameTag = faker[partes[0]][partes[1]](); 
-    //         }else if(scenario.strategy=="pool"){
-    //             const indice = Math.floor(Math.random() * scenario.data.length);
-    //             nameTag = scenario.data[indice];
-    //         } 
+            let nameTag = scenario.data;
+            if(scenario.strategy=="random"){
+                const partes = scenario.data.split('.'); // Dividir en ['string', 'alphanumeric']
+                nameTag = faker[partes[0]][partes[1]](); 
+            }else if(scenario.strategy=="pool"){
+                const indice = Math.floor(Math.random() * scenario.data.length);
+                nameTag = scenario.data[indice];
+            } 
 
             //Give:
             wp.visit(config.UrlTag);
