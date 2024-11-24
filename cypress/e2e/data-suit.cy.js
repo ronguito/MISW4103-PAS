@@ -38,14 +38,7 @@ describe('Suit de Escenarios: Prueba de diferentes escenarios de inyeccion de da
 
             cy.log(`Escenario: ${scenario.description}; Estrategia: ${scenario.strategy}, Datos - ${scenario.data}`);
 
-            let title = scenario.data;
-            if(scenario.strategy=="random"){
-                const partes = scenario.data.split('.'); // Dividir en ['string', 'alphanumeric']
-                title = faker[partes[0]][partes[1]](); 
-            }else if(scenario.strategy=="pool"){
-                const indice = Math.floor(Math.random() * scenario.data.length);
-                title = scenario.data[indice];
-            }
+            let title = getValue(scenario);
 
             //Given
             wp.visit("/ghost/#/dashboard");
@@ -71,14 +64,7 @@ describe('Suit de Escenarios: Prueba de diferentes escenarios de inyeccion de da
 
             cy.log(`Escenario: ${scenario.description}; Estrategia: ${scenario.strategy}, Datos - ${scenario.data}`);
 
-            let text = scenario.data;
-            if(scenario.strategy=="random"){
-                const partes = scenario.data.split('.'); // Dividir en ['string', 'alphanumeric']
-                text = faker[partes[0]][partes[1]](); 
-            }else if(scenario.strategy=="pool"){
-                const indice = Math.floor(Math.random() * scenario.data.length);
-                text = scenario.data[indice];
-            }
+            let text = getValue(scenario);
             //Given
             wp.visit("/ghost/#/dashboard");
             wp.openSiteSetting();
@@ -102,19 +88,13 @@ describe('Suit de Escenarios: Prueba de diferentes escenarios de inyeccion de da
 
         let name;
         let email;
+        member.Port=config.Port
   
         f02e01.forEach((scenario) => {
 
             cy.log(`Escenario: ${scenario.description}; Estrategia: ${scenario.strategy}, Datos - ${scenario.data}`);
 
-            let dato = scenario.data;
-            if(scenario.strategy=="random"){
-                const partes = scenario.data.split('.'); // Dividir en ['string', 'alphanumeric']
-                dato = faker[partes[0]][partes[1]](); 
-            }else if(scenario.strategy=="pool"){
-                const indice = Math.floor(Math.random() * scenario.data.length);
-                dato = scenario.data[indice];
-            }
+            let dato = getValue(scenario);
 
             if(scenario.field=="name"){
                 name = dato;
@@ -133,9 +113,17 @@ describe('Suit de Escenarios: Prueba de diferentes escenarios de inyeccion de da
             member.setEmail(email);
             wp.clickOnButton("Save");
             wp.visit(config.UrlMember);
-            
             //Then
-            member.verifyMemberEmail(email);
+            if (scenario.email_tipo == "invalid") {
+                member.checkInvalidEmail()
+            } else {
+            //Then
+                member.verifyMemberEmail(email);
+                member.editFirstMember()
+                member.deleteMember()
+            }
+            
+
 
         });
       });  
@@ -147,14 +135,8 @@ describe('Suit de Escenarios: Prueba de diferentes escenarios de inyeccion de da
 
             cy.log(`Escenario: ${scenario.description}; Estrategia: ${scenario.strategy}, Datos - ${scenario.data}`);
 
-            let title = scenario.data;
-            if(scenario.strategy=="random"){
-                const partes = scenario.data.split('.'); // Dividir en ['string', 'alphanumeric']
-                title = faker[partes[0]][partes[1]](); 
-            }else if(scenario.strategy=="pool"){
-                const indice = Math.floor(Math.random() * scenario.data.length);
-                title = scenario.data[indice];
-            }
+            let title = getValue(scenario);
+
             //Given
             wp.visit(config.UrlPost);
             
@@ -167,5 +149,19 @@ describe('Suit de Escenarios: Prueba de diferentes escenarios de inyeccion de da
             wp.visit(config.UrlPost);
             post.verifyStatus('Draft', title);
         });
-      });
+      });      
+    
 });
+
+function getValue(scenario){
+
+    let value = scenario.data;
+    if(scenario.strategy=="random"){
+        const partes = scenario.data.split('.'); // Dividir en ['string', 'alphanumeric']
+        value = faker[partes[0]][partes[1]](); 
+    }else if(scenario.strategy=="pool"){
+        const indice = Math.floor(Math.random() * scenario.data.length);
+        value = scenario.data[indice];
+    } 
+    return value; 
+}
