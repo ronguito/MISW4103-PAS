@@ -91,10 +91,18 @@ class Page {
 
     delete(){
         cy.url().should('match', /\/ghost\/#\/editor\/page\/.+/);
-        cy.get('button[title="Settings"]').click();// Abrir el menú de opciones del post
+        cy.get('button[title="Settings"]').click();// Abrir el menú de opciones del pagina
         cy.captureImage();
         cy.get('.settings-menu-delete-button').click();// clic boton en eliminar
         cy.captureImage();
+        cy.get('.gh-btn-red').click(); // Confirmar la eliminación
+        cy.url().should('include', '/ghost/#/pages');
+    }
+
+    deleteLastPage(){
+        cy.url().should('match', /\/ghost\/#\/editor\/page\/.+/);
+        cy.get('button[title="Settings"]').click();// Abrir el menú de opciones del pagina        
+        cy.get('.settings-menu-delete-button').click();// clic boton en eliminar
         cy.get('.gh-btn-red').click(); // Confirmar la eliminación
         cy.url().should('include', '/ghost/#/pages');
     }
