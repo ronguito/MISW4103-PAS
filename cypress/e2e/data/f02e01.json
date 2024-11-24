@@ -291,7 +291,6 @@
         "email_tipo":"invalid",
         "name":"Juan Tapia"
     },
-    [
     {
         "description": "28- Crear un miembro con datos validos",
         "strategy": "priori", 
@@ -661,6 +660,5 @@
         "data": "internet.email",
         "email_tipo":"valid",
         "name":"Juan Tapia"
-    }
-     
+    }   
 ]
