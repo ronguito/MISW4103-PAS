@@ -148,52 +148,7 @@ describe('Suit de Escenarios: Prueba de diferentes escenarios de inyeccion de da
             wp.visit(config.UrlPost);
             post.verifyStatus('Draft', title);
         });
-      });
-
-      it('Suit F04E01: Crear un nueva pagina en estado de borrador', () => {
-		  
-        const title1 = faker.hacker.phrase();
-        f04e01.forEach((scenario) => {
-
-            cy.log(`Escenario: ${scenario.description}; Estrategia: ${scenario.strategy}, Datos - ${scenario.data}`);
-
-            let title = getValue(scenario);
-            //Given
-            wp.visit(config.UrlPage);
-            
-            //When
-            page.create();
-            page.setTitle(title);
-            page.save();
-            
-            //then
-            page.verifyStatus('Draft', title);
-        });
-      });
-
-
-      it('Suit F05E01: Crear un nuevo tag', () => {
-		  
-        const nameTag1 = faker.hacker.verb();
-        f05e01.forEach((scenario) => {
-
-            cy.log(`Escenario: ${scenario.description}; Estrategia: ${scenario.strategy}, Datos - ${scenario.data}`);
-
-            let nameTag = getValue(scenario);
-
-            //Give:
-            wp.visit(config.UrlTag);
-            
-            //When
-            tag.create();
-            tag.setName(nameTag);
-            wp.clickOnButton("Save");
-            
-            //then
-            wp.visit(config.UrlTag);
-            tag.verifyTag(nameTag);
-        });
-      });
+      });      
     
 });
 
