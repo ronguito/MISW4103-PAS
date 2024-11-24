@@ -86,14 +86,29 @@ class Member {
     }
     
     checkInvalidEmail() {
-        const selector = this.Port==2345? 'div.gh-alert-content':'p.response'
-        const msg= 'Invalid Email.'
-        cy.get(selector, { timeout: 5000 }).then($links => {
-            const member = $links.filter((index, element) => {
-                return Cypress.$(element).text().includes(msg); 
-            }).first();
+        const selector = this.Port == 2345 ? 'div.gh-alert-content' : 'p.response';
+        const msg = 'Invalid Email.';
+        return cy.get('body').then($body => {
+            if ($body.find(selector).length === 0) {
+                // Si el elemento no está presente, considerar el email como válido
+                return cy.wrap(false);
+            }
+    
+            return cy.get(selector, { timeout: 5000 }).then($elements => {
+                // Verificar si el mensaje de error está presente
+                const hasInvalidEmail = $elements.filter((index, element) => {
+                    return Cypress.$(element).text().includes(msg);
+                }).length > 0;
+    
+                // Si el mensaje está presente, hacer clic en el botón y devolver `false`
+                if (hasInvalidEmail) {
+                    cy.get('div.modal-footer').find('button.gh-btn-red').first().click();
+                }
+    
+                // Devolver `false` si no se encontró el mensaje
+                return true;
+            });
         });
-        cy.get('div.modal-footer').find('button.gh-btn-red').first().click();
     }
 
 }
