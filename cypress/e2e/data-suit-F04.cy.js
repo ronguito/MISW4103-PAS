@@ -19,7 +19,7 @@ describe('Suit de Escenarios: Prueba de diferentes escenarios de inyeccion de da
         wp.login(config.UserName, config.UserPass);
     });
     
-      it('Suit F04E01: Crear un nueva pagina en estado de borrador', () => {
+      it('S04E01: Crear un nueva pagina en estado de borrador', () => {
 		
         f04e01.forEach((scenario) => {
 

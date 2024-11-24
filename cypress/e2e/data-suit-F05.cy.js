@@ -24,7 +24,7 @@ describe('Suit de Escenarios: Prueba de diferentes escenarios de inyeccion de da
     });
 
 
-      it('Suit F05E01: Crear un nuevo tag', () => {
+      it('S05E01: Crear un nuevo tag', () => {
 		  
         const nameTag1 = faker.hacker.verb();
         f05e01.forEach((scenario) => {

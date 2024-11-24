@@ -31,7 +31,7 @@ describe('Suit de Escenarios: Prueba de diferentes escenarios de inyeccion de da
         wp.login(config.UserName, config.UserPass);
     });
     
-    it('Suit F01E01: Configurar el título del sitio', () => {
+    it('S01E01: Configurar el título del sitio', () => {
 		
 
         f01e01.forEach((scenario) => {
@@ -57,7 +57,7 @@ describe('Suit de Escenarios: Prueba de diferentes escenarios de inyeccion de da
         
     });
     
-    it('Suit F01E02: Configurar la descripción del sitio', () => {
+    it('S01E02: Configurar la descripción del sitio', () => {
         const text1 = faker.company.buzzPhrase();
 
         f01e02.forEach((scenario) => {
@@ -81,7 +81,7 @@ describe('Suit de Escenarios: Prueba de diferentes escenarios de inyeccion de da
         });
     });
 
-    it('Suit F02E01: Crear un nuevo member', () => {
+    it('S02E01: Crear un nuevo member', () => {
 		  
         const name1 = faker.person.fullName();
         const email1 = faker.internet.email();
