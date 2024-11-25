@@ -190,8 +190,8 @@ Se adaptaron test e2e para correr escenarios con diferentes datos para las prueb
 Los archivos de configuracion de los escenarios se encuentran alojados en la carpeta ./e2e/data.
 En la carpeta ./e2e se encuentran los test adaptados con el nombre suit-data.cy.js, usando la herramienta cypress puede ejecutar cada test el cual se encargar de correr los escenarios desde la carpeta data, a continuacion se relaciona los escenarios que son cargados por cada test suit-data:
 
-suit-data.cy.js -> f01e01.json & f01e02.json & f02e01.json & f03e01.json
-suit-data-f04.cy.js -> f04e01.json
+suit-data.cy.js -> f01e01.json & f01e02.json & f02e01.json & f03e01.json<br>
+suit-data-f04.cy.js -> f04e01.json<br>
 suit-data-f05.cy.js -> f05e01.json
 
 ## Integrantes
